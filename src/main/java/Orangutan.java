@@ -87,6 +87,24 @@ public class Orangutan {
                         System.out.println(list);
                     break;
 
+                    case "delete":
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! I do not know which item to delete.\n\n" +
+                                    "Please follow the delete command with an integer between 1 and " + list.getLength() + " (inclusive).");
+                        }
+
+                        int deleteIndex = Integer.parseInt(command[1]);
+
+                        if (deleteIndex < 1 || deleteIndex > list.getLength()) {
+                            throw new OrangutanException("Alas! This number is not in the list.\n\n" +
+                                    "Please keep the index between 1 and " + list.getLength() + " (inclusive).");
+                        }
+
+                        String deleteItem = list.deleteItem(deleteIndex);
+                        System.out.println("The task has been purged from our records.");
+                        System.out.println("  " + deleteItem);
+                    break;
+
                     case "mark":
                         if (command.length < 2) {
                             throw new OrangutanException("Alas! I do not know which item to mark.\n\n" +
@@ -133,7 +151,7 @@ public class Orangutan {
                     default:
                         System.out.println("Alas! My simian mind is unable to comprehend your words.\n\n" +
                                 "Please use words I understand: " +
-                                "\"todo\", \"deadline\", \"event\", \"list\", \"mark\", \"unmark\", \"bye\"");
+                                "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"bye\"");
                 }
 
             }  catch (NumberFormatException e) {

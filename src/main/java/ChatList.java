@@ -21,6 +21,12 @@ public class ChatList {
         return item.toString();
     }
 
+    public String deleteItem(int n) {
+        ListItem item = list.get(n-1);
+        list.remove(n-1);
+        return item.toString();
+    }
+
     public int getLength() {
         return list.size();
     }
