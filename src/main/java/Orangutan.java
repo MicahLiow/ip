@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.*;
 
 public class Orangutan {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws OrangutanException{
         //initialize important variables
         //ascii banner adapted from https://ascii.co.uk/art/orangutan
         String line = "___________________________________________________________\n";
@@ -27,60 +27,139 @@ public class Orangutan {
 
             boolean exit = false;
 
-            System.out.println(line);
+            System.out.print(line);
             switch (command[0]) {
                 case "todo":
-                    TodoItem newTodo = new TodoItem(command[1]);
-                    list.addItem(newTodo);
+                    try {
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! The name of this todo has not been revealed.\n\n" +
+                                    "Please include the todo name.");
+                        }
 
-                    System.out.println("A task has been added.");
-                    System.out.println("  " + newTodo);
+                        TodoItem newTodo = new TodoItem(command[1]);
+                        list.addItem(newTodo);
+
+                        System.out.println("A task has been added.");
+                        System.out.println("  " + newTodo);
+                    } catch(OrangutanException e) {
+                        System.out.println(e);
+                    }
                     break;
+
                 case "deadline":
-                    String by = query[1].trim().split(" ", 2)[1];
-                    DeadlineItem newDeadline = new DeadlineItem(command[1], by);
-                    list.addItem(newDeadline);
+                    try {
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! The name of this deadline has not been revealed.\n\n" +
+                                    "Please include the deadline name.");
+                        }
 
-                    System.out.println("A deadline has been added.");
-                    System.out.println("  " + newDeadline);
+                        if (query.length < 2) {
+                            throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n" +
+                                    "Please include '\\by' in your message, along with the time or date of the deadline.");
+                        }
+
+                        String by = query[1].trim().split(" ", 2)[1];
+                        DeadlineItem newDeadline = new DeadlineItem(command[1], by);
+                        list.addItem(newDeadline);
+
+                        System.out.println("A deadline has been added.");
+                        System.out.println("  " + newDeadline);
+                    } catch(OrangutanException e) {
+                        System.out.println(e);
+                    }
                     break;
+
                 case "event":
-                    String from = query[1].trim().split(" ", 2)[1];
-                    String to = query[2].trim().split(" ", 2)[1];
-                    EventItem newEvent = new EventItem(command[1], from, to);
-                    list.addItem(newEvent);
+                    try {
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! The name of this event has not been revealed.\n\n" +
+                                    "Please include the event name.");
+                        }
 
-                    System.out.println("An event has been added.");
-                    System.out.println("  " + newEvent);
+                        if (query.length < 3) {
+                            throw new OrangutanException("Alas! Some event details have not been revealed.\n\n" +
+                                    "Please include '\\from' and '\\to' in your message, along with the start and end time or day.");
+                        }
+
+                        String from = query[1].trim().split(" ", 2)[1];
+                        String to = query[2].trim().split(" ", 2)[1];
+                        EventItem newEvent = new EventItem(command[1], from, to);
+                        list.addItem(newEvent);
+
+                        System.out.println("An event has been added.");
+                        System.out.println("  " + newEvent);
+                    } catch (OrangutanException e) {
+                        System.out.println(e);
+                    }
                     break;
+
                 case "list":
                     System.out.println("The following are the undertakings in your list:");
                     System.out.println(list);
                     break;
+
                 case "mark":
-                    int markIndex = Integer.parseInt(command[1]);
-                    String markedItem = list.markItem(markIndex);
+                   try {
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! I do not know which item to mark.\n\n" +
+                                    "Please follow the mark command with an integer between 1 and \" + list.getLength() + \" (inclusive).\"");
+                        }
 
-                    System.out.println("My compliments, you have completed a task.");
-                    System.out.println("  " + markedItem);
+                        int markIndex = Integer.parseInt(command[1]);
+
+                        if (markIndex < 1 || markIndex > list.getLength()) {
+                            throw new OrangutanException("Alas! This number is not in the list.\n\n" +
+                             "Please keep the index between 1 and " + list.getLength() + " (inclusive).");
+                        }
+
+                        String markedItem = list.markItem(markIndex);
+                        System.out.println("My compliments, you have completed a task.");
+                        System.out.println("  " + markedItem);
+
+                    }  catch (NumberFormatException e) {
+                        System.out.println("Alas! That is not a number. Not a number I know of, at the least.\n\n" +
+                         "Please input an integer between 1 and \" + list.getLength() + \" (inclusive).\"");
+                    } catch (OrangutanException e) {
+                       System.out.println(e);
+                   }
                     break;
+
                 case "unmark":
-                    int unmarkIndex = Integer.parseInt(command[1]);
-                    String unmarkedItem = list.unmarkItem(unmarkIndex);
+                    try {
+                        if (command.length < 2) {
+                            throw new OrangutanException("Alas! I do not know which item to unmark.\n\n" +
+                                    "Please follow the unmark command with an integer between 1 and \" + list.getLength() + \" (inclusive).\"");
+                        }
 
-                    System.out.println("Brace yourself, this task has not been completed yet.");
-                    System.out.println("  " + unmarkedItem);
+                        int unmarkIndex = Integer.parseInt(command[1]);
+
+                        if (unmarkIndex < 1 || unmarkIndex > list.getLength()) {
+                            throw new OrangutanException("Alas! This number is not in the list.\n\n" +
+                             "Please keep the index between 1 and " + list.getLength() + " (inclusive).");
+                        }
+
+                        String unmarkedItem = list.unmarkItem(unmarkIndex);
+
+                        System.out.println("Brace yourself, this task has not been completed yet.");
+                        System.out.println("  " + unmarkedItem);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Alas! That is not a number. Not a number I know of, at the least.\n\n" +
+                         "Please input an integer between 1 and \" + list.getLength() + \" (inclusive).\"");
+                    } catch (OrangutanException e) {
+                        System.out.println(e);
+                    }
                     break;
+
                 case "bye":
                     exit = true;
 
                     System.out.println("Fare thee well, and may we meet again.");
                     break;
-                default:
-                    String joinedQuery = String.join("/", query);
-                    list.addItem(new ListItem(joinedQuery));
 
-                    System.out.println("I have committed to memory: " + joinedQuery);
+                default:
+                    System.out.println("Alas! My simian mind is unable to comprehend your words.\n\n" +
+                     "Please use words I understand: \"todo\", \"deadline\", \"event\", \"list\", \"mark\", \"unmark\", \"bye\"");
             }
 
             System.out.println(line);
