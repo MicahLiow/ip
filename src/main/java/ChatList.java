@@ -5,8 +5,8 @@ public class ChatList {
 
     ChatList() {}
 
-    public void addItem(String s) {
-        list.add(new ListItem(s));
+    public void addItem(ListItem item) {
+        list.add(item);
     }
 
     public String markItem(int n) {

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Orangutan {
     public static void main(String[] args) {
@@ -21,41 +22,68 @@ public class Orangutan {
         //Get user input
         Scanner input = new Scanner(System.in);
         while (true) {
-            String[] query = input.nextLine().split(" ");
-            String command = query[0];
-            int param = -1;
+            String[] query = input.nextLine().split("/");
+            String[] command = query[0].trim().split(" ", 2);
 
-            if (query.length > 1) {
-                param = Integer.parseInt(query[1]);
-            }
-
-            String reply = "";
             boolean exit = false;
 
-            switch (command) {
-                case "bye":
-                    exit = true;
-                    reply = "Fare thee well, and may we meet again.";
+            System.out.println(line);
+            switch (command[0]) {
+                case "todo":
+                    TodoItem newTodo = new TodoItem(command[1]);
+                    list.addItem(newTodo);
+
+                    System.out.println("A task has been added.");
+                    System.out.println("  " + newTodo);
+                    break;
+                case "deadline":
+                    String by = query[1].trim().split(" ", 2)[1];
+                    DeadlineItem newDeadline = new DeadlineItem(command[1], by);
+                    list.addItem(newDeadline);
+
+                    System.out.println("A deadline has been added.");
+                    System.out.println("  " + newDeadline);
+                    break;
+                case "event":
+                    String from = query[1].trim().split(" ", 2)[1];
+                    String to = query[2].trim().split(" ", 2)[1];
+                    EventItem newEvent = new EventItem(command[1], from, to);
+                    list.addItem(newEvent);
+
+                    System.out.println("An event has been added.");
+                    System.out.println("  " + newEvent);
                     break;
                 case "list":
-                    reply = "The following are the undertakings in your list:\n" + list.toString();
+                    System.out.println("The following are the undertakings in your list:");
+                    System.out.println(list);
                     break;
                 case "mark":
-                    String markedItem = list.markItem(param);
-                    reply = "My compliments, you have completed a task.\n  " + markedItem;
+                    int markIndex = Integer.parseInt(command[1]);
+                    String markedItem = list.markItem(markIndex);
+
+                    System.out.println("My compliments, you have completed a task.");
+                    System.out.println("  " + markedItem);
                     break;
                 case "unmark":
-                    String unmarkedItem = list.unmarkItem(param);
-                    reply = "Brace yourself, this task has not been completed yet.\n  " + unmarkedItem;
+                    int unmarkIndex = Integer.parseInt(command[1]);
+                    String unmarkedItem = list.unmarkItem(unmarkIndex);
+
+                    System.out.println("Brace yourself, this task has not been completed yet.");
+                    System.out.println("  " + unmarkedItem);
+                    break;
+                case "bye":
+                    exit = true;
+
+                    System.out.println("Fare thee well, and may we meet again.");
                     break;
                 default:
-                    String joinedQuery = String.join(" ", query);
-                    list.addItem(joinedQuery);
-                    reply = "I have committed to memory: " + joinedQuery;
+                    String joinedQuery = String.join("/", query);
+                    list.addItem(new ListItem(joinedQuery));
+
+                    System.out.println("I have committed to memory: " + joinedQuery);
             }
 
-            System.out.println(line + reply + "\n" + line);
-
+            System.out.println(line);
             if (exit) break;
         }
     }
