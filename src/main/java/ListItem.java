@@ -17,6 +17,10 @@ public class ListItem {
         this.isCompleted = false;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
     @Override
     public String toString() {
         String res = "";
