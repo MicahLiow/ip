@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Orangutan {
     public static void main(String[] args) {
         //ascii banner adapted from https://ascii.co.uk/art/orangutan
@@ -12,5 +14,25 @@ public class Orangutan {
                       + "                       |___/                      \n\n"
                       + "Greetings, I am Orangutan.\nHow may I assist you on this fine day?\n" + line;
         System.out.println(banner);
+
+        //Get user input
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            String query = input.nextLine();
+            String reply = "";
+            boolean exit = false;
+            switch (query) {
+                case "bye":
+                    exit = true;
+                    reply = "Fare thee well, and may we meet again.";
+                    break;
+                default:
+                    reply = query;
+            }
+
+            System.out.println(line + reply + "\n" + line);
+
+            if (exit) {break;}
+        }
     }
 }
