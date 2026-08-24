@@ -21,6 +21,10 @@ public class ChatList {
         return item.toString();
     }
 
+    public int getLength() {
+        return list.size();
+    }
+
     @Override
     public String toString() {
         String res = "";
