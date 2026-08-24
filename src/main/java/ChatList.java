@@ -1,12 +1,24 @@
 import java.util.ArrayList;
 
 public class ChatList {
-    private ArrayList<String> list = new ArrayList<String>(100);
+    private final ArrayList<ListItem> list = new ArrayList<ListItem>(100);
 
     ChatList() {}
 
     public void addItem(String s) {
-        list.add(s);
+        list.add(new ListItem(s));
+    }
+
+    public String markItem(int n) {
+        ListItem item = list.get(n-1);
+        item.mark();
+        return item.toString();
+    }
+
+    public String unmarkItem(int n) {
+        ListItem item = list.get(n-1);
+        item.unmark();
+        return item.toString();
     }
 
     @Override

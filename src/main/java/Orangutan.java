@@ -21,26 +21,42 @@ public class Orangutan {
         //Get user input
         Scanner input = new Scanner(System.in);
         while (true) {
-            String query = input.nextLine();
+            String[] query = input.nextLine().split(" ");
+            String command = query[0];
+            int param = -1;
+
+            if (query.length > 1) {
+                param = Integer.parseInt(query[1]);
+            }
+
             String reply = "";
             boolean exit = false;
 
-            switch (query) {
+            switch (command) {
                 case "bye":
                     exit = true;
                     reply = "Fare thee well, and may we meet again.";
                     break;
                 case "list":
-                    reply = list.toString();
+                    reply = "The following are the undertakings in your list:\n" + list.toString();
+                    break;
+                case "mark":
+                    String markedItem = list.markItem(param);
+                    reply = "My compliments, you have completed a task.\n  " + markedItem;
+                    break;
+                case "unmark":
+                    String unmarkedItem = list.unmarkItem(param);
+                    reply = "Brace yourself, this task has not been completed yet.\n  " + unmarkedItem;
                     break;
                 default:
-                    list.addItem(query);
-                    reply = "I have committed to memory: " + query;
+                    String joinedQuery = String.join(" ", query);
+                    list.addItem(joinedQuery);
+                    reply = "I have committed to memory: " + joinedQuery;
             }
 
             System.out.println(line + reply + "\n" + line);
 
-            if (exit) {break;}
+            if (exit) break;
         }
     }
 }
