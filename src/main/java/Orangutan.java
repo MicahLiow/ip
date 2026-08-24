@@ -83,11 +83,20 @@ public class Orangutan {
                     break;
 
                     case "list":
-                        System.out.println("The following are the undertakings in your list:");
-                        System.out.println(list);
+                        if (list.getLength() == 0) {
+                            System.out.println("The list is empty.");
+                        } else {
+                            System.out.println("The following are the undertakings in your list:");
+                            System.out.println(list);
+                        }
                     break;
 
                     case "delete":
+                        if (list.getLength() == 0) {
+                            throw new OrangutanException("Alas! There is nothing to delete.\n\n" +
+                             "The list is empty; please add some items to it first.m");
+                        }
+
                         if (command.length < 2) {
                             throw new OrangutanException("Alas! I do not know which item to delete.\n\n" +
                                     "Please follow the delete command with an integer between 1 and " + list.getLength() + " (inclusive).");
@@ -106,6 +115,11 @@ public class Orangutan {
                     break;
 
                     case "mark":
+                        if (list.getLength() == 0) {
+                            throw new OrangutanException("Alas! There is nothing to mark.\n\n" +
+                                    "The list is empty; please add some items to it first.");
+                        }
+
                         if (command.length < 2) {
                             throw new OrangutanException("Alas! I do not know which item to mark.\n\n" +
                                     "Please follow the mark command with an integer between 1 and " + list.getLength() + " (inclusive).");
@@ -124,6 +138,11 @@ public class Orangutan {
                     break;
 
                     case "unmark":
+                        if (list.getLength() == 0) {
+                            throw new OrangutanException("Alas! There is nothing to unmark.\n\n" +
+                                    "The list is empty; please add some items to it first.");
+                        }
+
                         if (command.length < 2) {
                             throw new OrangutanException("Alas! I do not know which item to unmark.\n\n" +
                                     "Please follow the unmark command with an integer between 1 and " + list.getLength() + " (inclusive).");
