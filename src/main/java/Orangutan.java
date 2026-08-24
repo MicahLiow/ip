@@ -2,8 +2,11 @@ import java.util.*;
 
 public class Orangutan {
     public static void main(String[] args) {
+        //initialize important variables
         //ascii banner adapted from https://ascii.co.uk/art/orangutan
         String line = "___________________________________________________________\n";
+        ChatList list = new ChatList();
+
         String banner = line
                       + "  ___                             | |             \n"
                       + " / _ \\ ____ ____ ____   ____ _   _| |_ ____ ____  \n"
@@ -21,13 +24,18 @@ public class Orangutan {
             String query = input.nextLine();
             String reply = "";
             boolean exit = false;
+
             switch (query) {
                 case "bye":
                     exit = true;
                     reply = "Fare thee well, and may we meet again.";
                     break;
+                case "list":
+                    reply = list.toString();
+                    break;
                 default:
-                    reply = query;
+                    list.addItem(query);
+                    reply = "I have committed to memory: " + query;
             }
 
             System.out.println(line + reply + "\n" + line);
