@@ -5,28 +5,54 @@ public class ChatList {
 
     ChatList() {}
 
+    /**
+     * Adds item to the end of the list.
+     *
+     * @param item: ListItem object, representing a to-do, event or deadline in the list.
+     */
     public void addItem(ListItem item) {
         list.add(item);
     }
 
+    /**
+     * marks existing item as completed.
+     *
+     * @param n: position of item in the list (starting with 1).
+     * @return: marked list item, in the form of a String.
+     */
     public String markItem(int n) {
-        ListItem item = list.get(n-1);
+        ListItem item = list.get(n - 1);
         item.mark();
         return item.toString();
     }
 
+    /**
+     * Unmarks existing item, then return it as a String
+     *
+     * @param n: position of item in the list (starting with 1)
+     * @return: unmarked list item, in the form of a String.
+     */
     public String unmarkItem(int n) {
-        ListItem item = list.get(n-1);
+        ListItem item = list.get(n - 1);
         item.unmark();
         return item.toString();
     }
 
+    /**
+     * Deletes item from the list
+     *
+     * @param n: position of item in the list (starting with 1)
+     * @return: deleted list item, in the form of a String.
+     */
     public String deleteItem(int n) {
-        ListItem item = list.get(n-1);
-        list.remove(n-1);
+        ListItem item = list.get(n - 1);
+        list.remove(n - 1);
         return item.toString();
     }
 
+    /**
+     * get length of the list
+     */
     public int getLength() {
         return list.size();
     }
@@ -36,8 +62,10 @@ public class ChatList {
         String res = "";
         for(int i = 1; i <= list.size(); i++) {
             res += (i + ". ");
-            res += list.get(i-1);
-            if (i < list.size()) {res += "\n";}
+            res += list.get(i - 1);
+            if (i < list.size()) {
+                res += "\n";
+            }
         }
 
         return res;

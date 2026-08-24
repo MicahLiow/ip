@@ -9,16 +9,18 @@ public class ListItem {
         this.icon = "   ";
     }
 
+    /**
+     * Marks item as completed.
+     */
     public void mark() {
         this.isCompleted = true;
     }
 
+    /**
+     * unmarks item.
+     */
     public void unmark() {
         this.isCompleted = false;
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
     }
 
     @Override
