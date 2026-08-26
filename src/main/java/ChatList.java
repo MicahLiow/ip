@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 
 public class ChatList {
-    private final ArrayList<ListItem> list = new ArrayList<ListItem>(100);
+    private final ArrayList<ListItem> list;
 
-    ChatList() {}
+    ChatList() {
+         this.list = new ArrayList<ListItem>(100);
+    }
+
+    ChatList(ArrayList<ListItem> list) {
+        this.list = list;
+    }
+
 
     /**
      * Adds item to the end of the list.
