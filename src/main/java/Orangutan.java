@@ -35,7 +35,7 @@ public class Orangutan {
                                     "Please include the to-do name.");
                         }
 
-                        TodoItem newTodo = new TodoItem(command[1]);
+                        ListItem newTodo = new ListItem(ItemType.TODO, command[1], false);
                         listItems.addItem(newTodo);
 
                         System.out.println("A task has been added.");
@@ -50,11 +50,11 @@ public class Orangutan {
 
                         if (query.length < 2) {
                             throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n" +
-                                    "Please include '\\by' in your message, along with the time or date of the deadline.");
+                                    "Please include '/by' in your message, along with the time or date of the deadline.");
                         }
 
                         String by = query[1].trim().split(" ", 2)[1];
-                        DeadlineItem newDeadline = new DeadlineItem(command[1], by);
+                        ListItem newDeadline = new ListItem(ItemType.DEADLINE, command[1], false, by);
                         listItems.addItem(newDeadline);
 
                         System.out.println("A deadline has been added.");
@@ -69,12 +69,12 @@ public class Orangutan {
 
                         if (query.length < 3) {
                             throw new OrangutanException("Alas! Some event details have not been revealed.\n\n" +
-                                    "Please include '\\from' and '\\to' in your message, along with the start and end time or day.");
+                                    "Please include '/from' and '/to' in your message, along with the start and end time or day.");
                         }
 
                         String from = query[1].trim().split(" ", 2)[1];
                         String to = query[2].trim().split(" ", 2)[1];
-                        EventItem newEvent = new EventItem(command[1], from, to);
+                        ListItem newEvent = new ListItem(ItemType.EVENT, command[1], false, from, to);
                         listItems.addItem(newEvent);
 
                         System.out.println("An event has been added.");
