@@ -1,12 +1,17 @@
+package Orangutan.Command;
+
+import Orangutan.ChatList.ChatList;
+import Orangutan.OrangutanStorage;
+
 import java.nio.file.Path;
 
-class OrangutanContext {
+public class OrangutanContext {
     private ChatList list;
     private boolean runLoop;
     private Path filePath;
     private OrangutanStorage storage;
 
-    OrangutanContext(ChatList list, boolean runLoop, Path filePath, OrangutanStorage storage) {
+    public OrangutanContext(ChatList list, boolean runLoop, Path filePath, OrangutanStorage storage) {
         this.list = list;
         this.runLoop = runLoop;
         this.filePath = filePath;
@@ -16,42 +21,42 @@ class OrangutanContext {
     /**
      * Constructs a context where runLoop is false, and all other fields are null.
      */
-    OrangutanContext() {
+    public OrangutanContext() {
         this.list = null;
         this.runLoop = false;
         this.filePath = null;
         this.storage = new OrangutanStorage();
     }
 
-    ChatList getList() {
+    public ChatList getList() {
         return list;
     }
 
-    void setList(ChatList list) {
+    public void setList(ChatList list) {
         this.list = list;
     }
 
-    boolean getRunLoop() {
+    public boolean getRunLoop() {
         return runLoop;
     }
 
-    void setRunLoop(boolean runLoop) {
+    public void setRunLoop(boolean runLoop) {
         this.runLoop = runLoop;
     }
 
-    Path getFilePath() {
+    public Path getFilePath() {
         return filePath;
     }
 
-    void setFilePath(Path filePath) {
+    public void setFilePath(Path filePath) {
         this.filePath = filePath;
     }
 
-    OrangutanStorage getStorage() {
+    public OrangutanStorage getStorage() {
         return this.storage;
     }
 
-    void setStorage(OrangutanStorage storage) {
+    public void setStorage(OrangutanStorage storage) {
         this.storage = storage;
     }
 }

@@ -1,3 +1,7 @@
+package Orangutan.Command;
+
+import Orangutan.OrangutanException;
+
 import java.io.IOException;
 
 class OrangutanByeCommand implements OrangutanCommand{

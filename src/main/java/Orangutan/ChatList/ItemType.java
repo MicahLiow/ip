@@ -1,3 +1,5 @@
+package Orangutan.ChatList;
+
 public enum ItemType {
     TODO ("[T]"),
     DEADLINE ("[D]"),
@@ -10,12 +12,12 @@ public enum ItemType {
     }
 
     /**
-     * returns an ItemType based on its icon
+     * returns an Orangutan.ChatList.ItemType based on its icon
      *
      * @param icon three-digit String, identical to the one found in the "icon" field (see above).
-     * @return the ItemType corresponding to the icon
+     * @return the Orangutan.ChatList.ItemType corresponding to the icon
      */
-    static ItemType getTypeFromIcon(String icon) {
+    public static ItemType getTypeFromIcon(String icon) {
         return switch (icon) {
             case "[T]" -> TODO;
             case "[D]" -> DEADLINE;

@@ -1,4 +1,9 @@
-public class OrangutanTodoCommand implements OrangutanCommand{
+package Orangutan.Command;
+
+import Orangutan.ChatList.ItemType;
+import Orangutan.ChatList.ListItem;
+
+class OrangutanTodoCommand implements OrangutanCommand{
     private final String item;
     private final boolean isCompleted;
 

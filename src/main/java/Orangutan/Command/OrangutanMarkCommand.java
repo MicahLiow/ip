@@ -1,3 +1,7 @@
+package Orangutan.Command;
+
+import Orangutan.OrangutanException;
+
 class OrangutanMarkCommand implements OrangutanCommand{
     private final String index;
 

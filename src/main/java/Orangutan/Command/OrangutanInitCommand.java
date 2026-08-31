@@ -1,9 +1,14 @@
+package Orangutan.Command;
+
+import Orangutan.ChatList.ChatList;
+import Orangutan.OrangutanException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.format.DateTimeParseException;
 
-public class OrangutanInitCommand {
-    public OrangutanInitCommand() {
+class OrangutanInitCommand {
+    OrangutanInitCommand() {
     }
 
     public String run(OrangutanContext context) throws OrangutanException {

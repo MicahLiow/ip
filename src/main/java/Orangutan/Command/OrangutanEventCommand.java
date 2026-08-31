@@ -1,6 +1,11 @@
+package Orangutan.Command;
+
+import Orangutan.ChatList.ItemType;
+import Orangutan.ChatList.ListItem;
+
 import java.time.format.DateTimeParseException;
 
-public class OrangutanEventCommand implements OrangutanCommand {
+class OrangutanEventCommand implements OrangutanCommand {
     private final String item;
     private final String from;
     private final String to;
