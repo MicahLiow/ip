@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +24,8 @@ public class Orangutan {
         System.out.println(banner);
 
         //initialize list from save file if one exists. If not, initialize an empty list
+        boolean runLoop = true; //whether to run the input-collection loop. will be set to false if list file cannot be read.
+
         String path = "./data/orangutan.txt"; //path to save file
         Path filePath = Paths.get(path);
 
@@ -31,8 +34,13 @@ public class Orangutan {
             try {
                 listItems = ChatList.readFromFile(filePath);
             } catch (IOException e) {
+                runLoop = false;
                 System.out.println("Alas! I have failed to access the information previously stored in data/orangutan.txt.\n\n" +
-                        "Please ensure I have access to said file.");
+                        "Please ensure I have access to said file before returning to me.");
+            } catch (DateTimeParseException e) {
+                runLoop = false;
+                System.out.println("Alas! I do not comprehend the dates and times stored in data/orangutan.txt.\n\n" +
+                        "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359) before returning to me.");
             }
         } else {
             listItems = new ChatList();
@@ -40,11 +48,12 @@ public class Orangutan {
 
         //Get user input
         Scanner input = new Scanner(System.in);
-        while (true) {
+
+        while (runLoop) {
             String[] query = input.nextLine().split("/");
             String[] command = query[0].trim().split(" ", 2);
 
-            boolean isExit = false;
+
 
             System.out.print(line);
             try {
@@ -183,11 +192,11 @@ public class Orangutan {
                     case "bye":
                         //writes listItems to data/orangutan.txt, then exits the loop
                         try {
-                            isExit = true; //will only exit if we can successfully write to file
+                            runLoop = false; //will only exit if we can successfully write to file
                             listItems.writeToFile(filePath); //will automatically create directories and files as needed
                             System.out.println("Fare thee well, and may we meet again.");
                         } catch (IOException e) {
-                            isExit = false;
+                            runLoop = true;
                             System.out.println("Alas! I was not able to write your list to data/orangutan.txt.\n\n" +
                                     "Please ensure I have access to said files and folders before we bid farewell.");
                         }
@@ -203,14 +212,14 @@ public class Orangutan {
             }  catch (NumberFormatException e) {
                 System.out.println("Alas! That is not a number. Not a number I know of, at the least.\n\n" +
                         "Please input an integer between 1 and " + listItems.getLength() + " (inclusive).");
+            } catch (DateTimeParseException e) {
+                System.out.println("Alas! I do not comprehend the dates and times stored in data/orangutan.txt.\n\n" +
+                        "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359)");
             } catch (OrangutanException e) {
                 System.out.println(e);
             }
 
             System.out.println(line);
-            if (isExit) {
-                break;
-            }
         }
     }
 }
