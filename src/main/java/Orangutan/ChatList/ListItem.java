@@ -1,3 +1,5 @@
+package Orangutan.ChatList;
+
 import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +17,7 @@ public class ListItem {
     private final LocalDateTime by;
 
     /**
-     * constructs a ListItem.
+     * constructs a Orangutan.ChatList.ListItem.
      *
      * @param type the type of item, can be TODO, DEADLINE or EVENT
      * @param item the description of the list item (e.g. dinner)
@@ -23,7 +25,7 @@ public class ListItem {
      * @param params other String parameters, formatted "yyyy-MM-dd HH:mm" (e.g. "2026-08-31 15:00")
      *     TODO: no extra params. DEADLINE: param "by". EVENT: params "from", "to"
      */
-    ListItem(ItemType type, String item, boolean isCompleted, String...params) {
+    public ListItem(ItemType type, String item, boolean isCompleted, String...params) {
         this.type = type;
         this.item = item;
         this.isCompleted = isCompleted;

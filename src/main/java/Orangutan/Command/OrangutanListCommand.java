@@ -1,5 +1,7 @@
-public class OrangutanListCommand implements OrangutanCommand {
-    public OrangutanListCommand() {
+package Orangutan.Command;
+
+class OrangutanListCommand implements OrangutanCommand {
+    OrangutanListCommand() {
     }
 
     public String run(OrangutanContext context) {

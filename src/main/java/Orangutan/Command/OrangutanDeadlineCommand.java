@@ -1,6 +1,11 @@
+package Orangutan.Command;
+
+import Orangutan.ChatList.ItemType;
+import Orangutan.ChatList.ListItem;
+
 import java.time.format.DateTimeParseException;
 
-public class OrangutanDeadlineCommand implements OrangutanCommand {
+class OrangutanDeadlineCommand implements OrangutanCommand {
     private final String item;
     private final String by;
     private final boolean isCompleted;

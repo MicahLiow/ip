@@ -1,4 +1,8 @@
-public class OrangutanDeleteCommand implements OrangutanCommand {
+package Orangutan.Command;
+
+import Orangutan.OrangutanException;
+
+class OrangutanDeleteCommand implements OrangutanCommand {
     private final String index;
 
     OrangutanDeleteCommand(String index) {

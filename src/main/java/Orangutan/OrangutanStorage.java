@@ -1,3 +1,8 @@
+package Orangutan;
+
+import Orangutan.ChatList.ChatList;
+import Orangutan.ChatList.ListItem;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +14,7 @@ public class OrangutanStorage {
     }
 
     /**
-     * Reads new ChatList from save file to context.
+     * Reads new Orangutan.ChatList.ChatList from save file to context.
      */
     public ChatList readFromFile(Path filePath) throws IOException {
         ChatList list = new ChatList();
@@ -24,7 +29,7 @@ public class OrangutanStorage {
     }
 
     /**
-    * Write ChatList from context to a save file.
+    * Write Orangutan.ChatList.ChatList from context to a save file.
     * If file already exists, will overwrite current contents.
     * If file and/or directory does not exist, will create a new one.
     */

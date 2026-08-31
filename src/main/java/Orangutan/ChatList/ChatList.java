@@ -1,28 +1,30 @@
+package Orangutan.ChatList;
+
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class ChatList {
     private final ArrayList<ListItem> list;
 
-    ChatList() {
+    public ChatList() {
          this.list = new ArrayList<ListItem>(100);
     }
 
-    ChatList(ArrayList<ListItem> list) {
+    public ChatList(ArrayList<ListItem> list) {
         this.list = list;
     }
 
     /**
      * returns the list as a stream of ListItems.
      */
-    Stream<ListItem> toStream() {
+    public Stream<ListItem> toStream() {
         return list.stream();
     }
 
     /**
      * Adds item to the end of the list.
      *
-     * @param item: ListItem object, representing a to-do, event or deadline in the list.
+     * @param item: Orangutan.ChatList.ListItem object, representing a to-do, event or deadline in the list.
      */
     public void addItem(ListItem item) {
         list.add(item);

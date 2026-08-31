@@ -1,15 +1,15 @@
-package Orangutan;
+package Orangutan.Command;
 
-import Orangutan.Command.*;
+import Orangutan.OrangutanException;
 
 public class OrangutanParser {
-    OrangutanContext context;
+    private OrangutanContext context;
 
-    OrangutanParser(OrangutanContext context) {
+    public OrangutanParser(OrangutanContext context) {
         this.context = context;
     }
 
-    String parseCommand(String input) {
+    public String parseCommand(String input) {
         String[] query = input.split("/"); //e.g. {"event dinner ", "/from 20260831 1800 ", "/to 20260831 1900"}
         String[] command = query[0].trim().split(" ", 2); //e.g. {"event", "meet with friends"}
         String item;
