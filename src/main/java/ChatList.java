@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.io.IOException;
 
 public class ChatList {
     private final ArrayList<ListItem> list;
@@ -11,6 +16,39 @@ public class ChatList {
         this.list = list;
     }
 
+    /**
+     * Reads new ChatList from save file.
+     *
+     * @param filePath relative path to save file, as a Path object
+     * @return a new ChatList containing the data from the save file, or an empty ChatList if file does nto exist
+     * @throws IOException
+     */
+    public static ChatList readFromFile(Path filePath) throws IOException {
+        ChatList list = new ChatList();
+
+        if (Files.exists(filePath)) {
+            try (Stream<String> lines = Files.lines(filePath)){
+                lines.forEach(line -> list.addItem(ListItem.parseLine(line)));
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Write current ChatList to a save file.
+     * If file already exists, will overwrite current contents.
+     * If file and/or directory does not exist, will create a new one.
+     *
+     * @param filePath relative path to save file, as a Path object
+     * @throws IOException
+     */
+    public void writeToFile(Path filePath) throws IOException {
+        String toWrite = this.list.stream().map(i -> i.toFile()).collect(Collectors.joining("\n"));
+
+        Files.createDirectories(filePath.getParent()); //create directory structure (does nothing if already exists)
+        Files.writeString(filePath, toWrite); //write to file (creates file if does not exist)
+    }
 
     /**
      * Adds item to the end of the list.

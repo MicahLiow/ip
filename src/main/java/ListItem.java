@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class ListItem {
     private final ItemType type;
@@ -47,6 +48,26 @@ public class ListItem {
         }
     }
 
+    /**
+     * Constructs an EventItem from a comma-separated string
+     *
+     * @param fromFileLine comma-separated string
+     *     "[icon],[isCompleted (1 or 0)],[item name],[from / by],[to]"
+     *     (e.g. "[E],1,Dinner,6pm,7pm")
+     */
+    public static ListItem parseLine(String fromFileLine) {
+        String[] data = fromFileLine.split(",");
+
+        ItemType type = ItemType.getTypeFromIcon(data[0]);
+        boolean isCompleted = Boolean.parseBoolean(data[1]);
+        String item = data[2];
+
+        String[] params = {};
+        if (data.length > 3) { //correct number of parameters is checked by the calling class
+            params = Arrays.copyOfRange(data, 3, 5);
+        }
+
+        return new ListItem(type, item, isCompleted, params);
     }
 
     /**
@@ -70,7 +91,11 @@ public class ListItem {
      * @return "[icon],[isCompleted (1 or 0)],[item name]" (e.g. "   ,1,Dinner")
      */
     public String toFile() {
-        return String.format("%s,%d,%s", this.icon, this.isCompleted ? 1 : 0, this.item);
+        String icon = this.type.icon;
+        String isCompleted = Boolean.toString(this.isCompleted);
+        return Stream.of(icon, isCompleted, this.item, this.by, this.from, this.to)
+                .filter(s -> s != null)
+                .collect(Collectors.joining(","));
     }
 
     /**
