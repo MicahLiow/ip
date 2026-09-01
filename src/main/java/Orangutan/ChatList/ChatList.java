@@ -24,7 +24,7 @@ public class ChatList {
     /**
      * Adds item to the end of the list.
      *
-     * @param item: Orangutan.ChatList.ListItem object, representing a to-do, event or deadline in the list.
+     * @param item: ListItem object, representing a to-do, event or deadline in the list.
      */
     public void addItem(ListItem item) {
         list.add(item);

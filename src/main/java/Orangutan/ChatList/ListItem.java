@@ -17,7 +17,7 @@ public class ListItem {
     private final LocalDateTime by;
 
     /**
-     * constructs a Orangutan.ChatList.ListItem.
+     * constructs a Orangutan.ChatList.ChatList.ListItem.
      *
      * @param type the type of item, can be TODO, DEADLINE or EVENT
      * @param item the description of the list item (e.g. dinner)
@@ -59,7 +59,7 @@ public class ListItem {
      *
      * @param fromFileLine comma-separated string
      *     "[icon],[isCompleted],[item name],[from / by],[to]"
-     *     (e.g. "[E],true,Dinner,2026-08-31 1700,2026-08-31 1900")
+     *     (e.g. "[E],true,Dinner,20260831 1700,20260831 1900")
      */
     public static ListItem parseLine(String fromFileLine) {
         String[] data = fromFileLine.split(",");
