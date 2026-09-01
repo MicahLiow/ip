@@ -24,7 +24,7 @@ public class ChatList {
     /**
      * Adds item to the end of the list.
      *
-     * @param item: ListItem object, representing a to-do, event or deadline in the list.
+     * @param item ListItem object, representing a to-do, event or deadline in the list.
      */
     public void addItem(ListItem item) {
         list.add(item);
@@ -33,8 +33,8 @@ public class ChatList {
     /**
      * marks existing item as completed.
      *
-     * @param n: position of item in the list (starting with 1).
-     * @return: marked list item, in the form of a String.
+     * @param n position of item in the list (starting with 1).
+     * @return marked list item, in the form of a String.
      */
     public String markItem(int n) {
         ListItem item = list.get(n - 1);
@@ -45,8 +45,8 @@ public class ChatList {
     /**
      * Unmarks existing item, then return it as a String
      *
-     * @param n: position of item in the list (starting with 1)
-     * @return: unmarked list item, in the form of a String.
+     * @param n position of item in the list (starting with 1)
+     * @return unmarked list item, in the form of a String.
      */
     public String unmarkItem(int n) {
         ListItem item = list.get(n - 1);
@@ -57,8 +57,8 @@ public class ChatList {
     /**
      * Deletes item from the list
      *
-     * @param n: position of item in the list (starting with 1)
-     * @return: deleted list item, in the form of a String.
+     * @param n position of item in the list (starting with 1)
+     * @return deleted list item, in the form of a String.
      */
     public String deleteItem(int n) {
         ListItem item = list.get(n - 1);

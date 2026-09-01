@@ -2,13 +2,27 @@ package Orangutan.Command;
 
 import Orangutan.OrangutanException;
 
+/**
+ * parses commands from user and runs the appropriate commands.
+ */
 public class OrangutanParser {
     private OrangutanContext context;
 
+    /**
+     * Creates new parser object.
+     *
+     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     */
     public OrangutanParser(OrangutanContext context) {
         this.context = context;
     }
 
+    /**
+     * Parses user input, calls the corresponding command with given parameters, and returns the command output.
+     *
+     * @param input command supplied by user.
+     * @return reply after command completion.
+     */
     public String parseCommand(String input) {
         String[] query = input.split("/"); //e.g. {"event dinner ", "/from 20260831 1800 ", "/to 20260831 1900"}
         String[] command = query[0].trim().split(" ", 2); //e.g. {"event", "meet with friends"}

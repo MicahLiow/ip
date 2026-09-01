@@ -5,17 +5,34 @@ import Orangutan.ChatList.ListItem;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Command to create a new deadline and add it to the list.
+ */
 class OrangutanDeadlineCommand implements OrangutanCommand {
     private final String item;
     private final String by;
     private final boolean isCompleted;
 
+    /**
+     * Creates new command.
+     *
+     * @param item description of the list item.
+     * @param by date and time of the deadline, of format "yyyyddmm hhmm".
+     * @param isCompleted whether the deadline has been completed or not.
+     */
     OrangutanDeadlineCommand(String item, String by, boolean isCompleted) {
         this.item = item;
         this.by = by;
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Creates deadline and appends it to the list.
+     *
+     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @return reply message, plus a printout of the new deadline.
+     *      If date and time are of the wrong format, will instead return an alert message.
+     */
     public String run(OrangutanContext context) {
         try {
             ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);

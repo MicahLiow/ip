@@ -1,5 +1,9 @@
 package Orangutan.ChatList;
 
+/**
+ * Enum type denoting the three main types of list items: to-do, deadline, event.
+ * Also contains the icon field, which is a short string depicting the item type.
+ */
 public enum ItemType {
     TODO ("[T]"),
     DEADLINE ("[D]"),
@@ -12,10 +16,10 @@ public enum ItemType {
     }
 
     /**
-     * returns an Orangutan.ChatList.ChatList.ItemType based on its icon
+     * returns an Orangutan.ChatList.ChatList.ItemType based on its icon.
      *
      * @param icon three-digit String, identical to the one found in the "icon" field (see above).
-     * @return the Orangutan.ChatList.ChatList.ItemType corresponding to the icon
+     * @return the Orangutan.ChatList.ChatList.ItemType corresponding to the icon.
      */
     public static ItemType getTypeFromIcon(String icon) {
         return switch (icon) {

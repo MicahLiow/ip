@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Handles storing and loading of list data to and from file.
+ */
 public class OrangutanStorage {
     public OrangutanStorage() {
     }
@@ -29,7 +32,7 @@ public class OrangutanStorage {
     }
 
     /**
-    * Write Orangutan.ChatList.ChatList.ChatList from context to a save file.
+    * Writes Orangutan.ChatList.ChatList.ChatList from context to a save file.
     * If file already exists, will overwrite current contents.
     * If file and/or directory does not exist, will create a new one.
     */
