@@ -8,7 +8,7 @@ public class ChatList {
     private final ArrayList<ListItem> list;
 
     public ChatList() {
-         this.list = new ArrayList<ListItem>(100);
+        this.list = new ArrayList<ListItem>(100);
     }
 
     public ChatList(ArrayList<ListItem> list) {
@@ -34,11 +34,11 @@ public class ChatList {
     /**
      * marks existing item as completed.
      *
-     * @param n: position of item in the list (starting with 1).
+     * @param index: position of item in the list (starting with 1).
      * @return: marked list item, in the form of a String.
      */
-    public String markItem(int n) {
-        ListItem item = list.get(n - 1);
+    public String markItem(int index) {
+        ListItem item = list.get(index - 1);
         item.mark();
         return item.toString();
     }
@@ -46,11 +46,11 @@ public class ChatList {
     /**
      * Unmarks existing item, then return it as a String
      *
-     * @param n: position of item in the list (starting with 1)
+     * @param index: position of item in the list (starting with 1)
      * @return: unmarked list item, in the form of a String.
      */
-    public String unmarkItem(int n) {
-        ListItem item = list.get(n - 1);
+    public String unmarkItem(int index) {
+        ListItem item = list.get(index - 1);
         item.unmark();
         return item.toString();
     }
@@ -58,12 +58,12 @@ public class ChatList {
     /**
      * Deletes item from the list
      *
-     * @param n: position of item in the list (starting with 1)
+     * @param index: position of item in the list (starting with 1)
      * @return: deleted list item, in the form of a String.
      */
-    public String deleteItem(int n) {
-        ListItem item = list.get(n - 1);
-        list.remove(n - 1);
+    public String deleteItem(int index) {
+        ListItem item = list.get(index - 1);
+        list.remove(index - 1);
         return item.toString();
     }
 
@@ -88,7 +88,7 @@ public class ChatList {
     @Override
     public String toString() {
         String res = "";
-        for(int i = 1; i <= list.size(); i++) {
+        for (int i = 1; i <= list.size(); i++) {
             res += (i + ". ");
             res += list.get(i - 1);
             if (i < list.size()) {

@@ -1,6 +1,6 @@
 package orangutan;
 
-public class OrangutanException extends Exception{
+public class OrangutanException extends Exception {
     public OrangutanException(String msg) {
         super(msg);
     }

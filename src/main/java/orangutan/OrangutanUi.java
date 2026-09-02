@@ -7,9 +7,9 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 class OrangutanUi {
-    private static String LINE = "___________________________________________________________";
-    //ascii banner adapted from https://ascii.co.uk/art/orangutan
-    private static String BANNER = "  ___                             | |             \n"
+    private static final String LINE = "___________________________________________________________";
+    // ascii banner adapted from https://ascii.co.uk/art/orangutan
+    private static final String BANNER = "  ___                             | |             \n"
             + " / _ \\ ____ ____ ____   ____ _   _| |_ ____ ____  \n"
             + "| . . |  __/ _  |  _ \\ / _  | | | | __/ _  |  _ \\ \n"
             + "| (_) | |  |(_| | | | | (_| | |_| | | |(_| | | | |\n"
@@ -29,7 +29,7 @@ class OrangutanUi {
      * Prints the welcome message.
      */
     void printWelcome() {
-        String welcomeMessage = "Greetings, I am Orangutan.Orangutan. How may I assist you on this fine day?";
+        String welcomeMessage = "Greetings, I am Orangutan. How may I assist you on this fine day?";
         out.println(String.join("\n", LINE, BANNER, welcomeMessage, LINE));
     }
 

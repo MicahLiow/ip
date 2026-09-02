@@ -7,23 +7,23 @@ import java.nio.file.Path;
 
 public class OrangutanContext {
     private ChatList list;
-    private boolean runLoop;
+    private boolean isRunLoop;
     private Path filePath;
     private OrangutanStorage storage;
 
-    public OrangutanContext(ChatList list, boolean runLoop, Path filePath, OrangutanStorage storage) {
+    public OrangutanContext(ChatList list, boolean isRunLoop, Path filePath, OrangutanStorage storage) {
         this.list = list;
-        this.runLoop = runLoop;
+        this.isRunLoop = isRunLoop;
         this.filePath = filePath;
         this.storage = storage;
     }
 
     /**
-     * Constructs a context where runLoop is false, and all other fields are null.
+     * Constructs a context where isRunLoop is false, and all other fields are null.
      */
     public OrangutanContext() {
         this.list = null;
-        this.runLoop = false;
+        this.isRunLoop = false;
         this.filePath = null;
         this.storage = new OrangutanStorage();
     }
@@ -36,12 +36,12 @@ public class OrangutanContext {
         this.list = list;
     }
 
-    public boolean getRunLoop() {
-        return runLoop;
+    public boolean getIsRunLoop() {
+        return isRunLoop;
     }
 
-    public void setRunLoop(boolean runLoop) {
-        this.runLoop = runLoop;
+    public void setIsRunLoop(boolean isRunLoop) {
+        this.isRunLoop = isRunLoop;
     }
 
     public Path getFilePath() {

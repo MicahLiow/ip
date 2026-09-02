@@ -22,9 +22,9 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
             context.getList().addItem(newDeadline);
 
             return ("A deadline has been added.\n " + newDeadline);
-        } catch(DateTimeParseException e) {
-            return("Alas! I do not comprehend the dates and times you have told me.\n\n" +
-                    "Please ensure your dates are of format yyyymmdd hhmm (e.g. 20260831 2359)");
+        } catch (DateTimeParseException e) {
+            return ("Alas! I do not comprehend the dates and times you have told me.\n\n"
+                    + "Please ensure your dates are of format yyyymmdd hhmm (e.g. 20260831 2359)");
         }
     }
 }

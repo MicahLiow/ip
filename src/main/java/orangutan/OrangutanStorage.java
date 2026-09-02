@@ -20,7 +20,7 @@ public class OrangutanStorage {
         ChatList list = new ChatList();
 
         if (Files.exists(filePath)) {
-            try (Stream<String> lines = Files.lines(filePath)){
+            try (Stream<String> lines = Files.lines(filePath)) {
                 lines.forEach(line -> list.addItem(ListItem.parseLine(line)));
             }
         }
@@ -35,9 +35,9 @@ public class OrangutanStorage {
     */
     public void writeToFile(Path filePath, ChatList list) throws IOException {
 
-        String toWrite = list.toStream().map(i -> i.toFile()).collect(Collectors.joining("\n"));
+        String toWrite = list.toStream().map(item -> item.toFile()).collect(Collectors.joining("\n"));
 
-        Files.createDirectories(filePath.getParent()); //create directory structure (does nothing if already exists)
-        Files.writeString(filePath, toWrite); //write to file (creates file if does not exist)
+        Files.createDirectories(filePath.getParent()); // create directory structure (does nothing if already exists)
+        Files.writeString(filePath, toWrite); // write to file (creates file if does not exist)
     }
 }
