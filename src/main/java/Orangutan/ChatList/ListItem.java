@@ -76,6 +76,10 @@ public class ListItem {
         return new ListItem(type, item, isCompleted, params);
     }
 
+    String getItem() {
+        return this.item;
+    }
+
     /**
      * Marks item as completed.
      */

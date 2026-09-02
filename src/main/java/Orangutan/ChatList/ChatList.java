@@ -1,6 +1,7 @@
 package Orangutan.ChatList;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ChatList {
@@ -64,6 +65,17 @@ public class ChatList {
         ListItem item = list.get(n - 1);
         list.remove(n - 1);
         return item.toString();
+    }
+
+    /**
+     * Finds items whose descriptions contain query.
+     *
+     * @param query String to be found.
+     * @return ChatList of matching items.
+     */
+    public ChatList findItem(String query) {
+        List<ListItem> resStream = list.stream().filter(item -> item.getItem().contains(query)).toList();
+        return new ChatList(new ArrayList<ListItem>(resStream));
     }
 
     /**
