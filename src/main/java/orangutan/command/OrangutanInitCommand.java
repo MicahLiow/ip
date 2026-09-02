@@ -7,10 +7,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Command to initiate chatbot.
+ * This command cannot be accessed by the user.
+ */
 class OrangutanInitCommand {
     OrangutanInitCommand() {
     }
 
+    /**
+     * Loads data from file and stores it in context. And flags the program to start collecting input.
+     * If no file exists, will load an empty list into context.
+     * If read file fails, or if dates and times stored in file are of the wrong format, will instead terminate the program.
+     *
+     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @return Empty string if successful.
+     * @throws OrangutanException If read file has failed, or dates and times in file are of the wrong format,
+     *      or if a user tries to run this command.
+     */
     public String run(OrangutanContext context) throws OrangutanException {
 <<<<<<< HEAD
         //initialize list from save file if one exists. If not, initialize an empty list

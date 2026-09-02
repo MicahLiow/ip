@@ -2,13 +2,29 @@ package orangutan.command;
 
 import orangutan.OrangutanException;
 
+/**
+ * Command to mark an item as completed.
+ */
 class OrangutanMarkCommand implements OrangutanCommand {
     private final String index;
 
+    /**
+     * Creates a new command.
+     *
+     * @param index Index of the item to be marked.
+     */
     OrangutanMarkCommand(String index) {
         this.index = index;
     }
 
+    /**
+     * Marks item at the given index of the list.
+     *
+     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @return Reply message, plus a printout of the marked item.
+     *      If index is not a number, will instead return an alert message.
+     * @throws OrangutanException If list is empty, or if index is out of range.
+     */
     public String run(OrangutanContext context) throws OrangutanException {
         if (context.getList().getLength() == 0) {
             throw new OrangutanException("Alas! There is nothing to mark.\n\n"

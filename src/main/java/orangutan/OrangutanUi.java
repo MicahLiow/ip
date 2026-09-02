@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Handles user interface and user interactions.
+ */
 class OrangutanUi {
     private static final String LINE = "___________________________________________________________";
     // ascii banner adapted from https://ascii.co.uk/art/orangutan

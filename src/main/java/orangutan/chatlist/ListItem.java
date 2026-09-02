@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Stores information on a single item in the list.
+ */
 public class ListItem {
     private static final DateTimeFormatter DATE_TIME_INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
     private static final DateTimeFormatter DATE_TIME_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -18,13 +21,17 @@ public class ListItem {
     private final LocalDateTime by;
 
     /**
+<<<<<<< HEAD:src/main/java/orangutan/chatList/ListItem.java
      * constructs a ListItem.
+=======
+     * constructs an ListItem.
+>>>>>>> branch-A-Javadoc:src/main/java/Orangutan/ChatList/ListItem.java
      *
-     * @param type the type of item, can be TODO, DEADLINE or EVENT
-     * @param item the description of the list item (e.g. dinner)
-     * @param isCompleted whether the item has already been completed
-     * @param params other String parameters, formatted "yyyy-MM-dd HH:mm" (e.g. "2026-08-31 15:00")
-     *     TODO: no extra params. DEADLINE: param "by". EVENT: params "from", "to"
+     * @param type ItemType corresponding to the type of the item, can be TODO, DEADLINE or EVENT.
+     * @param item Description of the list item (e.g. dinner).
+     * @param isCompleted Whether the item has already been completed.
+     * @param params Time parameters, formatted "yyyy-MM-dd HH:mm" (e.g. "2026-08-31 15:00").
+     *     Params required are as follows: to-do - no extra params. deadline - param "by". event - params "from", "to".
      */
     public ListItem(ItemType type, String item, boolean isCompleted, String... params) {
         this.type = type;
@@ -56,11 +63,10 @@ public class ListItem {
     }
 
     /**
-     * Constructs an EventItem from a comma-separated string
+     * Constructs a ListItem from a comma-separated string.
      *
-     * @param fromFileLine comma-separated string
-     *     "[icon],[isCompleted],[item name],[from / by],[to]"
-     *     (e.g. "[E],true,Dinner,20260831 1700,20260831 1900")
+     * @param fromFileLine comma-separated string "[icon],[isCompleted],[item name],[from / by],[to]".
+     *     (e.g. "[E],true,Dinner,20260831 1700,20260831 1900").
      */
     public static ListItem parseLine(String fromFileLine) {
         String[] data = fromFileLine.split(",");
@@ -89,17 +95,16 @@ public class ListItem {
     }
 
     /**
-     * unmarks item as to be completed.
+     * Unmarks item as to be completed.
      */
     public void unmark() {
         this.isCompleted = false;
     }
 
     /**
-     * Returns a comma-separated string representation of the data in this object
-     * to be written to a file
+     * Returns a comma-separated string representation of the data in this object to be written to a file.
      *
-     * @return "[icon],[isCompleted],[item name]" (e.g. "   ,true,Dinner")
+     * @return String "[icon],[isCompleted],[item name],[from/by],[to]" (e.g. "[D],true,report,20260831 1900").
      */
     public String toFile() {
         String icon = this.type.getIcon();
@@ -115,15 +120,14 @@ public class ListItem {
     }
 
     /**
-     * Returns item parameters (by, from, to) as a String
+     * Returns item parameters (by, from, to) as a String.
      *
-     * @param paramName parameter name ("by", "from", "to")
-     * @param param parameter value (e.g. "Monday 5pm")
-     * @param prefix any String to be added to the beginning of the result
-     * @param suffix any String to be added after the end of the result
-     * @param formatter format the param to this
-     * @return null if the parameter is of null value,
-     *     else a String of format "prefix paramName param suffix"
+     * @param paramName Parameter name ("by", "from", "to").
+     * @param param Parameter value (e.g. "Monday 5pm").
+     * @param prefix Any String to be added to the beginning of the result.
+     * @param suffix Any String to be added after the end of the result.
+     * @param formatter Format time params to this.
+     * @return Null if the parameter is of null value, else a String of format "prefix paramName param suffix".
      *     (e.g. "(by Monday 5pm)", prefix is "(", suffix is ")" and paramName is "by ")
      */
     private static String paramToString(String paramName, LocalDateTime param, String prefix, String suffix,
@@ -132,9 +136,9 @@ public class ListItem {
     }
 
     /**
-     * Prints this item as a String
+     * Prints this item as a String.
      *
-     * @return String of format "[icon] [isCompleted ([X] or [ ])] item, (paramName: paramValue)"
+     * @return String of format "[icon] [isCompleted ([X] or [ ])] item, (paramName: paramValue)".
      *     (e.g. "[T] [X] Dinner (from: 6pm to: 7pm)")
      */
     @Override

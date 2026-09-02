@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Stores list of ListItems, and provides functionality to add, modify and remove th
+ */
 public class ChatList {
     private final ArrayList<ListItem> list;
 
@@ -25,7 +28,7 @@ public class ChatList {
     /**
      * Adds item to the end of the list.
      *
-     * @param item: ListItem object, representing a to-do, event or deadline in the list.
+     * @param item ListItem object, representing a to-do, event or deadline in the list.
      */
     public void addItem(ListItem item) {
         list.add(item);
@@ -34,8 +37,8 @@ public class ChatList {
     /**
      * marks existing item as completed.
      *
-     * @param index: position of item in the list (starting with 1).
-     * @return: marked list item, in the form of a String.
+     * @param index position of item in the list (starting with 1).
+     * @return marked list item, in the form of a String.
      */
     public String markItem(int index) {
         ListItem item = list.get(index - 1);
@@ -46,8 +49,8 @@ public class ChatList {
     /**
      * Unmarks existing item, then return it as a String
      *
-     * @param index: position of item in the list (starting with 1)
-     * @return: unmarked list item, in the form of a String.
+     * @param index position of item in the list (starting with 1)
+     * @return unmarked list item, in the form of a String.
      */
     public String unmarkItem(int index) {
         ListItem item = list.get(index - 1);
@@ -58,8 +61,8 @@ public class ChatList {
     /**
      * Deletes item from the list
      *
-     * @param index: position of item in the list (starting with 1)
-     * @return: deleted list item, in the form of a String.
+     * @param index Position of item in the list (starting with 1).
+     * @return Deleted list item, in the form of a String.
      */
     public String deleteItem(int index) {
         ListItem item = list.get(index - 1);
@@ -79,7 +82,7 @@ public class ChatList {
     }
 
     /**
-     * get length of the list
+     * Get length of the list.
      */
     public int getLength() {
         return list.size();
