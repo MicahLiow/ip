@@ -74,12 +74,12 @@ public class OrangutanParser {
                     return new OrangutanListCommand().run(context);
 
                 case "find":
-                    if (command.length < 2) {
+                    if (commandParams.length < 2) {
                         throw new OrangutanException("Alas! I do not know what to find.\n\n"
                                 + "Please follow the find command with the text I am to find.");
                     }
 
-                    return new OrangutanFindCommand(command[1]).run(context);
+                    return new OrangutanFindCommand(commandParams[1]).run(context);
 
                 case "delete":
                     if (commandParams.length < 2) {
