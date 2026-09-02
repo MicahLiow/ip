@@ -1,7 +1,7 @@
-package Orangutan.Command;
+package orangutan.command;
 
-import Orangutan.ChatList.ItemType;
-import Orangutan.ChatList.ListItem;
+import orangutan.chatList.ItemType;
+import orangutan.chatList.ListItem;
 
 import java.time.format.DateTimeParseException;
 

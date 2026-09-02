@@ -1,4 +1,4 @@
-package Orangutan.ChatList;
+package orangutan.chatList;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

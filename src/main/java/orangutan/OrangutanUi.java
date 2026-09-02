@@ -1,6 +1,6 @@
-package Orangutan;
+package orangutan;
 
-import Orangutan.Command.OrangutanParser;
+import orangutan.command.OrangutanParser;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -36,7 +36,7 @@ class OrangutanUi {
     /**
      * Receives input from user and prints the reply.
      *
-     * @param parser Orangutan.Command.OrangutanParser object, for parsing the command.
+     * @param parser OrangutanParser object, for parsing the command.
      */
     void getInput(OrangutanParser parser) {
         out.print(" > ");

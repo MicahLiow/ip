@@ -1,4 +1,4 @@
-package Orangutan.ChatList;
+package orangutan.chatList;
 
 import java.util.Arrays;
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ public class ListItem {
     private final LocalDateTime by;
 
     /**
-     * constructs a Orangutan.ChatList.ChatList.ListItem.
+     * constructs a ListItem.
      *
      * @param type the type of item, can be TODO, DEADLINE or EVENT
      * @param item the description of the list item (e.g. dinner)

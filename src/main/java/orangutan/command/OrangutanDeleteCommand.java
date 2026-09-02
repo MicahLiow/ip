@@ -1,6 +1,6 @@
-package Orangutan.Command;
+package orangutan.command;
 
-import Orangutan.OrangutanException;
+import orangutan.OrangutanException;
 
 class OrangutanDeleteCommand implements OrangutanCommand {
     private final String index;

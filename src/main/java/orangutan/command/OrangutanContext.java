@@ -1,7 +1,7 @@
-package Orangutan.Command;
+package orangutan.command;
 
-import Orangutan.ChatList.ChatList;
-import Orangutan.OrangutanStorage;
+import orangutan.chatList.ChatList;
+import orangutan.OrangutanStorage;
 
 import java.nio.file.Path;
 

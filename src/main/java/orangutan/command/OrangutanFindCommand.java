@@ -1,9 +1,6 @@
-package Orangutan.Command;
+package orangutan.command;
 
-import Orangutan.ChatList.ChatList;
-import Orangutan.OrangutanException;
-
-import java.util.stream.Stream;
+import orangutan.chatList.ChatList;
 
 /**
  * Command to find items in list whose descriptions contain a specific string.

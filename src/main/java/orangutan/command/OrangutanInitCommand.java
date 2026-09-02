@@ -1,7 +1,7 @@
-package Orangutan.Command;
+package orangutan.command;
 
-import Orangutan.ChatList.ChatList;
-import Orangutan.OrangutanException;
+import orangutan.chatList.ChatList;
+import orangutan.OrangutanException;
 
 import java.io.IOException;
 import java.nio.file.Files;

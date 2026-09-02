@@ -1,7 +1,7 @@
-package Orangutan;
+package orangutan;
 
-import Orangutan.Command.OrangutanContext;
-import Orangutan.Command.OrangutanParser;
+import orangutan.command.OrangutanContext;
+import orangutan.command.OrangutanParser;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

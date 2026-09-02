@@ -1,4 +1,4 @@
-package Orangutan.ChatList;
+package orangutan.chatList;
 
 import java.util.ArrayList;
 import java.util.List;
