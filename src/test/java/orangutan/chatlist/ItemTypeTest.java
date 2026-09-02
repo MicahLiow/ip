@@ -1,4 +1,4 @@
-package Orangutan.ChatList;
+package orangutan.chatlist;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ItemTypeTest {
     @Test
     public void todoIconTest() {
-        assertEquals("[T]", ItemType.TODO.icon);
+        assertEquals("[T]", ItemType.TODO.getIcon());
     }
 
     @Test
     public void deadlineIconTest() {
-        assertEquals("[D]", ItemType.DEADLINE.icon);
+        assertEquals("[D]", ItemType.DEADLINE.getIcon());
     }
 
     @Test
     public void eventIconTest() {
-        assertEquals("[E]", ItemType.EVENT.icon);
+        assertEquals("[E]", ItemType.EVENT.getIcon());
     }
 
     @Test

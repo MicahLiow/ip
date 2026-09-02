@@ -1,4 +1,4 @@
-package Orangutan;
+package orangutan;
 
 public class OrangutanStorageTest {
 }

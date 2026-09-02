@@ -1,17 +1,18 @@
-package Orangutan.ChatList;
+package orangutan.chatlist;
 
-import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
+
+import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListItem {
-    private final static DateTimeFormatter DATE_TIME_INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
-    private final static DateTimeFormatter DATE_TIME_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATE_TIME_INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
+    private static final DateTimeFormatter DATE_TIME_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final ItemType type;
     private final String item;
-    private boolean isCompleted; //not final so we can mark and unmark a task
+    private boolean isCompleted; // not final so we can mark and unmark a task
     private final LocalDateTime from;
     private final LocalDateTime to;
     private final LocalDateTime by;
@@ -25,12 +26,12 @@ public class ListItem {
      * @param params other String parameters, formatted "yyyy-MM-dd HH:mm" (e.g. "2026-08-31 15:00")
      *     TODO: no extra params. DEADLINE: param "by". EVENT: params "from", "to"
      */
-    public ListItem(ItemType type, String item, boolean isCompleted, String...params) {
+    public ListItem(ItemType type, String item, boolean isCompleted, String... params) {
         this.type = type;
         this.item = item;
         this.isCompleted = isCompleted;
 
-        switch (type) { //correct number of parameters is checked by the calling class
+        switch (type) { // correct number of parameters is checked by the calling class
             case TODO:
                 this.from = null;
                 this.to = null;
@@ -69,7 +70,7 @@ public class ListItem {
         String item = data[2];
 
         String[] params = {};
-        if (data.length > 3) { //correct number of parameters is checked by the calling class
+        if (data.length > 3) { // correct number of parameters is checked by the calling class
             params = Arrays.copyOfRange(data, 3, 5);
         }
 
@@ -97,10 +98,10 @@ public class ListItem {
      * @return "[icon],[isCompleted],[item name]" (e.g. "   ,true,Dinner")
      */
     public String toFile() {
-        String icon = this.type.icon;
+        String icon = this.type.getIcon();
         String isCompleted = Boolean.toString(this.isCompleted);
 
-        //here we use the input formatter because these lines need to be parsed in the future
+        // here we use the input formatter because these lines need to be parsed in the future
         String by = paramToString("", this.by, "", "", DATE_TIME_INPUT_FORMATTER);
         String from = paramToString("", this.from, "", "", DATE_TIME_INPUT_FORMATTER);
         String to = paramToString("", this.to, "", "", DATE_TIME_INPUT_FORMATTER);
@@ -134,7 +135,7 @@ public class ListItem {
      */
     @Override
     public String toString() {
-        String icon = this.type.icon;
+        String icon = this.type.getIcon();
         String isCompleted = this.isCompleted ? "[X]" : "[ ]";
         String item = this.item;
         String by = paramToString("by ", this.by, "(", ")", DATE_TIME_OUTPUT_FORMATTER);

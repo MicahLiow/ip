@@ -1,14 +1,18 @@
-package Orangutan.ChatList;
+package orangutan.chatlist;
 
 public enum ItemType {
-    TODO ("[T]"),
-    DEADLINE ("[D]"),
-    EVENT ("[E]");
+    TODO("[T]"),
+    DEADLINE("[D]"),
+    EVENT("[E]");
 
-    public final String icon;
+    private final String icon;
 
     ItemType(String icon) {
         this.icon = icon;
+    }
+
+    public String getIcon() {
+        return this.icon;
     }
 
     /**

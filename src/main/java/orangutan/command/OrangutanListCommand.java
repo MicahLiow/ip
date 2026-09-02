@@ -1,4 +1,4 @@
-package Orangutan.Command;
+package orangutan.command;
 
 class OrangutanListCommand implements OrangutanCommand {
     OrangutanListCommand() {
