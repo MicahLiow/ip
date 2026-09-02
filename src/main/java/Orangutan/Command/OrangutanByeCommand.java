@@ -15,8 +15,8 @@ class OrangutanByeCommand implements OrangutanCommand{
      * Saves list to file and exits chatbot.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return a goodbye message, after successfully writing to file.
-     * @throws OrangutanException when write to file fails. In this case the bot does not exit and continues to take input.
+     * @return Goodbye message, after successfully writing to file.
+     * @throws OrangutanException When write to file fails. In this case the bot does not exit and continues to take input.
      */
     public String run(OrangutanContext context) throws OrangutanException {
         try {

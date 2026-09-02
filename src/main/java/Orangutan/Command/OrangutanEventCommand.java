@@ -17,10 +17,10 @@ class OrangutanEventCommand implements OrangutanCommand {
     /**
      * Creates a new command.
      *
-     * @param item description of the list item.
-     * @param from start date and time of the event, of format "yyyyddmm hhmm".
-     * @param to end date and time of the event, of format "yyyyddmm hhmm".
-     * @param isCompleted whether the event has passed or not.
+     * @param item Description of the list item.
+     * @param from Start date and time of the event, of format "yyyyddmm hhmm".
+     * @param to End date and time of the event, of format "yyyyddmm hhmm".
+     * @param isCompleted Whether the event has passed or not.
      */
     OrangutanEventCommand(String item, String from, String to, boolean isCompleted) {
         this.item = item;
@@ -33,7 +33,7 @@ class OrangutanEventCommand implements OrangutanCommand {
      * Creates an event and appends it to the list.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return reply message, plus a printout of the new deadline.
+     * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
     public String run(OrangutanContext context) {

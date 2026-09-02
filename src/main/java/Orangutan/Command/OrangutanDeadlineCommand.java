@@ -16,9 +16,9 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
     /**
      * Creates new command.
      *
-     * @param item description of the list item.
-     * @param by date and time of the deadline, of format "yyyyddmm hhmm".
-     * @param isCompleted whether the deadline has been completed or not.
+     * @param item Description of the list item.
+     * @param by Date and time of the deadline, of format "yyyyddmm hhmm".
+     * @param isCompleted Whether the deadline has been completed or not.
      */
     OrangutanDeadlineCommand(String item, String by, boolean isCompleted) {
         this.item = item;
@@ -30,7 +30,7 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
      * Creates deadline and appends it to the list.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return reply message, plus a printout of the new deadline.
+     * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
     public String run(OrangutanContext context) {

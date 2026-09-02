@@ -18,7 +18,7 @@ public class Orangutan {
      * Initializes a new session.
      * Loads saved list (if any) from file, and prints welcome banner.
      *
-     * @param path path to store / load lists.
+     * @param path Path to store / load lists.
      */
     public Orangutan(String path) {
         Path filePath = Paths.get(path);
@@ -44,8 +44,7 @@ public class Orangutan {
     }
 
     /**
-     * Main method.
-     * Runs an Orangutan sesion.
+     * Runs an Orangutan session.
      */
     public static void main(String[] args) {
         new Orangutan("./data/orangutan.txt").run();

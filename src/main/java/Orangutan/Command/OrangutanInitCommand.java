@@ -21,8 +21,8 @@ class OrangutanInitCommand {
      * If read file fails, or if dates and times stored in file are of the wrong format, will instead terminate the program.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return empty string if successful
-     * @throws OrangutanException if read file has failed, or dates and times in file are of the wrong format,
+     * @return Empty string if successful.
+     * @throws OrangutanException If read file has failed, or dates and times in file are of the wrong format,
      *      or if a user tries to run this command.
      */
     public String run(OrangutanContext context) throws OrangutanException {

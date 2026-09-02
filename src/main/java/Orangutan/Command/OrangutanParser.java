@@ -3,7 +3,7 @@ package Orangutan.Command;
 import Orangutan.OrangutanException;
 
 /**
- * parses commands from user and runs the appropriate commands.
+ * Parses commands from user and runs the appropriate commands.
  */
 public class OrangutanParser {
     private OrangutanContext context;
@@ -20,8 +20,8 @@ public class OrangutanParser {
     /**
      * Parses user input, calls the corresponding command with given parameters, and returns the command output.
      *
-     * @param input command supplied by user.
-     * @return reply after command completion.
+     * @param input Command supplied by user.
+     * @return Reply after command completion.
      */
     public String parseCommand(String input) {
         String[] query = input.split("/"); //e.g. {"event dinner ", "/from 20260831 1800 ", "/to 20260831 1900"}

@@ -17,10 +17,10 @@ public class OrangutanContext {
     /**
      * Creates a new OrangutanContext.
      *
-     * @param list list storing any list items submitted by the user.
-     * @param runLoop flag for whether to continue (or begin) taking user input.
-     * @param filePath path to save the list after chatbot exits, or to retrieve it when chatbot is started.
-     * @param storage utility class that manages the storing and loading of data to and from file.
+     * @param list List storing any list items submitted by the user.
+     * @param runLoop Flag for whether to continue (or begin) taking user input.
+     * @param filePath Path to save the list after chatbot exits, or to retrieve it when chatbot is started.
+     * @param storage Utility class that manages the storing and loading of data to and from file.
      */
     public OrangutanContext(ChatList list, boolean runLoop, Path filePath, OrangutanStorage storage) {
         this.list = list;

@@ -13,8 +13,8 @@ class OrangutanTodoCommand implements OrangutanCommand{
     /**
      * Creates new command.
      *
-     * @param item description of the list item.
-     * @param isCompleted whether the deadline has been completed or not.
+     * @param item Description of the list item.
+     * @param isCompleted Whether the deadline has been completed or not.
      */
     OrangutanTodoCommand(String item, boolean isCompleted) {
         this.item = item;
@@ -25,7 +25,7 @@ class OrangutanTodoCommand implements OrangutanCommand{
      * Creates to-do and appends it to the list.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return reply message, plus a printout of the new deadline.
+     * @return Reply message, plus a printout of the new deadline.
      */
     public String run(OrangutanContext context) {
         ListItem newTodo = new ListItem(ItemType.TODO, item, false);

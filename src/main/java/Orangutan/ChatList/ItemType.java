@@ -16,10 +16,10 @@ public enum ItemType {
     }
 
     /**
-     * returns an Orangutan.ChatList.ChatList.ItemType based on its icon.
+     * returns an ItemType based on its icon.
      *
-     * @param icon three-digit String, identical to the one found in the "icon" field (see above).
-     * @return the Orangutan.ChatList.ChatList.ItemType corresponding to the icon.
+     * @param icon Three-character String, identical to the one found in the "icon" field (see above).
+     * @return The ItemType corresponding to the icon.
      */
     public static ItemType getTypeFromIcon(String icon) {
         return switch (icon) {

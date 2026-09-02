@@ -39,7 +39,7 @@ class OrangutanUi {
     /**
      * Receives input from user and prints the reply.
      *
-     * @param parser Orangutan.Command.OrangutanParser object, for parsing the command.
+     * @param parser OrangutanParser object, for parsing the command.
      */
     void getInput(OrangutanParser parser) {
         out.print(" > ");

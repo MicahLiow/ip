@@ -17,7 +17,9 @@ public class OrangutanStorage {
     }
 
     /**
-     * Reads new Orangutan.ChatList.ChatList.ChatList from save file to context.
+     * Reads new ChatList from save file to context.
+     *
+     * @throws IOException If program does not have read access to the directory.
      */
     public ChatList readFromFile(Path filePath) throws IOException {
         ChatList list = new ChatList();
@@ -32,10 +34,12 @@ public class OrangutanStorage {
     }
 
     /**
-    * Writes Orangutan.ChatList.ChatList.ChatList from context to a save file.
-    * If file already exists, will overwrite current contents.
-    * If file and/or directory does not exist, will create a new one.
-    */
+     * Writes ChatList from context to a save file.
+     * If file already exists, overwrites current contents.
+     * If file and/or directory does not exist, creates a new one at the given path.
+     *
+     * @throws IOException If program does not have write access.
+     */
     public void writeToFile(Path filePath, ChatList list) throws IOException {
 
         String toWrite = list.toStream().map(i -> i.toFile()).collect(Collectors.joining("\n"));

@@ -11,7 +11,7 @@ class OrangutanListCommand implements OrangutanCommand {
      * Prints out all list items in a numbered list.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return the printout of list items, or a message if list is empty.
+     * @return The printout of list items, or a message if list is empty.
      */
     public String run(OrangutanContext context) {
         if (context.getList().getLength() == 0) {

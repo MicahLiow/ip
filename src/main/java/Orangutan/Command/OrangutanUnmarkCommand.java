@@ -11,7 +11,7 @@ class OrangutanUnmarkCommand implements OrangutanCommand{
     /**
      * Creates a new command.
      *
-     * @param index index of the item to be unmarked.
+     * @param index Index of the item to be unmarked.
      */
     OrangutanUnmarkCommand(String index) {
         this.index = index;
@@ -21,9 +21,9 @@ class OrangutanUnmarkCommand implements OrangutanCommand{
      * Unmarks item at the given index from the list.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
-     * @return reply message, plus a printout of the unmarked item.
+     * @return Reply message, plus a printout of the unmarked item.
      *      If index is not a number, will instead return an alert message.
-     * @throws OrangutanException if list is empty, or if index is out of range.
+     * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(OrangutanContext context) throws OrangutanException {
         if (context.getList().getLength() == 0) {

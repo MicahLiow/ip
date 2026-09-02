@@ -3,6 +3,9 @@ package Orangutan.ChatList;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/**
+ * Stores list of ListItems, and provides functionality to add, modify and remove th
+ */
 public class ChatList {
     private final ArrayList<ListItem> list;
 
@@ -57,8 +60,8 @@ public class ChatList {
     /**
      * Deletes item from the list
      *
-     * @param n position of item in the list (starting with 1)
-     * @return deleted list item, in the form of a String.
+     * @param n Position of item in the list (starting with 1).
+     * @return Deleted list item, in the form of a String.
      */
     public String deleteItem(int n) {
         ListItem item = list.get(n - 1);
@@ -67,7 +70,7 @@ public class ChatList {
     }
 
     /**
-     * get length of the list
+     * Get length of the list.
      */
     public int getLength() {
         return list.size();
