@@ -1,6 +1,6 @@
 package orangutan.command;
 
-import orangutan.chatList.ChatList;
+import orangutan.chatlist.ChatList;
 
 /**
  * Command to find items in list whose descriptions contain a specific string.
