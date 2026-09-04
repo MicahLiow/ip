@@ -11,18 +11,18 @@ import orangutan.chatlist.ChatList;
  * Command to initiate chatbot.
  * This command cannot be accessed by the user.
  */
-class OrangutanInitCommand {
+class InitCommand implements Command {
     /**
      * Loads data from file and stores it in context, then flags the program to start collecting input.
      * If no file exists, will load an empty list into context.
      * Terminates program if read file fails, or if the stored dates and times are of the wrong format.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      * @return Empty string if successful.
      * @throws OrangutanException If read file has failed, or dates and times in file are of the wrong format,
      *      or if a user tries to run this command.
      */
-    public String run(OrangutanContext context) throws OrangutanException {
+    public String run(Context context) throws OrangutanException {
         // initialize list from save file if one exists. If not, initialize an empty list
         // only reachable in the initial state, before user input is queried.
         // this is only reachable when context.isRunLoop is false, since isRunLoop is initialized to false

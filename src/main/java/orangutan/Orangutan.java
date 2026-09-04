@@ -3,16 +3,16 @@ package orangutan;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import orangutan.command.OrangutanContext;
-import orangutan.command.OrangutanParser;
+import orangutan.command.Context;
+import orangutan.command.Parser;
 
 /**
  * Main class for Orangutan Chatbot.
  */
 public class Orangutan {
-    private OrangutanContext context;
-    private OrangutanUi ui;
-    private OrangutanParser parser;
+    private Context context;
+    private Ui ui;
+    private Parser parser;
 
     /**
      * Initializes a new session.
@@ -22,9 +22,9 @@ public class Orangutan {
      */
     public Orangutan(String path) {
         Path filePath = Paths.get(path);
-        context = new OrangutanContext(); // list: null, isRunLoop: false, filePath: null
-        ui = new OrangutanUi(System.out, System.in);
-        parser = new OrangutanParser(context);
+        context = new Context(); // list: null, isRunLoop: false, filePath: null
+        ui = new Ui(System.out, System.in);
+        parser = new Parser(context);
 
         context.setFilePath(filePath);
 

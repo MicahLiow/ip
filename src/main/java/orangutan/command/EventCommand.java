@@ -9,7 +9,7 @@ import orangutan.chatlist.ListItem;
 /**
  * Command to create a new event and add it to the list.
  */
-class OrangutanEventCommand implements OrangutanCommand {
+class EventCommand implements Command {
     private final String item;
     private final String from;
     private final String to;
@@ -23,7 +23,7 @@ class OrangutanEventCommand implements OrangutanCommand {
      * @param to End date and time of the event, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the event has passed or not.
      */
-    OrangutanEventCommand(String item, String from, String to, boolean isCompleted) {
+    EventCommand(String item, String from, String to, boolean isCompleted) {
         this.item = item;
         this.from = from;
         this.to = to;
@@ -33,11 +33,11 @@ class OrangutanEventCommand implements OrangutanCommand {
     /**
      * Creates an event and appends it to the list.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
-    public String run(OrangutanContext context) {
+    public String run(Context context) {
         try {
             ListItem newEvent = new ListItem(ItemType.EVENT, item, isCompleted, from, to);
             context.getList().addItem(newEvent);

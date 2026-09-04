@@ -9,7 +9,7 @@ import orangutan.chatlist.ListItem;
 /**
  * Command to create a new deadline and add it to the list.
  */
-class OrangutanDeadlineCommand implements OrangutanCommand {
+class DeadlineCommand implements Command {
     private final String item;
     private final String by;
     private final boolean isCompleted;
@@ -21,7 +21,7 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
      * @param by Date and time of the deadline, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the deadline has been completed or not.
      */
-    OrangutanDeadlineCommand(String item, String by, boolean isCompleted) {
+    DeadlineCommand(String item, String by, boolean isCompleted) {
         this.item = item;
         this.by = by;
         this.isCompleted = isCompleted;
@@ -30,11 +30,11 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
     /**
      * Creates deadline and appends it to the list.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
-    public String run(OrangutanContext context) {
+    public String run(Context context) {
         try {
             ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);
             context.getList().addItem(newDeadline);

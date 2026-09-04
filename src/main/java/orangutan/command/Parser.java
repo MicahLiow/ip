@@ -5,15 +5,15 @@ import orangutan.OrangutanException;
 /**
  * Parses commands from user and runs the appropriate commands.
  */
-public class OrangutanParser {
-    private OrangutanContext context;
+public class Parser {
+    private Context context;
 
     /**
      * Creates new parser object.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      */
-    public OrangutanParser(OrangutanContext context) {
+    public Parser(Context context) {
         this.context = context;
     }
 
@@ -30,7 +30,7 @@ public class OrangutanParser {
         try {
             switch (commandParams[0]) {
                 case "init":
-                    return new OrangutanInitCommand().run(context);
+                    return new InitCommand().run(context);
 
                 case "todo":
                     if (commandParams.length < 2) {
@@ -38,7 +38,7 @@ public class OrangutanParser {
                                 + "Please include the to-do name.");
                     }
                     String todoItem = commandParams[1];
-                    return new OrangutanTodoCommand(todoItem, false).run(context);
+                    return new TodoCommand(todoItem, false).run(context);
 
                 case "deadline":
                     if (commandParams.length < 2) {
@@ -52,7 +52,7 @@ public class OrangutanParser {
 
                     String by = queryParams[1].trim().split(" ", 2)[1];
                     String deadlineItem = commandParams[1];
-                    return new OrangutanDeadlineCommand(deadlineItem, by, false).run(context);
+                    return new DeadlineCommand(deadlineItem, by, false).run(context);
 
                 case "event":
                     if (commandParams.length < 2) {
@@ -68,10 +68,10 @@ public class OrangutanParser {
                     String from = queryParams[1].trim().split(" ", 2)[1];
                     String to = queryParams[2].trim().split(" ", 2)[1];
                     String eventItem = commandParams[1];
-                    return new OrangutanEventCommand(eventItem, from, to, false).run(context);
+                    return new EventCommand(eventItem, from, to, false).run(context);
 
                 case "list":
-                    return new OrangutanListCommand().run(context);
+                    return new ListCommand().run(context);
 
                 case "find":
                     if (commandParams.length < 2) {
@@ -79,7 +79,7 @@ public class OrangutanParser {
                                 + "Please follow the find command with the text I am to find.");
                     }
 
-                    return new OrangutanFindCommand(commandParams[1]).run(context);
+                    return new FindCommand(commandParams[1]).run(context);
 
                 case "delete":
                     if (commandParams.length < 2) {
@@ -88,7 +88,7 @@ public class OrangutanParser {
                                 + context.getList().getLength() + " (inclusive).");
                     }
 
-                    return new OrangutanDeleteCommand(commandParams[1]).run(context);
+                    return new DeleteCommand(commandParams[1]).run(context);
 
                 case "mark":
                     if (commandParams.length < 2) {
@@ -97,7 +97,7 @@ public class OrangutanParser {
                                 + context.getList().getLength() + " (inclusive).");
                     }
 
-                    return new OrangutanMarkCommand(commandParams[1]).run(context);
+                    return new MarkCommand(commandParams[1]).run(context);
 
                 case "unmark":
                     if (commandParams.length < 2) {
@@ -106,10 +106,10 @@ public class OrangutanParser {
                                 + context.getList().getLength() + " (inclusive).");
                     }
 
-                    return new OrangutanUnmarkCommand(commandParams[1]).run(context);
+                    return new UnmarkCommand(commandParams[1]).run(context);
 
                 case "bye":
-                    return new OrangutanByeCommand().run(context);
+                    return new ByeCommand().run(context);
 
                 default:
                     throw new OrangutanException("Alas! My simian mind is unable to comprehend your words.\n\n"

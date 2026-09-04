@@ -2,28 +2,28 @@ package orangutan.command;
 
 import java.nio.file.Path;
 
-import orangutan.OrangutanStorage;
+import orangutan.Storage;
 import orangutan.chatlist.ChatList;
 
 
 /**
  * Stores important pieces of Orangutan's internal state, to be accessed and modified by other commands.
  */
-public class OrangutanContext {
+public class Context {
     private ChatList list;
     private boolean isRunLoop;
     private Path filePath;
-    private OrangutanStorage storage;
+    private Storage storage;
 
     /**
-     * Creates a new OrangutanContext.
+     * Creates a new Context.
      *
      * @param list List storing any list items submitted by the user.
      * @param isRunLoop Flag for whether to continue (or begin) taking user input.
      * @param filePath Path to save the list after chatbot exits, or to retrieve it when chatbot is started.
      * @param storage Utility class that manages the storing and loading of data to and from file.
      */
-    public OrangutanContext(ChatList list, boolean isRunLoop, Path filePath, OrangutanStorage storage) {
+    public Context(ChatList list, boolean isRunLoop, Path filePath, Storage storage) {
         this.list = list;
         this.isRunLoop = isRunLoop;
         this.filePath = filePath;
@@ -33,11 +33,11 @@ public class OrangutanContext {
     /**
      * Constructs a context where isRunLoop is false, and all other fields are null.
      */
-    public OrangutanContext() {
+    public Context() {
         list = null;
         isRunLoop = false;
         filePath = null;
-        storage = new OrangutanStorage();
+        storage = new Storage();
     }
 
     public ChatList getList() {
@@ -64,11 +64,11 @@ public class OrangutanContext {
         this.filePath = filePath;
     }
 
-    public OrangutanStorage getStorage() {
+    public Storage getStorage() {
         return storage;
     }
 
-    public void setStorage(OrangutanStorage storage) {
+    public void setStorage(Storage storage) {
         this.storage = storage;
     }
 }

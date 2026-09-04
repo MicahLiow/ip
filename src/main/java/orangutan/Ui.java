@@ -4,12 +4,12 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import orangutan.command.OrangutanParser;
+import orangutan.command.Parser;
 
 /**
  * Handles user interface and user interactions.
  */
-class OrangutanUi {
+class Ui {
     private static final String LINE = "___________________________________________________________";
     // ascii banner adapted from https://ascii.co.uk/art/orangutan
     private static final String BANNER = "  ___                             | |             \n"
@@ -29,7 +29,7 @@ class OrangutanUi {
      * @param out Output stream.
      * @param in Input stream.
      */
-    OrangutanUi(PrintStream out, InputStream in) {
+    Ui(PrintStream out, InputStream in) {
         this.out = out;
         this.in = new Scanner(in);
     }
@@ -45,9 +45,9 @@ class OrangutanUi {
     /**
      * Receives input from user and prints the reply.
      *
-     * @param parser OrangutanParser object, for parsing the command.
+     * @param parser Parser object, for parsing the command.
      */
-    void getInput(OrangutanParser parser) {
+    void getInput(Parser parser) {
         out.print(" > ");
         String input = in.nextLine();
         String output = parser.parseCommand(input);

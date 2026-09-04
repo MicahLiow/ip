@@ -12,7 +12,7 @@ import orangutan.chatlist.ListItem;
 /**
  * Handles storing and loading of list data to and from file.
  */
-public class OrangutanStorage {
+public class Storage {
     /**
      * Reads new ChatList from save file.
      *

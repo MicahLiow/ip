@@ -6,7 +6,7 @@ import orangutan.chatlist.ListItem;
 /**
  * Command to create a new to-do and add it to the list.
  */
-class OrangutanTodoCommand implements OrangutanCommand {
+class TodoCommand implements Command {
     private final String item;
     private final boolean isCompleted;
 
@@ -16,7 +16,7 @@ class OrangutanTodoCommand implements OrangutanCommand {
      * @param item Description of the list item.
      * @param isCompleted Whether the to-do has been completed or not.
      */
-    OrangutanTodoCommand(String item, boolean isCompleted) {
+    TodoCommand(String item, boolean isCompleted) {
         this.item = item;
         this.isCompleted = isCompleted;
     }
@@ -24,10 +24,10 @@ class OrangutanTodoCommand implements OrangutanCommand {
     /**
      * Creates to-do and appends it to the list.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      * @return Reply message, plus a printout of the new to-do.
      */
-    public String run(OrangutanContext context) {
+    public String run(Context context) {
         ListItem newTodo = new ListItem(ItemType.TODO, item, isCompleted);
         context.getList().addItem(newTodo);
 

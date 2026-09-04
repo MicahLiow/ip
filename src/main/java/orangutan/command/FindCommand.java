@@ -5,7 +5,7 @@ import orangutan.chatlist.ChatList;
 /**
  * Command to find items in list whose descriptions contain a specific string.
  */
-class OrangutanFindCommand implements OrangutanCommand {
+class FindCommand implements Command {
     private final String query;
 
     /**
@@ -13,18 +13,18 @@ class OrangutanFindCommand implements OrangutanCommand {
      *
      * @param query String to be searched for.
      */
-    OrangutanFindCommand(String query) {
+    FindCommand(String query) {
         this.query = query;
     }
 
     /**
      * Lists items that match the given keyword.
      *
-     * @param context OrangutanContext item storing information on the chatbot's current internal state.
+     * @param context Context item storing information on the chatbot's current internal state.
      * @return Reply message, plus list of all matching items.
      *      If no items could be found, will return an appropriate reply with no list.
      */
-    public String run(OrangutanContext context) {
+    public String run(Context context) {
         ChatList res = context.getList().findItem(query);
         if (res.getLength() == 0) {
             return ("The item you requested could not be found. Perchance it is not in our list?");
