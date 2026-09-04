@@ -4,9 +4,6 @@ package orangutan.command;
  * Command to print all list items.
  */
 class OrangutanListCommand implements OrangutanCommand {
-    OrangutanListCommand() {
-    }
-
     /**
      * Prints out all list items in a numbered list.
      *

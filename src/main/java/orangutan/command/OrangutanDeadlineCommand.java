@@ -17,7 +17,7 @@ class OrangutanDeadlineCommand implements OrangutanCommand {
      * Creates new command.
      *
      * @param item Description of the list item.
-     * @param by Date and time of the deadline, of format "yyyyddmm hhmm".
+     * @param by Date and time of the deadline, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the deadline has been completed or not.
      */
     OrangutanDeadlineCommand(String item, String by, boolean isCompleted) {

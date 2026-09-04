@@ -18,8 +18,8 @@ class OrangutanEventCommand implements OrangutanCommand {
      * Creates a new command.
      *
      * @param item Description of the list item.
-     * @param from Start date and time of the event, of format "yyyyddmm hhmm".
-     * @param to End date and time of the event, of format "yyyyddmm hhmm".
+     * @param from Start date and time of the event, of format "yyyymmdd hhmm".
+     * @param to End date and time of the event, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the event has passed or not.
      */
     OrangutanEventCommand(String item, String from, String to, boolean isCompleted) {

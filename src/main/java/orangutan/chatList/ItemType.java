@@ -16,11 +16,11 @@ public enum ItemType {
     }
 
     public String getIcon() {
-        return this.icon;
+        return icon;
     }
 
     /**
-     * returns an ItemType based on its icon.
+     * Returns an ItemType based on its icon.
      *
      * @param icon Three-character String, identical to the one found in the "icon" field (see above).
      * @return The ItemType corresponding to the icon.

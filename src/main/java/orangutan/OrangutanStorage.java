@@ -13,11 +13,8 @@ import java.util.stream.Stream;
  * Handles storing and loading of list data to and from file.
  */
 public class OrangutanStorage {
-    public OrangutanStorage() {
-    }
-
     /**
-     * Reads new ChatList from save file to context.
+     * Reads new ChatList from save file.
      *
      * @throws IOException If program does not have read access to the directory.
      */
@@ -34,7 +31,7 @@ public class OrangutanStorage {
     }
 
     /**
-     * Writes ChatList from context to a save file.
+     * Writes ChatList to a save file.
      * If file already exists, overwrites current contents.
      * If file and/or directory does not exist, creates a new one at the given path.
      *

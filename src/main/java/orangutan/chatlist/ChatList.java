@@ -5,21 +5,29 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Stores list of ListItems, and provides functionality to add, modify and remove th
+ * Stores list of ListItems, and provides functionality to add, modify and remove them.
  */
 public class ChatList {
     private final ArrayList<ListItem> list;
 
+    /**
+     * Creates an empty ChatList.
+     */
     public ChatList() {
-        this.list = new ArrayList<ListItem>(100);
+        list = new ArrayList<ListItem>(100);
     }
 
+    /**
+     * Creates a new ChatList from existing data.
+     *
+     * @param list ArrayList of ListItems to be stored in this list.
+     */
     public ChatList(ArrayList<ListItem> list) {
         this.list = list;
     }
 
     /**
-     * returns the list as a stream of ListItems.
+     * Returns the list as a stream of ListItems.
      */
     public Stream<ListItem> toStream() {
         return list.stream();
@@ -35,10 +43,10 @@ public class ChatList {
     }
 
     /**
-     * marks existing item as completed.
+     * Marks existing item as completed.
      *
-     * @param index position of item in the list (starting with 1).
-     * @return marked list item, in the form of a String.
+     * @param index Position of item in the list (starting with 1).
+     * @return Marked list item, in the form of a String.
      */
     public String markItem(int index) {
         ListItem item = list.get(index - 1);
@@ -47,10 +55,10 @@ public class ChatList {
     }
 
     /**
-     * Unmarks existing item, then return it as a String
+     * Unmarks existing item, then return it as a String.
      *
-     * @param index position of item in the list (starting with 1)
-     * @return unmarked list item, in the form of a String.
+     * @param index Position of item in the list (starting with 1).
+     * @return Unmarked list item, in the form of a String.
      */
     public String unmarkItem(int index) {
         ListItem item = list.get(index - 1);
@@ -59,7 +67,7 @@ public class ChatList {
     }
 
     /**
-     * Deletes item from the list
+     * Deletes item from the list.
      *
      * @param index Position of item in the list (starting with 1).
      * @return Deleted list item, in the form of a String.
@@ -77,17 +85,20 @@ public class ChatList {
      * @return ChatList of matching items.
      */
     public ChatList findItem(String query) {
-        List<ListItem> resStream = list.stream().filter(item -> item.getItem().contains(query)).toList();
-        return new ChatList(new ArrayList<ListItem>(resStream));
+        List<ListItem> matchStream = list.stream().filter(item -> item.getItem().contains(query)).toList();
+        return new ChatList(new ArrayList<ListItem>(matchStream));
     }
 
     /**
-     * Get length of the list.
+     * Gets length of the list.
      */
     public int getLength() {
         return list.size();
     }
 
+    /**
+     * Prints out an enumerated list of items.
+     */
     @Override
     public String toString() {
         String res = "";

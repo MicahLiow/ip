@@ -21,11 +21,7 @@ public class ListItem {
     private final LocalDateTime by;
 
     /**
-<<<<<<< HEAD:src/main/java/orangutan/chatList/ListItem.java
-     * constructs a ListItem.
-=======
-     * constructs an ListItem.
->>>>>>> branch-A-Javadoc:src/main/java/Orangutan/ChatList/ListItem.java
+     * Constructs an ListItem.
      *
      * @param type ItemType corresponding to the type of the item, can be TODO, DEADLINE or EVENT.
      * @param item Description of the list item (e.g. dinner).
@@ -40,24 +36,24 @@ public class ListItem {
 
         switch (type) { // correct number of parameters is checked by the calling class
             case TODO:
-                this.from = null;
-                this.to = null;
-                this.by = null;
+                from = null;
+                to = null;
+                by = null;
                 break;
             case DEADLINE:
-                this.from = null;
-                this.to = null;
-                this.by = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
+                from = null;
+                to = null;
+                by = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
                 break;
             case EVENT:
-                this.from = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
-                this.to = LocalDateTime.parse(params[1], DATE_TIME_INPUT_FORMATTER);
-                this.by = null;
+                from = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
+                to = LocalDateTime.parse(params[1], DATE_TIME_INPUT_FORMATTER);
+                by = null;
                 break;
             default:
-                this.from = null;
-                this.to = null;
-                this.by = null;
+                from = null;
+                to = null;
+                by = null;
                 break;
         }
     }
@@ -65,7 +61,7 @@ public class ListItem {
     /**
      * Constructs a ListItem from a comma-separated string.
      *
-     * @param fromFileLine comma-separated string "[icon],[isCompleted],[item name],[from / by],[to]".
+     * @param fromFileLine Comma-separated string "[icon],[isCompleted],[item name],[from / by],[to]".
      *     (e.g. "[E],true,Dinner,20260831 1700,20260831 1900").
      */
     public static ListItem parseLine(String fromFileLine) {
@@ -84,21 +80,21 @@ public class ListItem {
     }
 
     String getItem() {
-        return this.item;
+        return item;
     }
 
     /**
      * Marks item as completed.
      */
     public void mark() {
-        this.isCompleted = true;
+        isCompleted = true;
     }
 
     /**
      * Unmarks item as to be completed.
      */
     public void unmark() {
-        this.isCompleted = false;
+        isCompleted = false;
     }
 
     /**
@@ -107,14 +103,14 @@ public class ListItem {
      * @return String "[icon],[isCompleted],[item name],[from/by],[to]" (e.g. "[D],true,report,20260831 1900").
      */
     public String toFile() {
-        String icon = this.type.getIcon();
+        String icon = type.getIcon();
         String isCompleted = Boolean.toString(this.isCompleted);
 
         // here we use the input formatter because these lines need to be parsed in the future
         String by = paramToString("", this.by, "", "", DATE_TIME_INPUT_FORMATTER);
         String from = paramToString("", this.from, "", "", DATE_TIME_INPUT_FORMATTER);
         String to = paramToString("", this.to, "", "", DATE_TIME_INPUT_FORMATTER);
-        return Stream.of(icon, isCompleted, this.item, by, from, to)
+        return Stream.of(icon, isCompleted, item, by, from, to)
                 .filter(s -> s != null)
                 .collect(Collectors.joining(","));
     }
@@ -143,7 +139,7 @@ public class ListItem {
      */
     @Override
     public String toString() {
-        String icon = this.type.getIcon();
+        String icon = type.getIcon();
         String isCompleted = this.isCompleted ? "[X]" : "[ ]";
         String item = this.item;
         String by = paramToString("by ", this.by, "(", ")", DATE_TIME_OUTPUT_FORMATTER);

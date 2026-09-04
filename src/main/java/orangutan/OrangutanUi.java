@@ -23,6 +23,12 @@ class OrangutanUi {
     private final PrintStream out;
     private final Scanner in;
 
+    /**
+     * Initializes a new UI.
+     *
+     * @param out Output stream.
+     * @param in Input stream.
+     */
     OrangutanUi(PrintStream out, InputStream in) {
         this.out = out;
         this.in = new Scanner(in);
@@ -43,7 +49,7 @@ class OrangutanUi {
      */
     void getInput(OrangutanParser parser) {
         out.print(" > ");
-        String input = this.in.nextLine();
+        String input = in.nextLine();
         String output = parser.parseCommand(input);
 
         out.println(LINE);

@@ -22,9 +22,9 @@ public class Orangutan {
      */
     public Orangutan(String path) {
         Path filePath = Paths.get(path);
-        this.context = new OrangutanContext(); // list: null, isRunLoop: false, filePath: null
-        this.ui = new OrangutanUi(System.out, System.in);
-        this.parser = new OrangutanParser(context);
+        context = new OrangutanContext(); // list: null, isRunLoop: false, filePath: null
+        ui = new OrangutanUi(System.out, System.in);
+        parser = new OrangutanParser(context);
 
         context.setFilePath(filePath);
 
@@ -35,10 +35,11 @@ public class Orangutan {
 
     /**
      * Runs user input loop.
-     * Continuously retrieves user input and outputs chatbot reply, until exit conditions are met (usually via the bye command).
+     * Continuously retrieves user input and outputs chatbot reply, until exit conditions are met
+     *      (usually via the bye command).
      */
     public void run() {
-        while (context.getIsRunLoop()) {
+        while (context.isRunLoop()) {
             ui.getInput(parser);
         }
     }

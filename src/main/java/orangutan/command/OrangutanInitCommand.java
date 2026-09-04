@@ -12,13 +12,10 @@ import java.time.format.DateTimeParseException;
  * This command cannot be accessed by the user.
  */
 class OrangutanInitCommand {
-    OrangutanInitCommand() {
-    }
-
     /**
-     * Loads data from file and stores it in context. And flags the program to start collecting input.
+     * Loads data from file and stores it in context, then flags the program to start collecting input.
      * If no file exists, will load an empty list into context.
-     * If read file fails, or if dates and times stored in file are of the wrong format, will instead terminate the program.
+     * Terminates program if read file fails, or if the stored dates and times are of the wrong format.
      *
      * @param context OrangutanContext item storing information on the chatbot's current internal state.
      * @return Empty string if successful.
@@ -30,26 +27,26 @@ class OrangutanInitCommand {
         // only reachable in the initial state, before user input is queried.
         // this is only reachable when context.isRunLoop is false, since isRunLoop is initialized to false
         // if loading data is a success, isRunLoop set to true and we start querying user for input.
-        if (!context.getIsRunLoop()) {
+        if (!context.isRunLoop()) {
             if (Files.exists(context.getFilePath())) {
                 try {
-                    context.setIsRunLoop(true);
+                    context.setRunLoop(true);
                     context.setList(context.getStorage().readFromFile(context.getFilePath()));
                     return ("");
                 } catch (IOException e) {
-                    context.setIsRunLoop(false);
+                    context.setRunLoop(false);
                     throw new OrangutanException("Alas! I have failed to access the information previously stored in "
                             + "data/orangutan.txt.\n\n"
                             + "Please ensure I have access to said file before returning to me.");
                 } catch (DateTimeParseException e) {
-                    context.setIsRunLoop(false);
-                    throw new OrangutanException("Alas! I do not comprehend the dates and times"
+                    context.setRunLoop(false);
+                    throw new OrangutanException("Alas! I do not comprehend the dates and times "
                             + "stored in data/orangutan.txt.\n\n"
                             + "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359) "
                             + "before returning to me.");
                 }
             } else {
-                context.setIsRunLoop(true);
+                context.setRunLoop(true);
                 context.setList(new ChatList());
                 return ("");
             }

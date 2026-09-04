@@ -43,7 +43,7 @@ class OrangutanDeleteCommand implements OrangutanCommand {
             return ("The task has been purged from our records.\n " + deleteItem);
         } catch (NumberFormatException e) {
             return ("Alas! That is not a number. Not a number I know of, at the least.\n\n"
-                    + "Please input an integer  between 1 and " + context.getList().getLength() + " (inclusive).");
+                    + "Please input an integer between 1 and " + context.getList().getLength() + " (inclusive).");
         }
     }
 }
