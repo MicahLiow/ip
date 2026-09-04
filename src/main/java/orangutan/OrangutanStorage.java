@@ -1,13 +1,13 @@
 package orangutan;
 
-import orangutan.chatlist.ChatList;
-import orangutan.chatlist.ListItem;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import orangutan.chatlist.ChatList;
+import orangutan.chatlist.ListItem;
 
 /**
  * Handles storing and loading of list data to and from file.

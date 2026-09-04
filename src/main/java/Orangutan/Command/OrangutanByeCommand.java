@@ -1,8 +1,8 @@
 package orangutan.command;
 
-import orangutan.OrangutanException;
-
 import java.io.IOException;
+
+import orangutan.OrangutanException;
 
 /**
  * Command to save list to file and exit chatbot.

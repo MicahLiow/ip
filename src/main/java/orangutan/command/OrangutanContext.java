@@ -1,9 +1,10 @@
 package orangutan.command;
 
-import orangutan.chatlist.ChatList;
-import orangutan.OrangutanStorage;
-
 import java.nio.file.Path;
+
+import orangutan.OrangutanStorage;
+import orangutan.chatlist.ChatList;
+
 
 /**
  * Stores important pieces of Orangutan's internal state, to be accessed and modified by other commands.

@@ -1,11 +1,11 @@
 package orangutan.command;
 
-import orangutan.chatlist.ChatList;
-import orangutan.OrangutanException;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.format.DateTimeParseException;
+
+import orangutan.OrangutanException;
+import orangutan.chatlist.ChatList;
 
 /**
  * Command to initiate chatbot.

@@ -1,10 +1,10 @@
 package orangutan;
 
-import orangutan.command.OrangutanParser;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import orangutan.command.OrangutanParser;
 
 /**
  * Handles user interface and user interactions.

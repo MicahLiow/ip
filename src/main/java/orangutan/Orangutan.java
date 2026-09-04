@@ -1,10 +1,10 @@
 package orangutan;
 
-import orangutan.command.OrangutanContext;
-import orangutan.command.OrangutanParser;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import orangutan.command.OrangutanContext;
+import orangutan.command.OrangutanParser;
 
 /**
  * Main class for Orangutan Chatbot.

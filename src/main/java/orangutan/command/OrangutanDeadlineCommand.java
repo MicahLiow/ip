@@ -1,9 +1,10 @@
 package orangutan.command;
 
+import java.time.format.DateTimeParseException;
+
 import orangutan.chatlist.ItemType;
 import orangutan.chatlist.ListItem;
 
-import java.time.format.DateTimeParseException;
 
 /**
  * Command to create a new deadline and add it to the list.
