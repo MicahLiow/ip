@@ -24,6 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
 
             //set taskbar icon and title
+            //icon taken from www.flaticon.com/free-icon/orangutan_7743169
             Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
             stage.getIcons().add(icon);
             stage.setTitle("Orangutan");
