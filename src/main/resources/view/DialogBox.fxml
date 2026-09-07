@@ -7,8 +7,8 @@
 <?import javafx.scene.image.ImageView?>
 
 <fx:root alignment="TOP_RIGHT"
-         maxHeight="Infinity"
-         maxWidth="Infinity"
+         maxHeight="1.7976931348623157E308"
+         maxWidth="1.7976931348623157E308"
          prefWidth="400.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/17"

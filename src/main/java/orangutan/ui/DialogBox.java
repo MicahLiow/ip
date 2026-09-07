@@ -78,7 +78,6 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        setAlignment(Pos.TOP_LEFT);
 
         dialog.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         dialog.setStyle(dialog.getStyle() + "-fx-padding: 3 6 3 55;");

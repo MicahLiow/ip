@@ -13,8 +13,8 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="orangutan.ui.MainWindow"
             style="-fx-background-image: url('/images/background.jpg');
-                    -fx-background-repeat: no-repeat;
-                    -fx-background-size: cover;
+                    -fx-background-size: 400 600;
+                    -fx-background-repeat: repeat;
                     -fx-background-position: center;">
             <!-- background image taken from www.facebook.com/photo?fbid=450518333786018 -->
     <TextField fx:id="userInput"
@@ -26,7 +26,7 @@
                AnchorPane.leftAnchor="0.0"
                AnchorPane.rightAnchor="76.0" />
     <Button fx:id="sendButton"
-            stylesheets="@disabledOpacity.css"
+            stylesheets="@../css/MainWindow.css"
             layoutX="324.0"
             layoutY="558.0"
             mnemonicParsing="false"
