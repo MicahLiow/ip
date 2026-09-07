@@ -6,7 +6,7 @@ import orangutan.OrangutanException;
  * Parses commands from user and runs the appropriate commands.
  */
 public class Parser {
-    private Context context;
+    private final Context context;
 
     /**
      * Creates new parser object.

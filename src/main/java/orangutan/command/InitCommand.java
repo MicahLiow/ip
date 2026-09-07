@@ -18,7 +18,7 @@ class InitCommand implements Command {
      * Terminates program if read file fails, or if the stored dates and times are of the wrong format.
      *
      * @param context Context item storing information on the chatbot's current internal state.
-     * @return Empty string if successful.
+     * @return Welcome message if successful.
      * @throws OrangutanException If read file has failed, or dates and times in file are of the wrong format,
      *      or if a user tries to run this command.
      */
@@ -27,28 +27,30 @@ class InitCommand implements Command {
         // only reachable in the initial state, before user input is queried.
         // this is only reachable when context.isRunLoop is false, since isRunLoop is initialized to false
         // if loading data is a success, isRunLoop set to true and we start querying user for input.
-        if (!context.isRunLoop()) {
+        String welcome = "Greetings, I am Orangutan. How may I assist you on this fine day?";
+
+        if (!context.isRun()) {
             if (Files.exists(context.getFilePath())) {
                 try {
-                    context.setRunLoop(true);
+                    context.setRun(true);
                     context.setList(context.getStorage().readFromFile(context.getFilePath()));
-                    return ("");
+                    return (welcome);
                 } catch (IOException e) {
-                    context.setRunLoop(false);
+                    context.setRun(false);
                     throw new OrangutanException("Alas! I have failed to access the information previously stored in "
                             + "data/orangutan.txt.\n\n"
                             + "Please ensure I have access to said file before returning to me.");
                 } catch (DateTimeParseException e) {
-                    context.setRunLoop(false);
+                    context.setRun(false);
                     throw new OrangutanException("Alas! I do not comprehend the dates and times "
                             + "stored in data/orangutan.txt.\n\n"
                             + "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359) "
                             + "before returning to me.");
                 }
             } else {
-                context.setRunLoop(true);
+                context.setRun(true);
                 context.setList(new ChatList());
-                return ("");
+                return (welcome);
             }
         } else {
             // if this was in a called while isRunLoop is true, that means the user called it

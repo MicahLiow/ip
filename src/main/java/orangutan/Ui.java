@@ -7,7 +7,7 @@ import java.util.Scanner;
 import orangutan.command.Parser;
 
 /**
- * Handles user interface and user interactions.
+ * Handles user interface and user interactions for CLI.
  */
 class Ui {
     private static final String LINE = "___________________________________________________________";
@@ -35,11 +35,11 @@ class Ui {
     }
 
     /**
-     * Prints the welcome message.
+     * Prints the welcome message and initializes list from file.
      */
-    void printWelcome() {
-        String welcomeMessage = "Greetings, I am Orangutan. How may I assist you on this fine day?";
-        out.println(String.join("\n", LINE, BANNER, welcomeMessage, LINE));
+    void welcome(Parser parser) {
+        out.println(String.join("\n", LINE, BANNER));
+        System.out.println(parser.parseCommand("init")); // sets context.isRunLoop to true if successful
     }
 
     /**

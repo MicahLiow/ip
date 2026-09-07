@@ -10,44 +10,65 @@ import orangutan.command.Parser;
  * Main class for Orangutan Chatbot.
  */
 public class Orangutan {
-    private Context context;
-    private Ui ui;
-    private Parser parser;
+    private final Context context;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Initializes a new session.
      * Loads saved list (if any) from file, and prints welcome banner.
      *
      * @param path Path to store / load lists.
+     * @param isGui Whether this instance is being started in GUI or CLI.
      */
-    public Orangutan(String path) {
+    public Orangutan(String path, boolean isGui) {
         Path filePath = Paths.get(path);
         context = new Context(); // list: null, isRunLoop: false, filePath: null
-        ui = new Ui(System.out, System.in);
         parser = new Parser(context);
-
         context.setFilePath(filePath);
 
-        ui.printWelcome();
-        System.out.println(parser.parseCommand("init")); // sets context.isRunLoop to true if successful
+        if (isGui) {
+            ui = null;
+        } else {
+            ui = new Ui(System.out, System.in);
+            ui.welcome(parser);
+        }
 
     }
 
     /**
-     * Runs user input loop.
+     * Returns Orangutan's reply to a user query.
+     *
+     * @param input Command inputted by user.
+     * @return String response to the input.
+     */
+    public String getResponse(String input) {
+        return parser.parseCommand(input);
+    }
+
+    /**
+     * Runs user input loop for CLI.
      * Continuously retrieves user input and outputs chatbot reply, until exit conditions are met
-     *      (usually via the bye command).
+     * (usually via the bye command).
      */
     public void run() {
-        while (context.isRunLoop()) {
+        while (context.isRun()) {
             ui.getInput(parser);
         }
     }
 
     /**
-     * Runs an Orangutan session.
+     * Whether Orangutan is currently accepting input.
+     * @return Boolean value.
+     */
+    public boolean isRun() {
+        return context.isRun();
+    }
+
+    /**
+     * Runs an Orangutan session in CLI.
      */
     public static void main(String[] args) {
-        new Orangutan("./data/orangutan.txt").run();
+        new Orangutan("./data/orangutan.txt", false).run();
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+
+<fx:root alignment="TOP_RIGHT"
+         maxHeight="Infinity"
+         maxWidth="Infinity"
+         prefWidth="400.0"
+         type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+    </padding>
+    <Label fx:id="dialog"
+           text="Label"
+           wrapText="true"
+           translateX="53"
+           minHeight="-Infinity"
+           style="-fx-min-width: 100;
+                    -fx-background-radius: 5;
+                    -fx-border-color: #FFFFFF;
+                    -fx-border-radius: 5;
+                    -fx-border-width: 3;
+                    -fx-padding: 3 55 3 6;"
+    />
+    <StackPane fx:id="imageContainer"
+               prefHeight="106.0"
+               minHeight="106.0"
+               maxHeight="106.0"
+               prefWidth="106.0"
+               minWidth="106.0"
+               maxWidth="106.0"
+               style="-fx-border-color: #FFFFFF;
+                    -fx-border-width: 3;
+                    -fx-border-radius: 50.0;
+                    -fx-background-color: #FFFFFF;
+                    -fx-background-radius: 50.0;">
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
+                   preserveRatio="true"/>
+    </StackPane>
+</fx:root>
