@@ -1,0 +1,5 @@
+/* Sets text inputs and send buttons to retain full opacity when disabled. */
+.text-field:disabled,
+.button:disabled {
+    -fx-opacity: 1.0;
+}
