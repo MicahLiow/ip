@@ -33,18 +33,13 @@ public class Parser {
                     return new InitCommand().run(context);
 
                 case "todo":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this to-do has not been revealed.\n\n"
-                                + "Please include the to-do name.");
-                    }
+                    verifyCommandParams(commandParams);
                     String todoItem = commandParams[1];
                     return new TodoCommand(todoItem, false).run(context);
 
                 case "deadline":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this deadline has not been revealed.\n\n"
-                                + "Please include the deadline name.");
-                    }
+                    verifyCommandParams(commandParams);
+
                     if (queryParams.length < 2) {
                         throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n"
                                 + "Please include '/by' in your message, along with the time or date of the deadline.");
@@ -55,10 +50,8 @@ public class Parser {
                     return new DeadlineCommand(deadlineItem, by, false).run(context);
 
                 case "event":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this event has not been revealed.\n\n"
-                                + "Please include the event name.");
-                    }
+                    verifyCommandParams(commandParams);
+
                     if (queryParams.length < 3) {
                         throw new OrangutanException("Alas! Some event details have not been revealed.\n\n"
                                 + "Please include '/from' and '/to' in your message, "
@@ -74,38 +67,19 @@ public class Parser {
                     return new ListCommand().run(context);
 
                 case "find":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know what to find.\n\n"
-                                + "Please follow the find command with the text I am to find.");
-                    }
-
+                    verifyActionIndex(commandParams);
                     return new FindCommand(commandParams[1]).run(context);
 
                 case "delete":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to delete.\n\n"
-                                + "Please follow the delete command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
+                    verifyActionIndex(commandParams);
                     return new DeleteCommand(commandParams[1]).run(context);
 
                 case "mark":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to mark.\n\n"
-                                + "Please follow the mark command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
+                    verifyActionIndex(commandParams);
                     return new MarkCommand(commandParams[1]).run(context);
 
                 case "unmark":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to unmark.\n\n"
-                                + "Please follow the unmark command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
+                    verifyActionIndex(commandParams);
                     return new UnmarkCommand(commandParams[1]).run(context);
 
                 case "bye":
@@ -118,6 +92,21 @@ public class Parser {
             }
         } catch (OrangutanException e) {
             return (e.toString());
+        }
+    }
+
+    private void verifyCommandParams(String[] commandParams) throws OrangutanException {
+        if (commandParams.length < 2) {
+            throw new OrangutanException(String.format("Alas! The name of this %s has not been revealed.\n\n"
+                    + "Please include the %s name.", commandParams[0], commandParams[0]));
+        }
+    }
+
+    private void verifyActionIndex(String[] commandParams) throws OrangutanException {
+        if (commandParams.length < 2) {
+            throw new OrangutanException(String.format("Alas! I do not know which item to %s.\n\n"
+                    + "Please follow the unmark command with an integer between 1 and %d (inclusive).",
+                    commandParams[0], context.getList().getLength()));
         }
     }
 }
