@@ -1,5 +1,7 @@
 package orangutan.command;
 
+import java.util.Arrays;
+
 import orangutan.OrangutanException;
 
 /**
@@ -18,103 +20,104 @@ public class Parser {
     }
 
     /**
+     * Breaks user input down into individual parameters.
+     *
+     * @param input Command supplied by user, guaranteed to be non-empty.
+     * @return Array of String Arrays; the first element is the (command, title) pair
+     *      and the second element are any date/time parameters.
+     *      e.g. { {"event", "eat lunch"} , {"20260831 1800", "20260831 1900"} }
+     */
+    private String[][] parseCommand(String input) {
+        String[] fields = input.split("/"); // {"event eat lunch ", "from 20260831 1800 ", "to 20260831 1900"}
+        String[] action = Arrays.stream(fields)
+                .limit(1) // ["event eat lunch "]
+                .map(String::trim) // ["event eat lunch"]
+                .flatMap(s -> Arrays.stream(s.split(" ", 2))) // ["event", "eat lunch"]
+                .toArray(String[]::new); // {"event", "eat lunch"}
+        String[] params = Arrays.stream(fields)
+                .skip(1) // ["from 20260831 1800 ", "to 20260831 1900"]
+                .map(String::trim) // ["from 20260831 1800", "to 20260831 1900"]
+                .map(s -> Arrays.stream(s.split(" ", 2)))
+                // [ ["from", "20260831 1800"] , ["to", "20260831 1900] ]
+                .map(s -> s.skip(1)) // [ ["20260831 1800"] , ["20260831 1900"] ]
+                .flatMap(s -> s) // ["20260831 1800" , "20260831 1900"]
+                .toArray(String[]::new); // {"20260831 1800" , "20260831 1900"}
+
+        return new String[][]{action, params};
+    }
+
+    /**
      * Parses user input, calls the corresponding command with given parameters, and returns the command output.
      *
      * @param input Command supplied by user.
      * @return Reply after command completion.
      */
-    public String parseCommand(String input) {
-        String[] queryParams = input.split("/"); // e.g. {"event eat ","/from 20260831 1800 ","/to 20260831 1900"}
-        String[] commandParams = queryParams[0].trim().split(" ", 2); // e.g. {"event", "meet with friends"}
+    public String runCommand(String input) {
+        String[][] command = parseCommand(input);
+        String[] action = command[0]; // e.g. {"event", "eat"}
+        String[] params = command[1]; // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
 
         try {
-            switch (commandParams[0]) {
+            switch (action[0]) {
                 case "init":
-                    return new InitCommand().run(context);
+                    if (!context.isRun()) {
+                        return new InitCommand().run(context);
+                    } else {
+                        throw CommandErrors.unknownCommandError();
+                    }
 
                 case "todo":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this to-do has not been revealed.\n\n"
-                                + "Please include the to-do name.");
-                    }
-                    String todoItem = commandParams[1];
-                    return new TodoCommand(todoItem, false).run(context);
+                    ErrorChecker.checkTitleMissing(action);
+                    String todoTitle = action[1];
+                    return new TodoCommand(todoTitle, false).run(context);
 
                 case "deadline":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this deadline has not been revealed.\n\n"
-                                + "Please include the deadline name.");
-                    }
-                    if (queryParams.length < 2) {
-                        throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n"
-                                + "Please include '/by' in your message, along with the time or date of the deadline.");
+                    ErrorChecker.checkTitleMissing(action);
+
+                    if (params.length < 1) {
+                        throw CommandErrors.deadlineMissingParametersError();
                     }
 
-                    String by = queryParams[1].trim().split(" ", 2)[1];
-                    String deadlineItem = commandParams[1];
-                    return new DeadlineCommand(deadlineItem, by, false).run(context);
+                    String by = params[0];
+                    String deadlineTitle = action[1];
+                    return new DeadlineCommand(deadlineTitle, by, false).run(context);
 
                 case "event":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! The name of this event has not been revealed.\n\n"
-                                + "Please include the event name.");
-                    }
-                    if (queryParams.length < 3) {
-                        throw new OrangutanException("Alas! Some event details have not been revealed.\n\n"
-                                + "Please include '/from' and '/to' in your message, "
-                                + "along with the start and end time or day.");
+                    ErrorChecker.checkTitleMissing(action);
+
+                    if (params.length < 2) {
+                        throw CommandErrors.eventMissingParametersError();
                     }
 
-                    String from = queryParams[1].trim().split(" ", 2)[1];
-                    String to = queryParams[2].trim().split(" ", 2)[1];
-                    String eventItem = commandParams[1];
-                    return new EventCommand(eventItem, from, to, false).run(context);
+                    String from = params[0];
+                    String to = params[1];
+                    String eventTitle = action[1];
+                    return new EventCommand(eventTitle, from, to, false).run(context);
 
                 case "list":
                     return new ListCommand().run(context);
 
                 case "find":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know what to find.\n\n"
-                                + "Please follow the find command with the text I am to find.");
-                    }
-
-                    return new FindCommand(commandParams[1]).run(context);
+                    ErrorChecker.verifyActionIndex(context, action);
+                    return new FindCommand(action[1]).run(context);
 
                 case "delete":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to delete.\n\n"
-                                + "Please follow the delete command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
-                    return new DeleteCommand(commandParams[1]).run(context);
+                    ErrorChecker.verifyActionIndex(context, action);
+                    return new DeleteCommand(action[1]).run(context);
 
                 case "mark":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to mark.\n\n"
-                                + "Please follow the mark command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
-                    return new MarkCommand(commandParams[1]).run(context);
+                    ErrorChecker.verifyActionIndex(context, action);
+                    return new MarkCommand(action[1]).run(context);
 
                 case "unmark":
-                    if (commandParams.length < 2) {
-                        throw new OrangutanException("Alas! I do not know which item to unmark.\n\n"
-                                + "Please follow the unmark command with an integer between 1 and "
-                                + context.getList().getLength() + " (inclusive).");
-                    }
-
-                    return new UnmarkCommand(commandParams[1]).run(context);
+                    ErrorChecker.verifyActionIndex(context, action);
+                    return new UnmarkCommand(action[1]).run(context);
 
                 case "bye":
                     return new ByeCommand().run(context);
 
                 default:
-                    throw new OrangutanException("Alas! My simian mind is unable to comprehend your words.\n\n"
-                            + "Please use words I understand: "
-                            + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"bye\"");
+                    throw CommandErrors.unknownCommandError();
             }
         } catch (OrangutanException e) {
             return (e.toString());

@@ -14,7 +14,7 @@ public class ChatList {
      * Creates an empty ChatList.
      */
     public ChatList() {
-        listItems = new ArrayList<ListItem>(100);
+        listItems = new ArrayList<ListItem>();
     }
 
     /**

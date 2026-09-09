@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import orangutan.OrangutanException;
 import orangutan.chatlist.ChatList;
+import orangutan.chatlist.ListItem;
 
 /**
  * Command to initiate chatbot.
@@ -29,35 +30,23 @@ class InitCommand implements Command {
         // if loading data is a success, isRunLoop set to true and we start querying user for input.
         String welcome = "Greetings, I am Orangutan. How may I assist you on this fine day?";
 
-        if (!context.isRun()) {
-            if (Files.exists(context.getFilePath())) {
-                try {
-                    context.setRun(true);
-                    context.setList(context.getStorage().readFromFile(context.getFilePath()));
-                    return (welcome);
-                } catch (IOException e) {
-                    context.setRun(false);
-                    throw new OrangutanException("Alas! I have failed to access the information previously stored in "
-                            + "data/orangutan.txt.\n\n"
-                            + "Please ensure I have access to said file before returning to me.");
-                } catch (DateTimeParseException e) {
-                    context.setRun(false);
-                    throw new OrangutanException("Alas! I do not comprehend the dates and times "
-                            + "stored in data/orangutan.txt.\n\n"
-                            + "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359) "
-                            + "before returning to me.");
-                }
-            } else {
+        if (Files.exists(context.getFilePath())) {
+            try {
                 context.setRun(true);
-                context.setList(new ChatList());
+                context.setList(context.getStorage().readFromFile(context.getFilePath()));
                 return (welcome);
+            } catch (IOException e) {
+                context.setRun(false);
+                throw CommandErrors.fileReadError(context.getFilePath().toString());
+            } catch (DateTimeParseException e) {
+                context.setRun(false);
+                throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
+                        ListItem.DATE_TIME_INPUT_FORMAT);
             }
         } else {
-            // if this was in a called while isRunLoop is true, that means the user called it
-            // so orangutan pretends not to know it
-            throw new OrangutanException("Alas! My simian mind is unable to comprehend your words.\n\n"
-                    + "Please use words I understand: "
-                    + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"bye\"");
+            context.setRun(true);
+            context.setList(new ChatList());
+            return (welcome);
         }
     }
 }
