@@ -26,6 +26,9 @@ class DeleteCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "DeleteCommand says: context should not be null!!!";
+        assert context.getList() != null : "DeleteCommand says: list should not be null!!!";
+
         if (context.getList().getLength() == 0) {
             throw new OrangutanException("Alas! There is nothing to delete.\n\n"
                     + "Please add some items to the list first.");

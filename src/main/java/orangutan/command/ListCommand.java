@@ -11,6 +11,9 @@ class ListCommand implements Command {
      * @return The printout of list items, or a message if list is empty.
      */
     public String run(Context context) {
+        assert context != null : "ListCommand says: context should not be null!!!";
+        assert context.getList() != null : "ListCommand says: list should not be null!!!";
+
         if (context.getList().getLength() == 0) {
             return ("The list is empty.");
         } else {

@@ -28,6 +28,9 @@ class TodoCommand implements Command {
      * @return Reply message, plus a printout of the new to-do.
      */
     public String run(Context context) {
+        assert context != null : "TodoCommand says: context should not be null!!!";
+        assert context.getList() != null : "TodoCommand says: list should not be null!!!";
+
         ListItem newTodo = new ListItem(ItemType.TODO, item, isCompleted);
         context.getList().addItem(newTodo);
 

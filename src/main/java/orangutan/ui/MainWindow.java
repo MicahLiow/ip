@@ -40,6 +40,9 @@ public class MainWindow extends AnchorPane {
      * If load has failed, will instead return an appropriate error message and not accept user input.
      */
     public void welcome() {
+        assert orangutan != null : "MainWindow says: orangutan should not be null!!!";
+        assert dialogContainer != null : "MainWindow says: dialogContainer should not be null!!!";
+
         String welcome = orangutan.getResponse("init");
         dialogContainer.getChildren().addAll(
                 DialogBox.getOrangutanDialog(welcome, orangutanImage)

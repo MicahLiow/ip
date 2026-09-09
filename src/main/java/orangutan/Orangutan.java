@@ -22,6 +22,8 @@ public class Orangutan {
      * @param isGui Whether this instance is being started in GUI or CLI.
      */
     public Orangutan(String path, boolean isGui) {
+        assert path != null : "orangutan says: path should not be null!!!";
+
         Path filePath = Paths.get(path);
         context = new Context(); // list: null, isRunLoop: false, filePath: null
         parser = new Parser(context);

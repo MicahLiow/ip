@@ -25,6 +25,9 @@ class FindCommand implements Command {
      *      If no items could be found, will return an appropriate reply with no list.
      */
     public String run(Context context) {
+        assert context != null : "FindCommand says: context should not be null!!!";
+        assert context.getList() != null : "FindCommand says: list should not be null!!!";
+
         ChatList res = context.getList().findItem(query);
         if (res.getLength() == 0) {
             return ("The item you requested could not be found. Perchance it is not in our list?");

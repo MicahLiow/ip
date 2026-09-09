@@ -26,6 +26,9 @@ class MarkCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "MarkCommand says: context should not be null!!!";
+        assert context.getList() != null : "MarkCommand says: list should not be null!!!";
+
         if (context.getList().getLength() == 0) {
             throw new OrangutanException("Alas! There is nothing to mark.\n\n"
                     + "Please add some items to the list first.");

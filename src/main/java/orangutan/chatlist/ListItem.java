@@ -29,6 +29,9 @@ public class ListItem {
      *     Params required are as follows: to-do - no extra params. deadline - param "by". event - params "from", "to".
      */
     public ListItem(ItemType type, String item, boolean isCompleted, String... params) {
+        assert type != null : "ListItem says: type should not be null!!!";
+        assert item != null : "ListItem says: item should not be null!!!";
+
         this.type = type;
         this.item = item;
         this.isCompleted = isCompleted;
@@ -40,11 +43,15 @@ public class ListItem {
                 by = null;
                 break;
             case DEADLINE:
+                assert params.length >= 1 : "ListItem says: params should be length 1!!!";
+
                 from = null;
                 to = null;
                 by = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
                 break;
             case EVENT:
+                assert params.length >= 2 : "ListItem says: params should be length 2!!!";
+
                 from = LocalDateTime.parse(params[0], DATE_TIME_INPUT_FORMATTER);
                 to = LocalDateTime.parse(params[1], DATE_TIME_INPUT_FORMATTER);
                 by = null;

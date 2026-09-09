@@ -35,6 +35,9 @@ class DeadlineCommand implements Command {
      *      If date and time are of the wrong format, will instead return an alert message.
      */
     public String run(Context context) {
+        assert context != null : "DeadlineCommand says: context should not be null!!!";
+        assert context.getList() != null : "DeadlineCommand says: list should not be null!!!";
+
         try {
             ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);
             context.getList().addItem(newDeadline);
