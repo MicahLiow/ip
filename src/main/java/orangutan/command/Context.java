@@ -13,7 +13,7 @@ public class Context {
     private ChatList list;
     private boolean isRun;
     private Path filePath;
-    private Storage storage;
+    private final Storage storage;
 
     /**
      * Creates a new Context.
@@ -66,9 +66,5 @@ public class Context {
 
     public Storage getStorage() {
         return storage;
-    }
-
-    public void setStorage(Storage storage) {
-        this.storage = storage;
     }
 }

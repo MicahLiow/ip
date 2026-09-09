@@ -45,7 +45,7 @@ public class Orangutan {
      * @return String response to the input.
      */
     public String getResponse(String input) {
-        return parser.parseCommand(input);
+        return parser.runCommand(input);
     }
 
     /**

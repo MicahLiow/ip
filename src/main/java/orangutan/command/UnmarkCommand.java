@@ -6,6 +6,7 @@ import orangutan.OrangutanException;
  * Command to unmark an item on the list as to be completed.
  */
 class UnmarkCommand implements Command {
+    private static final String NAME = "unmark";
     private final String index;
 
     /**
@@ -29,24 +30,16 @@ class UnmarkCommand implements Command {
         assert context != null : "UnmarkCommand says: context should not be null!!!";
         assert context.getList() != null : "UnmarkCommand says: list should not be null!!!";
 
-        if (context.getList().getLength() == 0) {
-            throw new OrangutanException("Alas! There is nothing to unmark.\n\n"
-                    + "Please add some items to the list first.");
-        }
+        ErrorChecker.checkListEmpty(context, NAME);
 
         try {
             int unmarkIndex = Integer.parseInt(index);
-
-            if (unmarkIndex < 1 || unmarkIndex > context.getList().getLength()) {
-                throw new OrangutanException("Alas! This number is not in the list.\n\n"
-                        + "Please keep the index between 1 and " + context.getList().getLength() + " (inclusive).");
-            }
+            ErrorChecker.checkIndexOutOfBounds(context, unmarkIndex);
 
             String unmarkedItem = context.getList().unmarkItem(unmarkIndex);
             return ("Brace yourself, this task has not been completed yet.\n " + unmarkedItem);
         } catch (NumberFormatException e) {
-            return ("Alas! That is not a number. Not a number I know of, at the least.\n\n"
-                    + "Please input an integer between 1 and " + context.getList().getLength() + " (inclusive).");
+            throw CommandErrors.numberParseError(context.getList().getLength());
         }
     }
 }

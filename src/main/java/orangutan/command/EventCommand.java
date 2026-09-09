@@ -2,6 +2,7 @@ package orangutan.command;
 
 import java.time.format.DateTimeParseException;
 
+import orangutan.OrangutanException;
 import orangutan.chatlist.ItemType;
 import orangutan.chatlist.ListItem;
 
@@ -37,7 +38,7 @@ class EventCommand implements Command {
      * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
-    public String run(Context context) {
+    public String run(Context context) throws OrangutanException {
         assert context != null : "EventCommand says: context should not be null!!!";
         assert context.getList() != null : "EventCommand says: list should not be null!!!";
 
@@ -47,8 +48,7 @@ class EventCommand implements Command {
 
             return ("An event has been added.\n " + newEvent);
         } catch (DateTimeParseException e) {
-            return ("Alas! I do not comprehend the dates and times you have told me.\n\n"
-                    + "Please ensure your dates are of format yyyymmdd hhmm (e.g. 20260831 2359)");
+            throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }
     }
 }

@@ -1,11 +1,13 @@
 package orangutan.command;
 
+import orangutan.OrangutanException;
 import orangutan.chatlist.ChatList;
 
 /**
  * Command to find items in list whose descriptions contain a specific string.
  */
 class FindCommand implements Command {
+    private static final String NAME = "find";
     private final String query;
 
     /**
@@ -24,9 +26,11 @@ class FindCommand implements Command {
      * @return Reply message, plus list of all matching items.
      *      If no items could be found, will return an appropriate reply with no list.
      */
-    public String run(Context context) {
+    public String run(Context context) throws OrangutanException {
         assert context != null : "FindCommand says: context should not be null!!!";
         assert context.getList() != null : "FindCommand says: list should not be null!!!";
+      
+        ErrorChecker.checkListEmpty(context, NAME);
 
         ChatList res = context.getList().findItem(query);
         if (res.getLength() == 0) {
