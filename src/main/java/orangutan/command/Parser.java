@@ -64,8 +64,8 @@ public class Parser {
 
                 case "todo":
                     verifyActionTitle(action);
-                    String todoItem = action[1];
-                    return new TodoCommand(todoItem, false).run(context);
+                    String todoTitle = action[1];
+                    return new TodoCommand(todoTitle, false).run(context);
 
                 case "deadline":
                     verifyActionTitle(action);
@@ -76,8 +76,8 @@ public class Parser {
                     }
 
                     String by = params[0];
-                    String deadlineItem = action[1];
-                    return new DeadlineCommand(deadlineItem, by, false).run(context);
+                    String deadlineTitle = action[1];
+                    return new DeadlineCommand(deadlineTitle, by, false).run(context);
 
                 case "event":
                     verifyActionTitle(action);
@@ -90,8 +90,8 @@ public class Parser {
 
                     String from = params[0];
                     String to = params[1];
-                    String eventItem = action[1];
-                    return new EventCommand(eventItem, from, to, false).run(context);
+                    String eventTitle = action[1];
+                    return new EventCommand(eventTitle, from, to, false).run(context);
 
                 case "list":
                     return new ListCommand().run(context);
