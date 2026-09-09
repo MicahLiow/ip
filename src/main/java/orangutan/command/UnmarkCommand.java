@@ -27,16 +27,11 @@ class UnmarkCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
-        if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError(NAME);
-        }
+        ErrorChecker.checkListEmpty(context, NAME);
 
         try {
             int unmarkIndex = Integer.parseInt(index);
-
-            if (unmarkIndex < 1 || unmarkIndex > context.getList().getLength()) {
-                throw CommandErrors.listOutOfBoundsError(context.getList().getLength());
-            }
+            ErrorChecker.checkIndexOutOfBounds(context, unmarkIndex);
 
             String unmarkedItem = context.getList().unmarkItem(unmarkIndex);
             return ("Brace yourself, this task has not been completed yet.\n " + unmarkedItem);

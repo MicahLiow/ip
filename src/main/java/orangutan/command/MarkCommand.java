@@ -27,16 +27,11 @@ class MarkCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
-        if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError(NAME);
-        }
+        ErrorChecker.checkListEmpty(context, NAME);
 
         try {
             int markIndex = Integer.parseInt(index);
-
-            if (markIndex < 1 || markIndex > context.getList().getLength()) {
-                throw CommandErrors.listOutOfBoundsError(context.getList().getLength());
-            }
+            ErrorChecker.checkIndexOutOfBounds(context, markIndex);
 
             String markItem = context.getList().markItem(markIndex);
             return ("My compliments, you have completed a task.\n " + markItem);

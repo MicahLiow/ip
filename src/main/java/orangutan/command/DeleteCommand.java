@@ -27,16 +27,11 @@ class DeleteCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
-        if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError(NAME);
-        }
+        ErrorChecker.checkListEmpty(context, NAME);
 
         try {
             int deleteIndex = Integer.parseInt(index);
-
-            if (deleteIndex < 1 || deleteIndex > context.getList().getLength()) {
-                throw CommandErrors.listOutOfBoundsError(context.getList().getLength());
-            }
+            ErrorChecker.checkIndexOutOfBounds(context, deleteIndex);
 
             String deleteItem = context.getList().deleteItem(deleteIndex);
             return ("The task has been purged from our records.\n " + deleteItem);

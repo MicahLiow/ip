@@ -63,12 +63,12 @@ public class Parser {
                     return new InitCommand().run(context);
 
                 case "todo":
-                    verifyActionTitle(action);
+                    ErrorChecker.checkTitleMissing(action);
                     String todoTitle = action[1];
                     return new TodoCommand(todoTitle, false).run(context);
 
                 case "deadline":
-                    verifyActionTitle(action);
+                    ErrorChecker.checkTitleMissing(action);
 
                     if (params.length < 1) {
                         throw CommandErrors.deadlineMissingParametersError();
@@ -79,7 +79,7 @@ public class Parser {
                     return new DeadlineCommand(deadlineTitle, by, false).run(context);
 
                 case "event":
-                    verifyActionTitle(action);
+                    ErrorChecker.checkTitleMissing(action);
 
                     if (params.length < 2) {
                         throw CommandErrors.eventMissingParametersError();
@@ -94,19 +94,19 @@ public class Parser {
                     return new ListCommand().run(context);
 
                 case "find":
-                    verifyActionIndex(action);
+                    ErrorChecker.verifyActionIndex(context, action);
                     return new FindCommand(action[1]).run(context);
 
                 case "delete":
-                    verifyActionIndex(action);
+                    ErrorChecker.verifyActionIndex(context, action);
                     return new DeleteCommand(action[1]).run(context);
 
                 case "mark":
-                    verifyActionIndex(action);
+                    ErrorChecker.verifyActionIndex(context, action);
                     return new MarkCommand(action[1]).run(context);
 
                 case "unmark":
-                    verifyActionIndex(action);
+                    ErrorChecker.verifyActionIndex(context, action);
                     return new UnmarkCommand(action[1]).run(context);
 
                 case "bye":
@@ -117,30 +117,6 @@ public class Parser {
             }
         } catch (OrangutanException e) {
             return (e.toString());
-        }
-    }
-
-    /**
-     * Verifies that action title exists.
-     *
-     * @param action String array, expected to be an (action, title) pair (e.g. {"todo", "lunch"})
-     * @throws OrangutanException if title is missing.
-     */
-    private void verifyActionTitle(String[] action) throws OrangutanException {
-        if (action.length < 2) {
-            throw CommandErrors.missingTitleError(action[0]);
-        }
-    }
-
-    /**
-     * Verifies that action index exists.
-     *
-     * @param action String array, expected to be an (action, index) pair (e.g. {"mark", "1"}
-     * @throws OrangutanException if index is missing.
-     */
-    private void verifyActionIndex(String[] action) throws OrangutanException {
-        if (action.length < 2) {
-            throw CommandErrors.missingIndexError(action[0], context.getList().getLength());
         }
     }
 }
