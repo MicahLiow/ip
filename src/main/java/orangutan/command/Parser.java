@@ -1,5 +1,7 @@
 package orangutan.command;
 
+import java.util.Arrays;
+
 import orangutan.OrangutanException;
 
 /**
@@ -18,14 +20,42 @@ public class Parser {
     }
 
     /**
+     * Breaks user input down into individual parameters.
+     *
+     * @param input Command supplied by user, guaranteed to be non-empty.
+     * @return Array of String Arrays; the first element is the (command, title) pair
+     *      and the second element are any date/time parameters.
+     *      e.g. { {"event", "eat lunch"} , {"20260831 1800", "20260831 1900"} }
+     */
+    private String[][] parseCommand(String input) {
+        String[] fields = input.split("/"); // {"event eat lunch ", "from 20260831 1800 ", "to 20260831 1900"}
+        String[] action = Arrays.stream(fields)
+                .limit(1) // ["event eat lunch "]
+                .map(String::trim) // ["event eat lunch"]
+                .flatMap(s -> Arrays.stream(s.split(" ", 2))) // ["event", "eat lunch"]
+                .toArray(String[]::new); // {"event", "eat lunch"}
+        String[] params = Arrays.stream(fields)
+                .skip(1) // ["from 20260831 1800 ", "to 20260831 1900"]
+                .map(String::trim) // ["from 20260831 1800", "to 20260831 1900"]
+                .map(s -> Arrays.stream(s.split(" ", 2)))
+                // [ ["from", "20260831 1800"] , ["to", "20260831 1900] ]
+                .map(s -> s.skip(1)) // [ ["20260831 1800"] , ["20260831 1900"] ]
+                .flatMap(s -> s) // ["20260831 1800" , "20260831 1900"]
+                .toArray(String[]::new); // {"20260831 1800" , "20260831 1900"}
+
+        return new String[][]{action, params};
+    }
+
+    /**
      * Parses user input, calls the corresponding command with given parameters, and returns the command output.
      *
      * @param input Command supplied by user.
      * @return Reply after command completion.
      */
-    public String parseCommand(String input) {
-        String[] params = input.split("/"); // e.g. {"event eat ","/from 20260831 1800 ","/to 20260831 1900"}
-        String[] action = params[0].trim().split(" ", 2); // e.g. {"event", "meet with friends"}
+    public String runCommand(String input) {
+        String[][] command = parseCommand(input);
+        String[] action = command[0]; // e.g. {"event", "eat"}
+        String[] params = command[1]; // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
 
         try {
             switch (action[0]) {
@@ -40,26 +70,26 @@ public class Parser {
                 case "deadline":
                     verifyActionTitle(action);
 
-                    if (params.length < 2) {
+                    if (params.length < 1) {
                         throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n"
                                 + "Please include '/by' in your message, along with the time or date of the deadline.");
                     }
 
-                    String by = params[1].trim().split(" ", 2)[1];
+                    String by = params[0];
                     String deadlineItem = action[1];
                     return new DeadlineCommand(deadlineItem, by, false).run(context);
 
                 case "event":
                     verifyActionTitle(action);
 
-                    if (params.length < 3) {
+                    if (params.length < 2) {
                         throw new OrangutanException("Alas! Some event details have not been revealed.\n\n"
                                 + "Please include '/from' and '/to' in your message, "
                                 + "along with the start and end time or day.");
                     }
 
-                    String from = params[1].trim().split(" ", 2)[1];
-                    String to = params[2].trim().split(" ", 2)[1];
+                    String from = params[0];
+                    String to = params[1];
                     String eventItem = action[1];
                     return new EventCommand(eventItem, from, to, false).run(context);
 

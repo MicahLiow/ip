@@ -39,7 +39,7 @@ class Ui {
      */
     void welcome(Parser parser) {
         out.println(String.join("\n", LINE, BANNER));
-        System.out.println(parser.parseCommand("init")); // sets context.isRunLoop to true if successful
+        System.out.println(parser.runCommand("init")); // sets context.isRunLoop to true if successful
     }
 
     /**
@@ -50,7 +50,7 @@ class Ui {
     void getInput(Parser parser) {
         out.print(" > ");
         String input = in.nextLine();
-        String output = parser.parseCommand(input);
+        String output = parser.runCommand(input);
 
         out.println(LINE);
         out.println(output);
