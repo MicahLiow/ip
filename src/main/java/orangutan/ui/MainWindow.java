@@ -25,9 +25,9 @@ public class MainWindow extends AnchorPane {
     private Orangutan orangutan;
 
     //taken from www.pexels.com/photo/portrait-of-man-in-suit-10041264/
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     //taken from www.orangutans-sos.org/content/uploads/2025/04/Three-Faces-of-the-Forest.jpg
-    private Image orangutanImage = new Image(this.getClass().getResourceAsStream("/images/orangutan.png"));
+    private final Image orangutanImage = new Image(this.getClass().getResourceAsStream("/images/orangutan.png"));
     //image location given relative to main/resources
 
     @FXML

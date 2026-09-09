@@ -14,7 +14,7 @@ import orangutan.Orangutan;
  * A GUI for Orangutan using FXML.
  */
 public class Main extends Application {
-    private Orangutan orangutan = new Orangutan("./data/orangutan.txt", true);
+    private final Orangutan orangutan = new Orangutan("./data/orangutan.txt", true);
 
     @Override
     public void start(Stage stage) {
