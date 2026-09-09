@@ -37,15 +37,10 @@ class InitCommand implements Command {
                     return (welcome);
                 } catch (IOException e) {
                     context.setRun(false);
-                    throw new OrangutanException("Alas! I have failed to access the information previously stored in "
-                            + "data/orangutan.txt.\n\n"
-                            + "Please ensure I have access to said file before returning to me.");
+                    throw CommandErrors.fileReadError(context.getFilePath().toString());
                 } catch (DateTimeParseException e) {
                     context.setRun(false);
-                    throw new OrangutanException("Alas! I do not comprehend the dates and times "
-                            + "stored in data/orangutan.txt.\n\n"
-                            + "Please ensure stored dates are of format yyyymmdd hhmm (e.g. 20260831 2359) "
-                            + "before returning to me.");
+                    throw CommandErrors.dateTimeLoadError(context.getFilePath().toString());
                 }
             } else {
                 context.setRun(true);
@@ -55,9 +50,7 @@ class InitCommand implements Command {
         } else {
             // if this was in a called while isRunLoop is true, that means the user called it
             // so orangutan pretends not to know it
-            throw new OrangutanException("Alas! My simian mind is unable to comprehend your words.\n\n"
-                    + "Please use words I understand: "
-                    + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"bye\"");
+            throw CommandErrors.unknownCommandError();
         }
     }
 }

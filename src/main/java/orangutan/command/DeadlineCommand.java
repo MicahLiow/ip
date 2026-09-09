@@ -2,6 +2,7 @@ package orangutan.command;
 
 import java.time.format.DateTimeParseException;
 
+import orangutan.OrangutanException;
 import orangutan.chatlist.ItemType;
 import orangutan.chatlist.ListItem;
 
@@ -34,15 +35,14 @@ class DeadlineCommand implements Command {
      * @return Reply message, plus a printout of the new deadline.
      *      If date and time are of the wrong format, will instead return an alert message.
      */
-    public String run(Context context) {
+    public String run(Context context) throws OrangutanException {
         try {
             ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);
             context.getList().addItem(newDeadline);
 
             return ("A deadline has been added.\n " + newDeadline);
         } catch (DateTimeParseException e) {
-            return ("Alas! I do not comprehend the dates and times you have told me.\n\n"
-                    + "Please ensure your dates are of format yyyymmdd hhmm (e.g. 20260831 2359)");
+            throw CommandErrors.dateTimeParseError();
         }
     }
 }

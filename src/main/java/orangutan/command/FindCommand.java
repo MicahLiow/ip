@@ -1,5 +1,6 @@
 package orangutan.command;
 
+import orangutan.OrangutanException;
 import orangutan.chatlist.ChatList;
 
 /**
@@ -24,7 +25,11 @@ class FindCommand implements Command {
      * @return Reply message, plus list of all matching items.
      *      If no items could be found, will return an appropriate reply with no list.
      */
-    public String run(Context context) {
+    public String run(Context context) throws OrangutanException {
+        if (context.getList().getLength() == 0) {
+            throw CommandErrors.emptyListError("find");
+        }
+
         ChatList res = context.getList().findItem(query);
         if (res.getLength() == 0) {
             return ("The item you requested could not be found. Perchance it is not in our list?");

@@ -71,8 +71,7 @@ public class Parser {
                     verifyActionTitle(action);
 
                     if (params.length < 1) {
-                        throw new OrangutanException("Alas! Deadline details have not been revealed.\n\n"
-                                + "Please include '/by' in your message, along with the time or date of the deadline.");
+                        throw CommandErrors.deadlineMissingParametersError();
                     }
 
                     String by = params[0];
@@ -83,9 +82,7 @@ public class Parser {
                     verifyActionTitle(action);
 
                     if (params.length < 2) {
-                        throw new OrangutanException("Alas! Some event details have not been revealed.\n\n"
-                                + "Please include '/from' and '/to' in your message, "
-                                + "along with the start and end time or day.");
+                        throw CommandErrors.eventMissingParametersError();
                     }
 
                     String from = params[0];
@@ -116,9 +113,7 @@ public class Parser {
                     return new ByeCommand().run(context);
 
                 default:
-                    throw new OrangutanException("Alas! My simian mind is unable to comprehend your words.\n\n"
-                            + "Please use words I understand: "
-                            + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"bye\"");
+                    throw CommandErrors.unknownCommandError();
             }
         } catch (OrangutanException e) {
             return (e.toString());
@@ -133,8 +128,7 @@ public class Parser {
      */
     private void verifyActionTitle(String[] action) throws OrangutanException {
         if (action.length < 2) {
-            throw new OrangutanException(String.format("Alas! The name of this %s has not been revealed.\n\n"
-                    + "Please include the %s name.", action[0], action[0]));
+            throw CommandErrors.missingTitleError(action[0]);
         }
     }
 
@@ -146,9 +140,7 @@ public class Parser {
      */
     private void verifyActionIndex(String[] action) throws OrangutanException {
         if (action.length < 2) {
-            throw new OrangutanException(String.format("Alas! I do not know which item to %s.\n\n"
-                    + "Please follow the unmark command with an integer between 1 and %d (inclusive).",
-                    action[0], context.getList().getLength()));
+            throw CommandErrors.missingIndexError(action[0], context.getList().getLength());
         }
     }
 }
