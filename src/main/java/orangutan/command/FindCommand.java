@@ -7,6 +7,7 @@ import orangutan.chatlist.ChatList;
  * Command to find items in list whose descriptions contain a specific string.
  */
 class FindCommand implements Command {
+    private static final String NAME = "find";
     private final String query;
 
     /**
@@ -27,7 +28,7 @@ class FindCommand implements Command {
      */
     public String run(Context context) throws OrangutanException {
         if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError("find");
+            throw CommandErrors.emptyListError(NAME);
         }
 
         ChatList res = context.getList().findItem(query);

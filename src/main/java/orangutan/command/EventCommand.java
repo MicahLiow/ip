@@ -45,7 +45,7 @@ class EventCommand implements Command {
 
             return ("An event has been added.\n " + newEvent);
         } catch (DateTimeParseException e) {
-            throw CommandErrors.dateTimeParseError();
+            throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }
     }
 }

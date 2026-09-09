@@ -42,7 +42,7 @@ class DeadlineCommand implements Command {
 
             return ("A deadline has been added.\n " + newDeadline);
         } catch (DateTimeParseException e) {
-            throw CommandErrors.dateTimeParseError();
+            throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }
     }
 }

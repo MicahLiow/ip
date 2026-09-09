@@ -6,6 +6,7 @@ import orangutan.OrangutanException;
  * Command to delete an item from the list.
  */
 class DeleteCommand implements Command {
+    private static final String NAME = "delete";
     private final String index;
 
     /**
@@ -27,7 +28,7 @@ class DeleteCommand implements Command {
      */
     public String run(Context context) throws OrangutanException {
         if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError("delete");
+            throw CommandErrors.emptyListError(NAME);
         }
 
         try {

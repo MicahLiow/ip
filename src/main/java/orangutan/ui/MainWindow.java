@@ -13,6 +13,8 @@ import orangutan.Orangutan;
  * controller for main GUI.
  */
 public class MainWindow extends AnchorPane {
+    private static final String INIT_COMMAND_NAME = "init";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,7 +25,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Orangutan orangutan;
-
     //taken from www.pexels.com/photo/portrait-of-man-in-suit-10041264/
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     //taken from www.orangutans-sos.org/content/uploads/2025/04/Three-Faces-of-the-Forest.jpg
@@ -40,7 +41,7 @@ public class MainWindow extends AnchorPane {
      * If load has failed, will instead return an appropriate error message and not accept user input.
      */
     public void welcome() {
-        String welcome = orangutan.getResponse("init");
+        String welcome = orangutan.getResponse(INIT_COMMAND_NAME);
         dialogContainer.getChildren().addAll(
                 DialogBox.getOrangutanDialog(welcome, orangutanImage)
         );
@@ -64,7 +65,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.length() > 1) {
+        if (!input.isBlank()) {
             String response = orangutan.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

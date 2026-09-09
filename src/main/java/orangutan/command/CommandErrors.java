@@ -1,14 +1,17 @@
 package orangutan.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import orangutan.OrangutanException;
 
 /**
  * Utility class for throwing OrangutanExceptions with the appropriate messages.
  */
 class CommandErrors {
-    static OrangutanException fileWriteError() {
-        String msg = "Alas! I was not able to write your list to data/orangutan.txt.\n\n"
-                + "Please ensure I have access to said files and folders before we bid farewell.";
+    static OrangutanException fileWriteError(String path) {
+        String msg = String.format("Alas! I was not able to write your list to %s.\n\n"
+                + "Please ensure I have access to said files and folders before we bid farewell.", path);
         return new OrangutanException(msg);
     }
 
@@ -18,15 +21,19 @@ class CommandErrors {
         return new OrangutanException(msg);
     }
 
-    static OrangutanException dateTimeParseError() {
-        String msg = "Alas! I do not comprehend the dates and times you have told me.\n\n"
-                + "Please ensure your dates are of format yyyymmdd hhmm (e.g. 20260831 2359).";
+    static OrangutanException dateTimeParseError(String format) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        String msg = String.format("Alas! I do not comprehend the dates and times you have told me.\n\n"
+                + "Please ensure your dates are of format %s (e.g. %s).",
+                format.toLowerCase(), LocalDateTime.now().format(formatter));
         return new OrangutanException(msg);
     }
 
-    static OrangutanException dateTimeLoadError(String path) {
+    static OrangutanException dateTimeLoadError(String path, String format) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         String msg = String.format("Alas! I do not comprehend the dates and times stored in %s.\n\n"
-                + "Please ensure all dates are of format yyyymmdd hhmm (e.g. 20260831 2359).", path);
+                + "Please ensure all dates are of format %s (e.g. %s).",
+                path, format.toLowerCase(), LocalDateTime.now().format(formatter));
         return new OrangutanException(msg);
     }
 

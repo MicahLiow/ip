@@ -6,6 +6,7 @@ import orangutan.OrangutanException;
  * Command to unmark an item on the list as to be completed.
  */
 class UnmarkCommand implements Command {
+    private static final String NAME = "unmark";
     private final String index;
 
     /**
@@ -27,7 +28,7 @@ class UnmarkCommand implements Command {
      */
     public String run(Context context) throws OrangutanException {
         if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError("unmark");
+            throw CommandErrors.emptyListError(NAME);
         }
 
         try {

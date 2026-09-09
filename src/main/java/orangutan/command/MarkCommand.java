@@ -6,6 +6,7 @@ import orangutan.OrangutanException;
  * Command to mark an item as completed.
  */
 class MarkCommand implements Command {
+    private static final String NAME = "mark";
     private final String index;
 
     /**
@@ -27,7 +28,7 @@ class MarkCommand implements Command {
      */
     public String run(Context context) throws OrangutanException {
         if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError("mark");
+            throw CommandErrors.emptyListError(NAME);
         }
 
         try {

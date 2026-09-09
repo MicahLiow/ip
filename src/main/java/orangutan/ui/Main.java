@@ -14,7 +14,13 @@ import orangutan.Orangutan;
  * A GUI for Orangutan using FXML.
  */
 public class Main extends Application {
-    private final Orangutan orangutan = new Orangutan("./data/orangutan.txt", true);
+    private static final String APPLICATION_NAME = "Orangutan";
+    private static final String DATA_PATH = "./data/orangutan.txt";
+    private static final String ICON_PATH = "/images/icon.png";
+    private static final int WINDOW_MIN_HEIGHT = 220;
+    private static final int WINDOW_MIN_WIDTH = 417;
+
+    private final Orangutan orangutan = new Orangutan(DATA_PATH, true);
 
     @Override
     public void start(Stage stage) {
@@ -22,14 +28,14 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setMinHeight(220);
-            stage.setMinWidth(417);
+            stage.setMinHeight(WINDOW_MIN_HEIGHT);
+            stage.setMinWidth(WINDOW_MIN_WIDTH);
 
             //set taskbar icon and title
             //icon taken from www.flaticon.com/free-icon/orangutan_7743169
-            Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
+            Image icon = new Image(this.getClass().getResourceAsStream(ICON_PATH));
             stage.getIcons().add(icon);
-            stage.setTitle("Orangutan");
+            stage.setTitle(APPLICATION_NAME);
 
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setOrangutan(orangutan); //inject Orangutan instance

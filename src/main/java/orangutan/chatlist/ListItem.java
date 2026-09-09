@@ -10,8 +10,12 @@ import java.util.stream.Stream;
  * Stores information on a single item in the list.
  */
 public class ListItem {
-    private static final DateTimeFormatter DATE_TIME_INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
+    public static final String DATE_TIME_INPUT_FORMAT = "yyyyMMdd HHmm"; // exposed for error messages
+    private static final DateTimeFormatter DATE_TIME_INPUT_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_INPUT_FORMAT);
     private static final DateTimeFormatter DATE_TIME_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final String COMPLETED_ICON = "[X]";
+    private static final String NOT_COMPLETED_ICON = "[ ]";
+
     private final ItemType type;
     private final String item;
     private boolean isCompleted; // not final so we can mark and unmark a task
@@ -72,7 +76,7 @@ public class ListItem {
 
         String[] params = {};
         if (data.length > 3) { // correct number of parameters is checked by the calling class
-            params = Arrays.copyOfRange(data, 3, 5);
+            params = Arrays.copyOfRange(data, 3, data.length);
         }
 
         return new ListItem(type, item, isCompleted, params);
@@ -139,7 +143,7 @@ public class ListItem {
     @Override
     public String toString() {
         String icon = type.getIcon();
-        String isCompleted = this.isCompleted ? "[X]" : "[ ]";
+        String isCompleted = this.isCompleted ? COMPLETED_ICON : NOT_COMPLETED_ICON;
         String item = this.item;
         String by = paramToString("by ", this.by, "(", ")", DATE_TIME_OUTPUT_FORMATTER);
         String from = paramToString("from ", this.from, "(", "", DATE_TIME_OUTPUT_FORMATTER);

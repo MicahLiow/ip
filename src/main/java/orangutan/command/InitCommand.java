@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import orangutan.OrangutanException;
 import orangutan.chatlist.ChatList;
+import orangutan.chatlist.ListItem;
 
 /**
  * Command to initiate chatbot.
@@ -40,7 +41,8 @@ class InitCommand implements Command {
                     throw CommandErrors.fileReadError(context.getFilePath().toString());
                 } catch (DateTimeParseException e) {
                     context.setRun(false);
-                    throw CommandErrors.dateTimeLoadError(context.getFilePath().toString());
+                    throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
+                            ListItem.DATE_TIME_INPUT_FORMAT);
                 }
             } else {
                 context.setRun(true);
