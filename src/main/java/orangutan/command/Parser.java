@@ -60,7 +60,11 @@ public class Parser {
         try {
             switch (action[0]) {
                 case "init":
-                    return new InitCommand().run(context);
+                    if (!context.isRun()) {
+                        return new InitCommand().run(context);
+                    } else {
+                        throw CommandErrors.unknownCommandError();
+                    }
 
                 case "todo":
                     ErrorChecker.checkTitleMissing(action);

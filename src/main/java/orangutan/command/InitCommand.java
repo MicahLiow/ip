@@ -30,29 +30,23 @@ class InitCommand implements Command {
         // if loading data is a success, isRunLoop set to true and we start querying user for input.
         String welcome = "Greetings, I am Orangutan. How may I assist you on this fine day?";
 
-        if (!context.isRun()) {
-            if (Files.exists(context.getFilePath())) {
-                try {
-                    context.setRun(true);
-                    context.setList(context.getStorage().readFromFile(context.getFilePath()));
-                    return (welcome);
-                } catch (IOException e) {
-                    context.setRun(false);
-                    throw CommandErrors.fileReadError(context.getFilePath().toString());
-                } catch (DateTimeParseException e) {
-                    context.setRun(false);
-                    throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
-                            ListItem.DATE_TIME_INPUT_FORMAT);
-                }
-            } else {
+        if (Files.exists(context.getFilePath())) {
+            try {
                 context.setRun(true);
-                context.setList(new ChatList());
+                context.setList(context.getStorage().readFromFile(context.getFilePath()));
                 return (welcome);
+            } catch (IOException e) {
+                context.setRun(false);
+                throw CommandErrors.fileReadError(context.getFilePath().toString());
+            } catch (DateTimeParseException e) {
+                context.setRun(false);
+                throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
+                        ListItem.DATE_TIME_INPUT_FORMAT);
             }
         } else {
-            // if this was in a called while isRunLoop is true, that means the user called it
-            // so orangutan pretends not to know it
-            throw CommandErrors.unknownCommandError();
+            context.setRun(true);
+            context.setList(new ChatList());
+            return (welcome);
         }
     }
 }
