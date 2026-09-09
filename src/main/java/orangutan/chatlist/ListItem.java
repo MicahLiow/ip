@@ -89,8 +89,21 @@ public class ListItem {
         return new ListItem(type, item, isCompleted, params);
     }
 
-    String getItem() {
+    public String getItem() {
         return item;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return switch (type) {
+            case TODO -> LocalDateTime.MIN;
+            case DEADLINE -> by;
+            case EVENT -> from;
+            default -> null;
+        };
     }
 
     /**

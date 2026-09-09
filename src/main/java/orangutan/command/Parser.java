@@ -61,7 +61,7 @@ public class Parser {
         String[] action = command[0]; // e.g. {"event", "eat"}
         String[] params = command[1]; // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
 
-        assert queryParams.length > 0 : "Parser says: queryParams should not be empty!!!";
+        assert action.length > 0 : "Parser says: action should not be empty!!!";
 
         try {
             switch (action[0]) {
@@ -81,7 +81,7 @@ public class Parser {
                     ErrorChecker.checkTitleMissing(action);
 
                     if (params.length < 1) {
-                        throw CommandErrors.deadlineMissingParametersError();
+                        throw CommandErrors.missingDeadlineParamError();
                     }
 
                     String by = params[0];
@@ -92,7 +92,7 @@ public class Parser {
                     ErrorChecker.checkTitleMissing(action);
 
                     if (params.length < 2) {
-                        throw CommandErrors.eventMissingParametersError();
+                        throw CommandErrors.missingEventParamError();
                     }
 
                     String from = params[0];
@@ -118,6 +118,12 @@ public class Parser {
                 case "unmark":
                     ErrorChecker.verifyActionIndex(context, action);
                     return new UnmarkCommand(action[1]).run(context);
+
+                case "sort":
+                    if (action.length < 2) {
+                        throw CommandErrors.missingSortMethodError();
+                    }
+                    return new SortCommand(action[1]).run(context);
 
                 case "bye":
                     return new ByeCommand().run(context);

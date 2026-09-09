@@ -1,14 +1,18 @@
 package orangutan.chatlist;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
+
+import orangutan.command.SortMethod;
 
 /**
  * Stores listItems of ListItems, and provides functionality to add, modify and remove them.
  */
 public class ChatList {
     private final ArrayList<ListItem> listItems;
+    private SortMethod sortMethod = SortMethod.NONE;
 
     /**
      * Creates an empty ChatList.
@@ -44,6 +48,9 @@ public class ChatList {
         assert item != null : "ChatList says: item should not be null!!!";
 
         listItems.add(item);
+        if (sortMethod != SortMethod.NONE) {
+            listItems.sort(sortMethod.getComparator());
+        }
     }
 
     /**
@@ -55,6 +62,10 @@ public class ChatList {
     public String markItem(int index) {
         ListItem item = listItems.get(index - 1);
         item.mark();
+        if (sortMethod != SortMethod.NONE) {
+            listItems.sort(sortMethod.getComparator());
+        }
+
         return item.toString();
     }
 
@@ -67,6 +78,10 @@ public class ChatList {
     public String unmarkItem(int index) {
         ListItem item = listItems.get(index - 1);
         item.unmark();
+        if (sortMethod != SortMethod.NONE) {
+            listItems.sort(sortMethod.getComparator());
+        }
+
         return item.toString();
     }
 
@@ -98,6 +113,20 @@ public class ChatList {
      */
     public int getLength() {
         return listItems.size();
+    }
+
+    public SortMethod getSortMethod() {
+        return sortMethod;
+    }
+
+    /**
+     * Enables sorting of the list.
+     * Will immediately sort the list. New additions will be added to the correct location.
+     * This is the only way to enable sorting, so when sorting the list we are guaranteed to have a comparator.
+     */
+    public void setSorting(SortMethod method) {
+        sortMethod = method;
+        listItems.sort(method.getComparator());
     }
 
     /**
