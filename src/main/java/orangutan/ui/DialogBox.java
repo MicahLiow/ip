@@ -34,6 +34,11 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+
+            assert dialog != null : "DialogBox says: dialog should not be null!!!";
+            assert displayPicture != null : "DialogBox says: displayPicture should not be null!!!";
+            assert imageContainer != null : "DialogBox says: imageContainer should not be null!!!";
+
         } catch (IOException e) {
             e.printStackTrace();
         }

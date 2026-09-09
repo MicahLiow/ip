@@ -27,6 +27,9 @@ class FindCommand implements Command {
      *      If no items could be found, will return an appropriate reply with no list.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "FindCommand says: context should not be null!!!";
+        assert context.getList() != null : "FindCommand says: list should not be null!!!";
+      
         ErrorChecker.checkListEmpty(context, NAME);
 
         ChatList res = context.getList().findItem(query);

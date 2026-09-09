@@ -16,6 +16,8 @@ public class Parser {
      * @param context Context item storing information on the chatbot's current internal state.
      */
     public Parser(Context context) {
+        assert context != null : "Parser says: context should not be null!!!";
+
         this.context = context;
     }
 
@@ -53,9 +55,13 @@ public class Parser {
      * @return Reply after command completion.
      */
     public String runCommand(String input) {
+        assert input != null : "Parser says: input should not be null!!!";
+
         String[][] command = parseCommand(input);
         String[] action = command[0]; // e.g. {"event", "eat"}
         String[] params = command[1]; // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
+
+        assert queryParams.length > 0 : "Parser says: queryParams should not be empty!!!";
 
         try {
             switch (action[0]) {

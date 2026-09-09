@@ -19,6 +19,8 @@ public class Storage {
      * @throws IOException If program does not have read access to the directory.
      */
     public ChatList readFromFile(Path filePath) throws IOException {
+        assert filePath != null : "Storage says: filePath should not be null!!!";
+
         ChatList list = new ChatList();
 
         if (Files.exists(filePath)) {

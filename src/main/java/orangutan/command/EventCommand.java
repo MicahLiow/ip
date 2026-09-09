@@ -39,6 +39,9 @@ class EventCommand implements Command {
      *      If date and time are of the wrong format, will instead return an alert message.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "EventCommand says: context should not be null!!!";
+        assert context.getList() != null : "EventCommand says: list should not be null!!!";
+
         try {
             ListItem newEvent = new ListItem(ItemType.EVENT, item, isCompleted, from, to);
             context.getList().addItem(newEvent);

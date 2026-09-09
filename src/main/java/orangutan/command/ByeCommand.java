@@ -17,6 +17,10 @@ class ByeCommand implements Command {
      *      and continues to take input.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "ByeCommand says: context should not be null!!!";
+        assert context.getFilePath() != null : "ByeCommand says: filepath should not be null!!!";
+        assert context.getList() != null : "ByeCommand says: list should not be null!!!";
+
         try {
             context.setRun(false);
             context.getStorage().writeToFile(context.getFilePath(), context.getList());

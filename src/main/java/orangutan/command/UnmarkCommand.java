@@ -27,6 +27,9 @@ class UnmarkCommand implements Command {
      * @throws OrangutanException If list is empty, or if index is out of range.
      */
     public String run(Context context) throws OrangutanException {
+        assert context != null : "UnmarkCommand says: context should not be null!!!";
+        assert context.getList() != null : "UnmarkCommand says: list should not be null!!!";
+
         ErrorChecker.checkListEmpty(context, NAME);
 
         try {

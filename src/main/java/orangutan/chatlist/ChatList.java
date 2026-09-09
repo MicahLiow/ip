@@ -23,6 +23,8 @@ public class ChatList {
      * @param listItems ArrayList of ListItems to be stored in this listItems.
      */
     public ChatList(ArrayList<ListItem> listItems) {
+        assert listItems != null : "ChatList says: listItems should not be null!!!";
+
         this.listItems = listItems;
     }
 
@@ -39,6 +41,8 @@ public class ChatList {
      * @param item ListItem object, representing a to-do, event or deadline in the listItems.
      */
     public void addItem(ListItem item) {
+        assert item != null : "ChatList says: item should not be null!!!";
+
         listItems.add(item);
     }
 
