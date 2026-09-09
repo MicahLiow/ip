@@ -125,6 +125,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Verifies that action title exists.
+     *
+     * @param action String array, expected to be an (action, title) pair (e.g. {"todo", "lunch"})
+     * @throws OrangutanException if title is missing.
+     */
     private void verifyActionTitle(String[] action) throws OrangutanException {
         if (action.length < 2) {
             throw new OrangutanException(String.format("Alas! The name of this %s has not been revealed.\n\n"
@@ -132,6 +138,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Verifies that action index exists.
+     *
+     * @param action String array, expected to be an (action, index) pair (e.g. {"mark", "1"}
+     * @throws OrangutanException if index is missing.
+     */
     private void verifyActionIndex(String[] action) throws OrangutanException {
         if (action.length < 2) {
             throw new OrangutanException(String.format("Alas! I do not know which item to %s.\n\n"
