@@ -43,6 +43,9 @@ class InitCommand implements Command {
                 context.setRun(false);
                 throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
                         ListItem.DATE_TIME_INPUT_FORMAT);
+            } catch (IllegalArgumentException e) {
+                context.setRun(false);
+                throw CommandErrors.sortMethodLoadError(context.getFilePath().toString());
             }
         } else {
             context.setRun(true);

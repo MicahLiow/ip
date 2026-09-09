@@ -3,6 +3,7 @@ package orangutan.command;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import orangutan.Orangutan;
 import orangutan.OrangutanException;
 
 /**
@@ -55,15 +56,33 @@ class CommandErrors {
         return new OrangutanException(msg);
     }
 
-    static OrangutanException deadlineMissingParametersError() {
+    static OrangutanException missingDeadlineParamError() {
         String msg = String.format("Alas! Some deadline details have not been revealed.\n\n"
                 + "Please include /by in your message, along with the due date and time.");
         return new OrangutanException(msg);
     }
 
-    static OrangutanException eventMissingParametersError() {
+    static OrangutanException missingEventParamError() {
         String msg = String.format("Alas! Some event details have not been revealed.\n\n"
                 + "Please include /from and /to in your message, along with the start and end dates and times.");
+        return new OrangutanException(msg);
+    }
+
+    static OrangutanException missingSortMethodError() {
+        String msg = "Alas! You did not specify a sorting method.\n\n"
+                + "Please use one of these sorting methods: \"completion\", \"datetime\", \"none\". ";
+        return new OrangutanException(msg);
+    }
+
+    static OrangutanException unknownSortMethodError() {
+        String msg = "Alas! That sorting method is unknown to me.\n\n"
+                + "Please use sorting methods I have learned: \"completion\", \"datetime\", \"none\". ";
+        return new OrangutanException(msg);
+    }
+
+    static OrangutanException sortMethodLoadError(String path) {
+        String msg = String.format("Alas! The sorting method stored in %s is unknown to me.\n\n"
+                        + "Please ensure the sorting method is \"completion\", \"datetime\", or \"none\".", path);
         return new OrangutanException(msg);
     }
 
@@ -82,7 +101,8 @@ class CommandErrors {
     static OrangutanException unknownCommandError() {
         String msg = "Alas! My simian mind is unable to comprehend your instructions.\n\n"
                 + "Please use instructions I understand: "
-                + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"find\", \"bye\"";
+                + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"find\", " 
+                + "\"sort\", \"bye\"";
         return new OrangutanException(msg);
     }
 
