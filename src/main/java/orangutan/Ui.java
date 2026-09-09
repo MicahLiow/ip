@@ -39,7 +39,7 @@ class Ui {
      */
     void welcome(Parser parser) {
         out.println(String.join("\n", LINE, BANNER));
-        System.out.println(parser.runCommand("init")); // sets context.isRunLoop to true if successful
+        out.println(parser.runCommand("init")); // sets context.isRunLoop to true if successful
     }
 
     /**
