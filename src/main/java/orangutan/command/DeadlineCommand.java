@@ -11,19 +11,19 @@ import orangutan.chatlist.ListItem;
  * Command to create a new deadline and add it to the list.
  */
 class DeadlineCommand implements Command {
-    private final String item;
+    private final String title;
     private final String by;
     private final boolean isCompleted;
 
     /**
      * Creates new command.
      *
-     * @param item Description of the list item.
+     * @param title Description of the list item.
      * @param by Date and time of the deadline, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the deadline has been completed or not.
      */
-    DeadlineCommand(String item, String by, boolean isCompleted) {
-        this.item = item;
+    DeadlineCommand(String title, String by, boolean isCompleted) {
+        this.title = title;
         this.by = by;
         this.isCompleted = isCompleted;
     }
@@ -40,7 +40,7 @@ class DeadlineCommand implements Command {
         assert context.getList() != null : "DeadlineCommand says: list should not be null!!!";
 
         try {
-            ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);
+            ListItem newDeadline = new ListItem(ItemType.DEADLINE, title, isCompleted, by);
             context.getList().addItem(newDeadline);
 
             return ("Hark! A deadline hath been added to your list:\n " + newDeadline);

@@ -1,7 +1,6 @@
 package orangutan.chatlist;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -104,7 +103,7 @@ public class ChatList {
      * @return ChatList of matching items.
      */
     public ChatList findItem(String query) {
-        List<ListItem> matchStream = listItems.stream().filter(item -> item.getItem().contains(query)).toList();
+        List<ListItem> matchStream = listItems.stream().filter(item -> item.getTitle().contains(query)).toList();
         return new ChatList(new ArrayList<ListItem>(matchStream));
     }
 

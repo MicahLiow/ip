@@ -64,75 +64,11 @@ public class Parser {
         assert action.length > 0 : "Parser says: action should not be empty!!!";
 
         try {
-            switch (action[0]) {
-                case "init":
-                    if (!context.isRun()) {
-                        return new InitCommand().run(context);
-                    } else {
-                        throw CommandErrors.unknownCommandError();
-                    }
-
-                case "todo":
-                    ErrorChecker.checkTitleMissing(action);
-                    String todoTitle = action[1];
-                    return new TodoCommand(todoTitle, false).run(context);
-
-                case "deadline":
-                    ErrorChecker.checkTitleMissing(action);
-
-                    if (params.length < 1) {
-                        throw CommandErrors.missingDeadlineParamError();
-                    }
-
-                    String by = params[0];
-                    String deadlineTitle = action[1];
-                    return new DeadlineCommand(deadlineTitle, by, false).run(context);
-
-                case "event":
-                    ErrorChecker.checkTitleMissing(action);
-
-                    if (params.length < 2) {
-                        throw CommandErrors.missingEventParamError();
-                    }
-
-                    String from = params[0];
-                    String to = params[1];
-                    String eventTitle = action[1];
-                    return new EventCommand(eventTitle, from, to, false).run(context);
-
-                case "list":
-                    return new ListCommand().run(context);
-
-                case "find":
-                    ErrorChecker.verifyActionIndex(context, action);
-                    return new FindCommand(action[1]).run(context);
-
-                case "delete":
-                    ErrorChecker.verifyActionIndex(context, action);
-                    return new DeleteCommand(action[1]).run(context);
-
-                case "mark":
-                    ErrorChecker.verifyActionIndex(context, action);
-                    return new MarkCommand(action[1]).run(context);
-
-                case "unmark":
-                    ErrorChecker.verifyActionIndex(context, action);
-                    return new UnmarkCommand(action[1]).run(context);
-
-                case "sort":
-                    if (action.length < 2) {
-                        throw CommandErrors.missingSortMethodError();
-                    }
-                    return new SortCommand(action[1]).run(context);
-
-                case "bye":
-                    return new ByeCommand().run(context);
-
-                default:
-                    throw CommandErrors.unknownCommandError();
-            }
+            return CommandType.valueOf(action[0].toUpperCase()).checkAndRun(action, params, context);
         } catch (OrangutanException e) {
             return (e.toString());
+        } catch (IllegalArgumentException e) {
+            return CommandErrors.unknownCommandError().toString();
         }
     }
 }

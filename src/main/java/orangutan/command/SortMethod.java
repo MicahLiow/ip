@@ -10,8 +10,8 @@ import orangutan.chatlist.ListItem;
  */
 public enum SortMethod {
     NONE((e1, e2) -> 0),
-    COMPLETION(Comparator.comparing(ListItem::isCompleted).thenComparing(ListItem::getItem)),
-    DATETIME(Comparator.comparing(ListItem::getStartDateTime).thenComparing(ListItem::getItem));
+    COMPLETION(Comparator.comparing(ListItem::isCompleted).thenComparing(ListItem::getTitle)),
+    DATETIME(Comparator.comparing(ListItem::getStartDateTime).thenComparing(ListItem::getTitle));
 
     private final Comparator<ListItem> cmp;
 

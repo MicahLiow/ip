@@ -26,7 +26,7 @@ public class SortCommand {
             throw CommandErrors.unknownSortMethodError();
         }
         if (param.equals("none")) {
-            return "Any additions to your list shall henceforth be added to the end.";
+            return "Any additions to your list shall henceforth take its place at the end of the list.";
         } else {
             return String.format("Your list shall henceforth be ordered by %s.\n%s", param, context.getList().toString());
         }

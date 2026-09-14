@@ -17,7 +17,7 @@ public class ListItem {
     private static final String NOT_COMPLETED_ICON = "[ ]";
 
     private final ItemType type;
-    private final String item;
+    private final String title;
     private boolean isCompleted; // not final so we can mark and unmark a task
     private final LocalDateTime from;
     private final LocalDateTime to;
@@ -27,17 +27,17 @@ public class ListItem {
      * Constructs an ListItem.
      *
      * @param type ItemType corresponding to the type of the item, can be TODO, DEADLINE or EVENT.
-     * @param item Description of the list item (e.g. dinner).
+     * @param title Title of the list item (e.g. dinner).
      * @param isCompleted Whether the item has already been completed.
      * @param params Time parameters, formatted "yyyy-MM-dd HH:mm" (e.g. "2026-08-31 15:00").
      *     Params required are as follows: to-do - no extra params. deadline - param "by". event - params "from", "to".
      */
-    public ListItem(ItemType type, String item, boolean isCompleted, String... params) {
+    public ListItem(ItemType type, String title, boolean isCompleted, String... params) {
         assert type != null : "ListItem says: type should not be null!!!";
-        assert item != null : "ListItem says: item should not be null!!!";
+        assert title != null : "ListItem says: title should not be null!!!";
 
         this.type = type;
-        this.item = item;
+        this.title = title;
         this.isCompleted = isCompleted;
 
         switch (type) { // correct number of parameters is checked by the calling class
@@ -71,7 +71,7 @@ public class ListItem {
     /**
      * Constructs a ListItem from a comma-separated string.
      *
-     * @param fromFileLine Comma-separated string "[icon],[isCompleted],[item name],[from / by],[to]".
+     * @param fromFileLine Comma-separated string "[icon],[isCompleted],[title],[from / by],[to]".
      *     (e.g. "[E],true,Dinner,20260831 1700,20260831 1900").
      */
     public static ListItem parseLine(String fromFileLine) {
@@ -89,8 +89,8 @@ public class ListItem {
         return new ListItem(type, item, isCompleted, params);
     }
 
-    public String getItem() {
-        return item;
+    public String getTitle() {
+        return title;
     }
 
     public boolean isCompleted() {
@@ -123,7 +123,7 @@ public class ListItem {
     /**
      * Returns a comma-separated string representation of the data in this object to be written to a file.
      *
-     * @return String "[icon],[isCompleted],[item name],[from/by],[to]" (e.g. "[D],true,report,20260831 1900").
+     * @return String "[icon],[isCompleted],[title],[from/by],[to]" (e.g. "[D],true,report,20260831 1900").
      */
     public String toFile() {
         String icon = type.getIcon();
@@ -133,7 +133,7 @@ public class ListItem {
         String by = paramToString("", this.by, "", "", DATE_TIME_INPUT_FORMATTER);
         String from = paramToString("", this.from, "", "", DATE_TIME_INPUT_FORMATTER);
         String to = paramToString("", this.to, "", "", DATE_TIME_INPUT_FORMATTER);
-        return Stream.of(icon, isCompleted, item, by, from, to)
+        return Stream.of(icon, isCompleted, title, by, from, to)
                 .filter(s -> s != null)
                 .collect(Collectors.joining(","));
     }
@@ -157,14 +157,14 @@ public class ListItem {
     /**
      * Prints this item as a String.
      *
-     * @return String of format "[icon] [isCompleted ([X] or [ ])] item, (paramName: paramValue)".
+     * @return String of format "[icon] [isCompleted ([X] or [ ])] title, (paramName: paramValue)".
      *     (e.g. "[T] [X] Dinner (from: 6pm to: 7pm)")
      */
     @Override
     public String toString() {
         String icon = type.getIcon();
         String isCompleted = this.isCompleted ? COMPLETED_ICON : NOT_COMPLETED_ICON;
-        String item = this.item;
+        String item = this.title;
         String by = paramToString("by ", this.by, "(", ")", DATE_TIME_OUTPUT_FORMATTER);
         String from = paramToString("from ", this.from, "(", "", DATE_TIME_OUTPUT_FORMATTER);
         String to = paramToString("to ", this.to, "", ")", DATE_TIME_OUTPUT_FORMATTER);

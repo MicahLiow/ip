@@ -11,7 +11,7 @@ import orangutan.chatlist.ListItem;
  * Command to create a new event and add it to the list.
  */
 class EventCommand implements Command {
-    private final String item;
+    private final String title;
     private final String from;
     private final String to;
     private final boolean isCompleted;
@@ -19,13 +19,13 @@ class EventCommand implements Command {
     /**
      * Creates a new command.
      *
-     * @param item Description of the list item.
+     * @param title Title of the list item.
      * @param from Start date and time of the event, of format "yyyymmdd hhmm".
      * @param to End date and time of the event, of format "yyyymmdd hhmm".
      * @param isCompleted Whether the event has passed or not.
      */
-    EventCommand(String item, String from, String to, boolean isCompleted) {
-        this.item = item;
+    EventCommand(String title, String from, String to, boolean isCompleted) {
+        this.title = title;
         this.from = from;
         this.to = to;
         this.isCompleted = isCompleted;
@@ -43,7 +43,7 @@ class EventCommand implements Command {
         assert context.getList() != null : "EventCommand says: list should not be null!!!";
 
         try {
-            ListItem newEvent = new ListItem(ItemType.EVENT, item, isCompleted, from, to);
+            ListItem newEvent = new ListItem(ItemType.EVENT, title, isCompleted, from, to);
             context.getList().addItem(newEvent);
 
             return ("Hark! An event hath been added to your list:\n " + newEvent);

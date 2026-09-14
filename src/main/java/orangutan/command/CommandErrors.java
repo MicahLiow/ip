@@ -3,10 +3,8 @@ package orangutan.command;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
-import orangutan.Orangutan;
 import orangutan.OrangutanException;
 
 /**
@@ -72,32 +70,32 @@ class CommandErrors {
     }
 
     static OrangutanException missingSortMethodError() {
-        String names = Arrays.stream(SortMethod.values())
+        String sortMethodNames = Arrays.stream(SortMethod.values())
                 .map(Enum::name)
                 .map(String::toLowerCase)
                 .collect(Collectors.joining(", "));
-        String msg = String.format("Alas! You hast not chosen a sorting method.\n\n"
-                + "Pray choose one of the sorting methods I have learned: %s.", names);
+        String msg = String.format("Alas! Thou hast not chosen a sorting method.\n\n"
+                + "Pray choose one of the sorting methods I have learned: %s.", sortMethodNames);
         return new OrangutanException(msg);
     }
 
     static OrangutanException unknownSortMethodError() {
-        String names = Arrays.stream(SortMethod.values())
+        String sortMethodNames = Arrays.stream(SortMethod.values())
                 .map(Enum::name)
                 .map(String::toLowerCase)
                 .collect(Collectors.joining(", "));
         String msg = String.format("Alas! This sorting method is unknown to me.\n\n"
-                + "Pray choose one of the sorting methods I have learned: %s.", names);
+                + "Pray choose one of the sorting methods I have learned: %s.", sortMethodNames);
         return new OrangutanException(msg);
     }
 
     static OrangutanException sortMethodLoadError(String path) {
-        String names = Arrays.stream(SortMethod.values())
+        String sortMethodNames = Arrays.stream(SortMethod.values())
                 .map(Enum::name)
                 .map(String::toLowerCase)
                 .collect(Collectors.joining(", "));
         String msg = String.format("Alas! The sorting method preserved in %s is unknown to me.\n\n"
-                        + "Pray choose one of the sorting methods I have learned: %s.", path, names);
+                        + "Pray choose one of the sorting methods I have learned: %s.", path, sortMethodNames);
         return new OrangutanException(msg);
     }
 
@@ -114,10 +112,13 @@ class CommandErrors {
     }
 
     static OrangutanException unknownCommandError() {
-        String msg = "Alas! My simian mind is unable to comprehend your instructions.\n\n"
-                + "Please use instructions I understand: "
-                + "\"todo\", \"deadline\", \"event\", \"list\", \"delete\", \"mark\", \"unmark\", \"find\", " 
-                + "\"sort\", \"bye\"";
+        String commandNames = Arrays.stream(CommandType.values())
+                .skip(1) //we must skip the INIT command.
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", "));
+        String msg = String.format("Alas! My simian mind is unable to comprehend your instructions.\n\n"
+                + "Please use instructions I understand: %s", commandNames);
         return new OrangutanException(msg);
     }
 
