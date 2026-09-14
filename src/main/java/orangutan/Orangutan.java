@@ -60,7 +60,7 @@ public class Orangutan {
     }
 
     /**
-     * Whether Orangutan is currently accepting input.
+     * Returns whether Orangutan is currently accepting input.
      * @return Boolean value.
      */
     public boolean isRun() {
