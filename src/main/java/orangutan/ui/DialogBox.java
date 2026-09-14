@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
-        userDialog.dialog.setStyle(userDialog.dialog.getStyle() + "-fx-background-color: #A8E68A;");
+        userDialog.dialog.getStyleClass().add("user-label");
         return userDialog;
     }
 
@@ -73,7 +73,7 @@ public class DialogBox extends HBox {
     public static DialogBox getOrangutanDialog(String text, Image img) {
         DialogBox orangutanDialog = new DialogBox(text, img);
         orangutanDialog.flip();
-        orangutanDialog.dialog.setStyle(orangutanDialog.dialog.getStyle() + "-fx-background-color: #E6C78A;");
+        orangutanDialog.dialog.getStyleClass().add("reply-label");
         return orangutanDialog;
     }
 
@@ -82,8 +82,6 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-
         dialog.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        dialog.setStyle(dialog.getStyle() + "-fx-padding: 3 6 3 40;");
     }
 }

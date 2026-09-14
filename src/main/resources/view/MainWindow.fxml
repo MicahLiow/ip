@@ -9,6 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="600.0" prefWidth="400.0"
+            stylesheets="@../css/MainWindow.css"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="orangutan.ui.MainWindow"
@@ -18,7 +19,6 @@
                     -fx-background-position: center;">
             <!-- background image taken from www.facebook.com/photo?fbid=450518333786018 -->
     <TextField fx:id="userInput"
-                stylesheets="@../css/MainWindow.css"
                layoutY="558.0"
                onAction="#handleUserInput"
                prefHeight="41.0"
@@ -27,7 +27,6 @@
                AnchorPane.leftAnchor="0.0"
                AnchorPane.rightAnchor="76.0" />
     <Button fx:id="sendButton"
-            stylesheets="@../css/MainWindow.css"
             layoutX="324.0"
             layoutY="558.0"
             mnemonicParsing="false"
