@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
             userInput.setDisable(true);
             sendButton.setDisable(true);
 
-            userInput.setText("You may close the window now.");
+            userInput.setText("The window may be closed, good bye.");
         }
     }
 }

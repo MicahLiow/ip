@@ -15,9 +15,9 @@ class ListCommand implements Command {
         assert context.getList() != null : "ListCommand says: list should not be null!!!";
 
         if (context.getList().getLength() == 0) {
-            return ("The list is empty.");
+            return ("The list contains no undertakings.");
         } else {
-            return ("The following are the undertakings in your list:\n" + context.getList());
+            return ("Herein lie the undertakings in your list:\n" + context.getList());
         }
     }
 }

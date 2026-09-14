@@ -37,7 +37,7 @@ class DeleteCommand implements Command {
             ErrorChecker.checkIndexOutOfBounds(context, deleteIndex);
 
             String deleteItem = context.getList().deleteItem(deleteIndex);
-            return ("The task has been purged from our records.\n " + deleteItem);
+            return ("The following task hath been purged from our records:\n " + deleteItem);
         } catch (NumberFormatException e) {
             throw CommandErrors.numberParseError(context.getList().getLength());
         }

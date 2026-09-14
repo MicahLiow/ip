@@ -37,7 +37,7 @@ class MarkCommand implements Command {
             ErrorChecker.checkIndexOutOfBounds(context, markIndex);
 
             String markItem = context.getList().markItem(markIndex);
-            return ("My compliments, you have completed a task.\n " + markItem);
+            return ("My compliments, thou hast completed a task:\n " + markItem);
         } catch (NumberFormatException e) {
             throw CommandErrors.numberParseError(context.getList().getLength());
         }

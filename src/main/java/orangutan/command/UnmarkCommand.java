@@ -37,7 +37,7 @@ class UnmarkCommand implements Command {
             ErrorChecker.checkIndexOutOfBounds(context, unmarkIndex);
 
             String unmarkedItem = context.getList().unmarkItem(unmarkIndex);
-            return ("Brace yourself, this task has not been completed yet.\n " + unmarkedItem);
+            return ("Take heed, this task hath not yet been completed:\n " + unmarkedItem);
         } catch (NumberFormatException e) {
             throw CommandErrors.numberParseError(context.getList().getLength());
         }

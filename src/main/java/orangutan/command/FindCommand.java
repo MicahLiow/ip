@@ -36,7 +36,7 @@ class FindCommand implements Command {
         if (res.getLength() == 0) {
             return ("The item you requested could not be found. Perchance it is not in our list?");
         } else {
-            return ("Here are the items you have requested:\n" + res);
+            return ("herein lie the items thou seekest:\n" + res);
         }
     }
 }

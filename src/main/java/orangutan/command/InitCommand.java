@@ -28,7 +28,7 @@ class InitCommand implements Command {
         // only reachable in the initial state, before user input is queried.
         // this is only reachable when context.isRunLoop is false, since isRunLoop is initialized to false
         // if loading data is a success, isRunLoop set to true and we start querying user for input.
-        String welcome = "Greetings, I am Orangutan. How may I assist you on this fine day?";
+        String welcome = "Greetings, I am Orangutan. In what manner may I be of service today?";
         assert context != null : "InitCommand says: context should not be null!!!";
 
         if (Files.exists(context.getFilePath())) {

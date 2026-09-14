@@ -34,6 +34,6 @@ class TodoCommand implements Command {
         ListItem newTodo = new ListItem(ItemType.TODO, item, isCompleted);
         context.getList().addItem(newTodo);
 
-        return ("A task has been added.\n " + newTodo);
+        return ("Hark! A task hath been added to your list:\n " + newTodo);
     }
 }

@@ -43,7 +43,7 @@ class DeadlineCommand implements Command {
             ListItem newDeadline = new ListItem(ItemType.DEADLINE, item, isCompleted, by);
             context.getList().addItem(newDeadline);
 
-            return ("A deadline has been added.\n " + newDeadline);
+            return ("Hark! A deadline hath been added to your list:\n " + newDeadline);
         } catch (DateTimeParseException e) {
             throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }

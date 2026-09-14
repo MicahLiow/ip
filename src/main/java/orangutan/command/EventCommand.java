@@ -46,7 +46,7 @@ class EventCommand implements Command {
             ListItem newEvent = new ListItem(ItemType.EVENT, item, isCompleted, from, to);
             context.getList().addItem(newEvent);
 
-            return ("An event has been added.\n " + newEvent);
+            return ("Hark! An event hath been added to your list:\n " + newEvent);
         } catch (DateTimeParseException e) {
             throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }

@@ -2,6 +2,9 @@ package orangutan.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 import orangutan.Orangutan;
 import orangutan.OrangutanException;
@@ -11,14 +14,14 @@ import orangutan.OrangutanException;
  */
 class CommandErrors {
     static OrangutanException fileWriteError(String path) {
-        String msg = String.format("Alas! I was not able to write your list to %s.\n\n"
-                + "Please ensure I have access to said files and folders before we bid farewell.", path);
+        String msg = String.format("Alas! I was unable to inscribe your list in %s.\n\n"
+                + "Pray grant me access to the requisite files and folders ere we bid farewell.", path);
         return new OrangutanException(msg);
     }
 
     static OrangutanException fileReadError(String path) {
-        String msg = String.format("Alas! I have failed to access the information previously stored in %s.\n\n"
-                + "Please ensure I have access to said file before returning to me.", path);
+        String msg = String.format("Alas! I could not retrieve the records preserved in %s.\n\n"
+                + "Pray grant me access to the requisite files ere you return to me.", path);
         return new OrangutanException(msg);
     }
 
@@ -32,69 +35,81 @@ class CommandErrors {
 
     static OrangutanException dateTimeLoadError(String path, String format) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-        String msg = String.format("Alas! I do not comprehend the dates and times stored in %s.\n\n"
-                + "Please ensure all dates are of format %s (e.g. %s).",
+        String msg = String.format("Alas! The dates and times thou hast supplied are beyond my understanding %s.\n\n"
+                + "Prithee provide them in the following format: %s (for example, %s).",
                 path, format.toLowerCase(), LocalDateTime.now().format(formatter));
         return new OrangutanException(msg);
     }
 
     static OrangutanException emptyListError(String action) {
-        String msg = String.format("Alas! There is nothing to %s.\n\n"
-                + "Please add some items to the list first.", action);
+        String msg = String.format("Alas! There is naught to %s.\n\n"
+                + "Pray add some items to the list first.", action);
         return new OrangutanException(msg);
     }
 
     static OrangutanException listOutOfBoundsError(int length) {
-        String msg = String.format("Alas! This number is not in the list.\n\n"
-                + "Please keep the index between 1 and %d (inclusive).", length);
+        String msg = String.format("Alas! That number appeareth not in your list.\n\n"
+                + "Pray choose an index between 1 and %d (inclusive).", length);
         return new OrangutanException(msg);
     }
 
     static OrangutanException numberParseError(int length) {
-        String msg = String.format("Alas! That is not a number. Not a number I know of, at the least.\n\n"
+        String msg = String.format("Alas! That is no number known to me.\n\n"
                 + "Please input an integer between 1 and %d (inclusive).", length);
         return new OrangutanException(msg);
     }
 
     static OrangutanException missingDeadlineParamError() {
-        String msg = String.format("Alas! Some deadline details have not been revealed.\n\n"
-                + "Please include /by in your message, along with the due date and time.");
+        String msg = String.format("Alas! The deadline's details remain incomplete.\n\n"
+                + "Pray include /by, along with the due date and time.");
         return new OrangutanException(msg);
     }
 
     static OrangutanException missingEventParamError() {
-        String msg = String.format("Alas! Some event details have not been revealed.\n\n"
-                + "Please include /from and /to in your message, along with the start and end dates and times.");
+        String msg = String.format("Alas! The event's details remain incomplete.\n\n"
+                + "pray include /from and /to in your message, along with the start and end dates and times.");
         return new OrangutanException(msg);
     }
 
     static OrangutanException missingSortMethodError() {
-        String msg = "Alas! You did not specify a sorting method.\n\n"
-                + "Please use one of these sorting methods: \"completion\", \"datetime\", \"none\". ";
+        String names = Arrays.stream(SortMethod.values())
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", "));
+        String msg = String.format("Alas! You hast not chosen a sorting method.\n\n"
+                + "Pray choose one of the sorting methods I have learned: %s.", names);
         return new OrangutanException(msg);
     }
 
     static OrangutanException unknownSortMethodError() {
-        String msg = "Alas! That sorting method is unknown to me.\n\n"
-                + "Please use sorting methods I have learned: \"completion\", \"datetime\", \"none\". ";
+        String names = Arrays.stream(SortMethod.values())
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", "));
+        String msg = String.format("Alas! This sorting method is unknown to me.\n\n"
+                + "Pray choose one of the sorting methods I have learned: %s.", names);
         return new OrangutanException(msg);
     }
 
     static OrangutanException sortMethodLoadError(String path) {
-        String msg = String.format("Alas! The sorting method stored in %s is unknown to me.\n\n"
-                        + "Please ensure the sorting method is \"completion\", \"datetime\", or \"none\".", path);
+        String names = Arrays.stream(SortMethod.values())
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .collect(Collectors.joining(", "));
+        String msg = String.format("Alas! The sorting method preserved in %s is unknown to me.\n\n"
+                        + "Pray choose one of the sorting methods I have learned: %s.", path, names);
         return new OrangutanException(msg);
     }
 
     static OrangutanException missingTitleError(String action) {
-        String msg = String.format("Alas! The name of this %s has not been revealed.\n\n"
-                + "Please include the %s name.", action, action);
+        String msg = String.format("Alas! The %s hath been given no name.\n\n"
+                + "Pray provide the %s name.", action, action);
         return new OrangutanException(msg);
     }
 
     static OrangutanException missingIndexError(String action, int index) {
-        String msg = String.format("Alas! I do not know which item to %s.\n\n"
-                + "Please follow the unmark command with an integer between 1 and %d (inclusive).", action, index);
+        String msg = String.format("Alas! I know not which item to %s.\n\n"
+                + "Pray follow the %s command with an integer from 1 to %d, inclusive.", action, action, index);
         return new OrangutanException(msg);
     }
 
