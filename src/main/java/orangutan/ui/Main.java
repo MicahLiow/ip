@@ -12,6 +12,7 @@ import orangutan.Orangutan;
 
 /**
  * A GUI for Orangutan using FXML.
+ * All FXML markup, stylesheets, and java code are adapted from se-education.org/guides/tutorials/javaFx.html.
  */
 public class Main extends Application {
     private static final String APPLICATION_NAME = "Orangutan";
