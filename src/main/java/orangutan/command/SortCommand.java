@@ -9,7 +9,7 @@ public class SortCommand {
     private final String param;
 
     SortCommand(String param) {
-        this.param = param;
+        this.param = param.toLowerCase();
     }
 
     /**
