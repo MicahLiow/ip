@@ -49,6 +49,33 @@ public class Parser {
     }
 
     /**
+     * Returns action specified by user.
+     * @param parsedCommand 2D String array containing action and parameters.
+     * @return Requested action, e.g. {"event", "dinner"}.
+     */
+    private String[] getAction(String[][] parsedCommand) {
+        return parsedCommand[0];
+    }
+
+    /**
+     * Returns parameters specified by user.
+     * @param parsedCommand 2D String array containing action and parameters.
+     * @return Parameters of the command, e.g. {"20260831 1900"}.
+     */
+    private String[] getParams(String[][] parsedCommand) {
+        return parsedCommand[1];
+    }
+
+    /**
+     * Returns CommandType from user-specified action.
+     * @param action String array denoting the requested action, e.g. {"event", "dinner"}.
+     * @return CommandType item corresponding to the command type, e.g. EVENT.
+     */
+    private CommandType getCommandType(String[] action) {
+        return CommandType.valueOf(action[0].toUpperCase());
+    }
+
+    /**
      * Parses user input, calls the corresponding command with given parameters, and returns the command output.
      *
      * @param input Command supplied by user.
@@ -58,13 +85,14 @@ public class Parser {
         assert input != null : "Parser says: input should not be null!!!";
 
         String[][] command = parseCommand(input);
-        String[] action = command[0]; // e.g. {"event", "eat"}
-        String[] params = command[1]; // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
+        String[] action = getAction(command); // e.g. {"event", "eat"}
+        String[] params = getParams(command); // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
+        CommandType commandType = getCommandType(action);
 
         assert action.length > 0 : "Parser says: action should not be empty!!!";
 
         try {
-            return CommandType.valueOf(action[0].toUpperCase()).checkAndRun(action, params, context);
+            return commandType.checkAndRun(action, params, context);
         } catch (OrangutanException e) {
             return (e.toString());
         } catch (IllegalArgumentException e) {
