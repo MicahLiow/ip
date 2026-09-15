@@ -32,15 +32,15 @@ public class Main extends Application {
             stage.setMinHeight(WINDOW_MIN_HEIGHT);
             stage.setMinWidth(WINDOW_MIN_WIDTH);
 
-            //set taskbar icon and title
-            //icon taken from www.flaticon.com/free-icon/orangutan_7743169
+            // set taskbar icon and title
+            // icon taken from www.flaticon.com/free-icon/orangutan_7743169
             Image icon = new Image(this.getClass().getResourceAsStream(ICON_PATH));
             stage.getIcons().add(icon);
             stage.setTitle(APPLICATION_NAME);
 
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setOrangutan(orangutan); //inject Orangutan instance
-            fxmlLoader.<MainWindow>getController().welcome(); //display welcome message
+            fxmlLoader.<MainWindow>getController().setOrangutan(orangutan); // inject Orangutan instance
+            fxmlLoader.<MainWindow>getController().welcome(); // display welcome message
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

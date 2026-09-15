@@ -45,7 +45,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
 
-        //turn the image into a circle (note that in DialogBox.fxml this is a child of ImageContainer)
+        // turn the image into a circle (note that in DialogBox.fxml this is a child of ImageContainer)
         displayPicture.setImage(img);
         double radius = displayPicture.getFitWidth() / 2;
         Circle clip = new Circle(radius, radius, radius);
@@ -81,6 +81,7 @@ public class DialogBox extends HBox {
      * flips dilaog box so that image is on the left and text on the right.
      */
     private void flip() {
+        // solution provided by DeepSeek.
         setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         dialog.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
     }

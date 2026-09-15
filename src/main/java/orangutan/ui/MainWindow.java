@@ -25,11 +25,11 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Orangutan orangutan;
-    //taken from www.pexels.com/photo/portrait-of-man-in-suit-10041264/
+    // taken from www.pexels.com/photo/portrait-of-man-in-suit-10041264/
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    //taken from www.orangutans-sos.org/content/uploads/2025/04/Three-Faces-of-the-Forest.jpg
+    // taken from www.orangutans-sos.org/content/uploads/2025/04/Three-Faces-of-the-Forest.jpg
     private final Image orangutanImage = new Image(this.getClass().getResourceAsStream("/images/orangutan.png"));
-    //image location given relative to main/resources
+    // image location given relative to main/resources
 
     @FXML
     public void initialize() {
@@ -85,6 +85,7 @@ public class MainWindow extends AnchorPane {
      */
     private void checkRun() {
         if (!orangutan.isRun()) {
+            // solution provided by DeepSeek.
             userInput.setDisable(true);
             sendButton.setDisable(true);
 

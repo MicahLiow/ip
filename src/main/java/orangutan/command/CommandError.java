@@ -113,7 +113,7 @@ class CommandError {
 
     static OrangutanException unknownCommandError() {
         String commandNames = Arrays.stream(CommandType.values())
-                .skip(1) //we must skip the INIT command.
+                .skip(1) // we must skip the INIT command.
                 .map(Enum::name)
                 .map(String::toLowerCase)
                 .collect(Collectors.joining(", "));
