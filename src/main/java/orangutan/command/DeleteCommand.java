@@ -30,7 +30,7 @@ class DeleteCommand implements Command {
         assert context != null : "DeleteCommand says: context should not be null!!!";
         assert context.getList() != null : "DeleteCommand says: list should not be null!!!";
 
-        ErrorChecker.checkListEmpty(context, NAME);
+        ErrorChecker.checkEmptyList(context, NAME);
 
         try {
             int deleteIndex = Integer.parseInt(index);

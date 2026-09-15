@@ -30,7 +30,7 @@ class MarkCommand implements Command {
         assert context != null : "MarkCommand says: context should not be null!!!";
         assert context.getList() != null : "MarkCommand says: list should not be null!!!";
 
-        ErrorChecker.checkListEmpty(context, NAME);
+        ErrorChecker.checkEmptyList(context, NAME);
 
         try {
             int markIndex = Integer.parseInt(index);

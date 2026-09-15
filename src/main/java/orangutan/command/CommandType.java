@@ -32,10 +32,10 @@ public enum CommandType {
          * @param params String array comprised of any other parameters (e.g. from, by).
          * @param context Context in which to run command.
          * @return The chatbot's String reply.
-         * @throws OrangutanException If ErrorChecker.checkTitleMissing() fails.
+         * @throws OrangutanException If ErrorChecker.checkMissingTitle() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.checkTitleMissing(action);
+            ErrorChecker.checkMissingTitle(action);
             String todoTitle = action[1];
             return new TodoCommand(todoTitle, false).run(context);
         }
@@ -48,14 +48,11 @@ public enum CommandType {
          * @param params String array comprised of any other parameters (e.g. from, by).
          * @param context Context in which to run command.
          * @return The chatbot's String reply.
-         * @throws OrangutanException If ErrorChecker.checkTitleMissing() fails or no by parameter given.
+         * @throws OrangutanException If ErrorChecker.checkMissingTitle() fails or no by parameter given.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.checkTitleMissing(action);
-
-            if (params.length < 1) {
-                throw CommandError.missingDeadlineParamError();
-            }
+            ErrorChecker.checkMissingTitle(action);
+            ErrorChecker.checkMissingDeadlineParam(params);
 
             String by = params[0];
             String deadlineTitle = action[1];
@@ -70,14 +67,11 @@ public enum CommandType {
          * @param params String array comprised of any other parameters (e.g. from, by).
          * @param context Context in which to run command.
          * @return The chatbot's String reply.
-         * @throws OrangutanException If ErrorChecker.checkTitleMissing() fails or from and/or to parameter missing.
+         * @throws OrangutanException If ErrorChecker.checkMissingTitle() fails or from and/or to parameter missing.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.checkTitleMissing(action);
-
-            if (params.length < 2) {
-                throw CommandError.missingEventParamError();
-            }
+            ErrorChecker.checkMissingTitle(action);
+            ErrorChecker.checkMissingEventParam(params);
 
             String from = params[0];
             String to = params[1];
@@ -110,7 +104,7 @@ public enum CommandType {
          * @throws OrangutanException If ErrorChecker.VerifyActionIndex() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.verifyActionIndex(context, action);
+            ErrorChecker.checkMissingIndex(context, action);
             return new FindCommand(action[1]).run(context);
         }
     },
@@ -125,7 +119,7 @@ public enum CommandType {
          * @throws OrangutanException If ErrorChecker.VerifyActionIndex() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.verifyActionIndex(context, action);
+            ErrorChecker.checkMissingIndex(context, action);
             return new DeleteCommand(action[1]).run(context);
         }
     },
@@ -140,7 +134,7 @@ public enum CommandType {
          * @throws OrangutanException If ErrorChecker.VerifyActionIndex() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.verifyActionIndex(context, action);
+            ErrorChecker.checkMissingIndex(context, action);
             return new MarkCommand(action[1]).run(context);
         }
     },
@@ -155,7 +149,7 @@ public enum CommandType {
          * @throws OrangutanException If ErrorChecker.VerifyActionIndex() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.verifyActionIndex(context, action);
+            ErrorChecker.checkMissingIndex(context, action);
             return new UnmarkCommand(action[1]).run(context);
         }
     },
@@ -170,9 +164,7 @@ public enum CommandType {
          * @throws OrangutanException If no sorting method provided.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            if (action.length < 2) {
-                throw CommandError.missingSortMethodError();
-            }
+            ErrorChecker.checkMissingSortMethod(action);
             return new SortCommand(action[1]).run(context);
         }
     },

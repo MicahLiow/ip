@@ -30,7 +30,7 @@ class UnmarkCommand implements Command {
         assert context != null : "UnmarkCommand says: context should not be null!!!";
         assert context.getList() != null : "UnmarkCommand says: list should not be null!!!";
 
-        ErrorChecker.checkListEmpty(context, NAME);
+        ErrorChecker.checkEmptyList(context, NAME);
 
         try {
             int unmarkIndex = Integer.parseInt(index);

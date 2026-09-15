@@ -30,7 +30,7 @@ class FindCommand implements Command {
         assert context != null : "FindCommand says: context should not be null!!!";
         assert context.getList() != null : "FindCommand says: list should not be null!!!";
       
-        ErrorChecker.checkListEmpty(context, NAME);
+        ErrorChecker.checkEmptyList(context, NAME);
 
         ChatList res = context.getList().findItem(query);
         if (res.getLength() == 0) {

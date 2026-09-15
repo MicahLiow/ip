@@ -45,7 +45,7 @@ class CommandError {
         return new OrangutanException(msg);
     }
 
-    static OrangutanException listOutOfBoundsError(int length) {
+    static OrangutanException indexOutOfBoundsError(int length) {
         String msg = String.format("Alas! That number appeareth not in your list.\n\n"
                 + "Pray choose an index between 1 and %d (inclusive).", length);
         return new OrangutanException(msg);
