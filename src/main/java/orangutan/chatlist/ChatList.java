@@ -103,7 +103,9 @@ public class ChatList {
      * @return ChatList of matching items.
      */
     public ChatList findItem(String query) {
-        List<ListItem> matchStream = listItems.stream().filter(item -> item.getTitle().contains(query)).toList();
+        List<ListItem> matchStream = listItems.stream()
+                .filter(item -> item.getTitle().toLowerCase().contains(query.toLowerCase()))
+                .toList();
         return new ChatList(new ArrayList<ListItem>(matchStream));
     }
 
