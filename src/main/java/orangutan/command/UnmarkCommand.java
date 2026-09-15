@@ -39,7 +39,7 @@ class UnmarkCommand implements Command {
             String unmarkedItem = context.getList().unmarkItem(unmarkIndex);
             return ("Take heed, this task hath not yet been completed:\n " + unmarkedItem);
         } catch (NumberFormatException e) {
-            throw CommandErrors.numberParseError(context.getList().getLength());
+            throw CommandError.numberParseError(context.getList().getLength());
         }
     }
 }

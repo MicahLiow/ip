@@ -20,7 +20,7 @@ public enum CommandType {
             if (!context.isRun()) {
                 return new InitCommand().run(context);
             } else {
-                throw CommandErrors.unknownCommandError();
+                throw CommandError.unknownCommandError();
             }
         }
     },
@@ -54,7 +54,7 @@ public enum CommandType {
             ErrorChecker.checkTitleMissing(action);
 
             if (params.length < 1) {
-                throw CommandErrors.missingDeadlineParamError();
+                throw CommandError.missingDeadlineParamError();
             }
 
             String by = params[0];
@@ -76,7 +76,7 @@ public enum CommandType {
             ErrorChecker.checkTitleMissing(action);
 
             if (params.length < 2) {
-                throw CommandErrors.missingEventParamError();
+                throw CommandError.missingEventParamError();
             }
 
             String from = params[0];
@@ -171,7 +171,7 @@ public enum CommandType {
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
             if (action.length < 2) {
-                throw CommandErrors.missingSortMethodError();
+                throw CommandError.missingSortMethodError();
             }
             return new SortCommand(action[1]).run(context);
         }

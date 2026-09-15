@@ -23,7 +23,7 @@ public class SortCommand {
         try {
             context.getList().setSorting(SortMethod.valueOf(param.toUpperCase()));
         } catch (IllegalArgumentException e) {
-            throw CommandErrors.unknownSortMethodError();
+            throw CommandError.unknownSortMethodError();
         }
         if (param.equals("none")) {
             return "Any additions to your list shall henceforth take its place at the end of the list.";

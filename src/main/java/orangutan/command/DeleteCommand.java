@@ -39,7 +39,7 @@ class DeleteCommand implements Command {
             String deleteItem = context.getList().deleteItem(deleteIndex);
             return ("The following task hath been purged from our records:\n " + deleteItem);
         } catch (NumberFormatException e) {
-            throw CommandErrors.numberParseError(context.getList().getLength());
+            throw CommandError.numberParseError(context.getList().getLength());
         }
     }
 }

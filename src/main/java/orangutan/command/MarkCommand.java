@@ -39,7 +39,7 @@ class MarkCommand implements Command {
             String markItem = context.getList().markItem(markIndex);
             return ("My compliments, thou hast completed a task:\n " + markItem);
         } catch (NumberFormatException e) {
-            throw CommandErrors.numberParseError(context.getList().getLength());
+            throw CommandError.numberParseError(context.getList().getLength());
         }
     }
 }

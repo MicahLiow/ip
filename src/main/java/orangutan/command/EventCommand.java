@@ -48,7 +48,7 @@ class EventCommand implements Command {
 
             return ("Hark! An event hath been added to your list:\n " + newEvent);
         } catch (DateTimeParseException e) {
-            throw CommandErrors.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
+            throw CommandError.dateTimeParseError(ListItem.DATE_TIME_INPUT_FORMAT);
         }
     }
 }

@@ -68,7 +68,7 @@ public class Parser {
         } catch (OrangutanException e) {
             return (e.toString());
         } catch (IllegalArgumentException e) {
-            return CommandErrors.unknownCommandError().toString();
+            return CommandError.unknownCommandError().toString();
         }
     }
 }

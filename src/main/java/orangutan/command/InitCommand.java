@@ -38,14 +38,14 @@ class InitCommand implements Command {
                 return (welcome);
             } catch (IOException e) {
                 context.setRun(false);
-                throw CommandErrors.fileReadError(context.getFilePath().toString());
+                throw CommandError.fileReadError(context.getFilePath().toString());
             } catch (DateTimeParseException e) {
                 context.setRun(false);
-                throw CommandErrors.dateTimeLoadError(context.getFilePath().toString(),
+                throw CommandError.dateTimeLoadError(context.getFilePath().toString(),
                         ListItem.DATE_TIME_INPUT_FORMAT);
             } catch (IllegalArgumentException e) {
                 context.setRun(false);
-                throw CommandErrors.sortMethodLoadError(context.getFilePath().toString());
+                throw CommandError.sortMethodLoadError(context.getFilePath().toString());
             }
         } else {
             context.setRun(true);

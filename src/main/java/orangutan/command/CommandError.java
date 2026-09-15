@@ -10,7 +10,7 @@ import orangutan.OrangutanException;
 /**
  * Utility class for throwing OrangutanExceptions with the appropriate messages.
  */
-class CommandErrors {
+class CommandError {
     static OrangutanException fileWriteError(String path) {
         String msg = String.format("Alas! I was unable to inscribe your list in %s.\n\n"
                 + "Pray grant me access to the requisite files and folders ere we bid farewell.", path);

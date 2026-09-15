@@ -5,13 +5,13 @@ import orangutan.OrangutanException;
 class ErrorChecker {
     static void checkListEmpty(Context context, String action) throws OrangutanException {
         if (context.getList().getLength() == 0) {
-            throw CommandErrors.emptyListError(action);
+            throw CommandError.emptyListError(action);
         }
     }
 
     static void checkIndexOutOfBounds(Context context, int index) throws OrangutanException {
         if (index < 1 || index > context.getList().getLength()) {
-            throw CommandErrors.listOutOfBoundsError(context.getList().getLength());
+            throw CommandError.listOutOfBoundsError(context.getList().getLength());
         }
     }
 
@@ -23,7 +23,7 @@ class ErrorChecker {
      */
     static void checkTitleMissing(String[] action) throws OrangutanException {
         if (action.length < 2) {
-            throw CommandErrors.missingTitleError(action[0]);
+            throw CommandError.missingTitleError(action[0]);
         }
     }
 
@@ -35,7 +35,7 @@ class ErrorChecker {
      */
     static void verifyActionIndex(Context context, String[] action) throws OrangutanException {
         if (action.length < 2) {
-            throw CommandErrors.missingIndexError(action[0], context.getList().getLength());
+            throw CommandError.missingIndexError(action[0], context.getList().getLength());
         }
     }
 }

@@ -27,7 +27,7 @@ class ByeCommand implements Command {
             return ("Fare thee well, and may we meet again.");
         } catch (IOException e) {
             context.setRun(true);
-            throw CommandErrors.fileWriteError(context.getFilePath().toString());
+            throw CommandError.fileWriteError(context.getFilePath().toString());
         }
     }
 }
