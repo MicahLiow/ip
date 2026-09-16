@@ -58,11 +58,9 @@ Format: `list`
 Marks list item as completed.
 
 Format: `mark <index>`
-* Marks the item at the given `index`. This index is the position of the item based on the current sorting.
+* Marks the item at the given `index`. This index is the position of the item based on the current sorting, 
+  as displayed by `list`.
 * the index must be a positive integer between 1 and the length of the list.
-
-> [!TIP]
-> Use `list` to check the index of the item.
 
 Example:
 * `mark 1` marks the 1st item in the list.
@@ -72,10 +70,9 @@ Example:
 Unmarks a list item as to be completed.
 
 Format: `unmark <index>`
-* Unmarks the item at the given `index`. This index is the position of the item based on the current sorting.
+* Marks the item at the given `index`. This index is the position of the item based on the current sorting,
+  as displayed by `list`.
 * the index must be a positive integer between 1 and the length of the list.
-> [!TIP]
-> Use `list` to check the index of the item.
 
 Example:
 * `unmark 4` unmarks the 4th item in the list.
@@ -85,10 +82,9 @@ Example:
 Deletes an item from the list.
 
 Format: `delete <index>`
-* Deletes the item at the given `index`. This index is the position of the item based on the current sorting.
+* Marks the item at the given `index`. This index is the position of the item based on the current sorting,
+  as displayed by `list`.
 * the index must be a positive integer between 1 and the length of the list.
-> [!TIP]
-> Use `list` to check the index of the item.
 
 Example:
 * `delete 12` deletes the 12th item in the list.
@@ -115,7 +111,7 @@ Examples:
 Sets the sorting method for the list.
 
 Format `sort <method>`
-* Immediately sorts the list by the specified method.
+* Immediately sorts the list by the specified method. Note that this also changes their list indices.
 * `method` must be one of the following: `none`, `datetime`, `completion`
   * Sorting by `none` does not change the order of the list. Any additions are added to the end of the list.
   * Sorting by `datetime` sorts the list by ascending order of deadline due date and time / event start date and time. 
@@ -125,9 +121,6 @@ Format `sort <method>`
     * Ties are broken by ascending alphabetical order.
     * Any additions are added to their sorted position in the list.
 * `method` is case-insensitive: `datetime`, `Datetime` and `DATETIME` are treated as identical.
-
-> [!IMPORTANT]
-> Sorting the list changes the indices of most list items.
 
 Examples:
 * `sort datetime` sorts the list by due date and time (for deadlines) and start date and time (for events).
