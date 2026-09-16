@@ -2,7 +2,7 @@
 
 > "Apes together strong." – Caesar (_Rise of the Planet of the Apes_)
 
-Orangutan is a ChatBot for managing tasks, deadlines and events.
+The Orangutan ChatBot is here to help you with managing tasks, deadlines and events.
 
 * [Adding a To-Do: `todo`](#adding-a-to-do-todo)
 * [Adding a Deadline: `deadline`](#adding-a-deadline-deadline)
@@ -14,6 +14,8 @@ Orangutan is a ChatBot for managing tasks, deadlines and events.
 * [Searching for an Item by Name: `find`](#searching-for-an-item-find)
 * [Sorting the List: `sort`](#sorting-the-list-sort)
 * [Exiting Orangutan: `bye`](#exiting-orangutan-bye)
+* [Command Summary](#command-summary)
+* [Acknowledgements](#acknowledgements)
 
 ## Adding a To-Do: `todo`
 
@@ -144,7 +146,7 @@ Format: `bye`
 
 ## Command Summary
 
-| Action          | Format, examples                                                                                                            |
+| Action          | Format, Examples                                                                                                            |
 |-----------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Add to-do       | `todo <name>`<br/> e.g. `todo eat lunch`                                                                                    |
 | Add deadline    | `deadline <name> \by <due date, time>`<br/> e.g. `deadline report /by 20260831 2359`                                        |
@@ -154,7 +156,7 @@ Format: `bye`
 | Unmark item     | `unmark <index>`<br/>e.g. `unmark 5`                                                                                        |
 | Delete item     | `delete <index>`<br/>e.g. `delete 1`                                                                                        |
 | Search for item | `find <keyword>`<br/>e.g. `find email`                                                                                      |
-| sort list       | `sort <method>`<br/>e.g. `sort datetime`, `sort completion`, `sort none`                                                     |
+| sort list       | `sort <method>`<br/>e.g. `sort datetime`, `sort completion`, `sort none`                                                    |
 | exit            | `bye`                                                                                                                       |
 
 ## Acknowledgements
