@@ -104,7 +104,7 @@ public enum CommandType {
          * @throws OrangutanException If ErrorChecker.VerifyActionIndex() fails.
          */
         public String checkAndRun(String[] action, String[] params, Context context) throws OrangutanException {
-            ErrorChecker.checkMissingIndex(context, action);
+            ErrorChecker.checkMissingFindKeyword(action);
             return new FindCommand(action[1]).run(context);
         }
     },

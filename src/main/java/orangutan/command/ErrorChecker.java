@@ -42,6 +42,16 @@ class ErrorChecker {
         }
     }
 
+    /**
+     * Verifies that find command has keyword.
+     *
+     * @throws OrangutanException If no keyword is found.
+     */
+    static void checkMissingFindKeyword(String[] action) throws OrangutanException {
+        if (action.length < 2) {
+            throw CommandError.missingFindKeywordError();
+        }
+    }
 
     /**
      * Verifies that sort command has sorting method.

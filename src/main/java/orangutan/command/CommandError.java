@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import orangutan.Orangutan;
 import orangutan.OrangutanException;
 
 /**
@@ -108,6 +109,12 @@ class CommandError {
     static OrangutanException missingIndexError(String action, int index) {
         String msg = String.format("Alas! I know not which item to %s.\n\n"
                 + "Pray follow the %s command with an integer from 1 to %d, inclusive.", action, action, index);
+        return new OrangutanException(msg);
+    }
+
+    static OrangutanException missingFindKeywordError() {
+        String msg = "Alas! I know not what to find.\n\n"
+                + "Pray include the words you wish to find in the list.";
         return new OrangutanException(msg);
     }
 
