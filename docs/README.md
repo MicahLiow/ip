@@ -99,7 +99,6 @@ Format: `find <keyword>`
 * Find only considers the item's name.
 * Items whose names contain the keyword are returned.
 
-> [!WARNING]
 > The index of items in the returned list do not correspond to their indices under `list`.
 
 Examples:
@@ -134,7 +133,6 @@ Format: `bye`
 * Upon receiving this command, Orangutan will cease to take in any input.
 * The list will be saved in /data/orangutan.txt, under the same folder orangutan.jar is located.
   * This list will be loaded into Orangutan the next time it is opened, so you can start from where you left off.
-> [!TIP]
 > You can edit the save file using a text editor, as long as each line is of the correct format.
 
 ## Command Summary
