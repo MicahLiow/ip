@@ -87,11 +87,11 @@ public class Parser {
         String[][] command = parseCommand(input);
         String[] action = getAction(command); // e.g. {"event", "eat"}
         String[] params = getParams(command); // e.g. { {"from", 20260831 1800"} , {"to", "20260831 1900"} }
-        CommandType commandType = getCommandType(action);
 
         assert action.length > 0 : "Parser says: action should not be empty!!!";
 
         try {
+            CommandType commandType = getCommandType(action);
             return commandType.checkAndRun(action, params, context);
         } catch (OrangutanException e) {
             return (e.toString());
