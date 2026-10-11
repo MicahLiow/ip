@@ -37,7 +37,8 @@ public class ChatListTest {
 
         assertEquals(2, test.getLength());
         assertEquals(List.of(deadline, event), test.toStream().toList());
-        assertEquals("1. [D] [ ] ab c (by 2026-08-31 19:00)\n2. [E] [X] ab c (from 2026-08-31 19:00 to 2026-08-31 22:00)",
+        assertEquals("1. [D] [ ] ab c (by 2026-08-31 19:00)\n"
+                        + "2. [E] [X] ab c (from 2026-08-31 19:00 to 2026-08-31 22:00)",
                 test.toString());
     }
 
@@ -173,11 +174,11 @@ public class ChatListTest {
     }
 
     @Test
-    public void findItemIsCaseSensitiveTest() {
+    public void findItem_differentlyCasedQuery_returnsMatch() {
         ListItem todo = new ListItem(ItemType.TODO, "Read book", false);
         ChatList test = new ChatList(new ArrayList<ListItem>(List.of(todo)));
 
-        assertEquals(0, test.findItem("read").getLength());
+        assertEquals(List.of(todo), test.findItem("read").toStream().toList());
     }
 
     @Test
@@ -227,6 +228,42 @@ public class ChatListTest {
         test.setSorting(SortMethod.DATETIME);
 
         assertEquals(List.of(earlier, later), test.toStream().toList());
+    }
+
+    @Test
+    public void addItem_sortingEnabled_insertsItemInSortedPosition() {
+        ListItem later = new ListItem(ItemType.DEADLINE, "later", false, "20260902 0900");
+        ListItem earlier = new ListItem(ItemType.DEADLINE, "earlier", false, "20260901 0900");
+        ChatList test = new ChatList(new ArrayList<ListItem>(List.of(later)));
+        test.setSorting(SortMethod.DATETIME);
+
+        test.addItem(earlier);
+
+        assertEquals(List.of(earlier, later), test.toStream().toList());
+    }
+
+    @Test
+    public void markItem_sortingByCompletion_reordersList() {
+        ListItem first = new ListItem(ItemType.TODO, "alpha", false);
+        ListItem second = new ListItem(ItemType.TODO, "beta", false);
+        ChatList test = new ChatList(new ArrayList<ListItem>(List.of(first, second)));
+        test.setSorting(SortMethod.COMPLETION);
+
+        test.markItem(1);
+
+        assertEquals(List.of(second, first), test.toStream().toList());
+    }
+
+    @Test
+    public void unmarkItem_sortingByCompletion_reordersList() {
+        ListItem completed = new ListItem(ItemType.TODO, "alpha", true);
+        ListItem uncompleted = new ListItem(ItemType.TODO, "beta", false);
+        ChatList test = new ChatList(new ArrayList<ListItem>(List.of(uncompleted, completed)));
+        test.setSorting(SortMethod.COMPLETION);
+
+        test.unmarkItem(2);
+
+        assertEquals(List.of(completed, uncompleted), test.toStream().toList());
     }
 
     @Test
